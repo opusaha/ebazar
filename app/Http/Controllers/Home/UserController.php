@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +15,7 @@ class UserController extends Controller
         return view('home.shop',compact('products'));
     }
     public function cart(){
-        $products =Product::take(20)->get();
-        return view('home.cart',compact('products'));
+        $carts =Cart::where('user_id',Auth::id())->get();
+        return view('home.cart',compact('carts'));
     }
 }

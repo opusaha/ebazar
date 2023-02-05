@@ -44,4 +44,22 @@ class CartController extends Controller
         Session::flash('success', 'Product removed from cart successfully');
         return redirect()->route('home');
     }
+    public function data()
+    {
+        $carts = Cart::where('user_id', Auth::id())->get();
+        return response()->json(['carts' => $carts]);
+    }
+    public function show($id)
+    {
+        $product = Product::find($id);
+        return response()->json([
+            'product' => $product
+        ]);
+    }
+    public function destroy($id)
+    {
+        $cart = Cart::find($id);
+        $cart->delete();
+        return response()->json(['success' => true]);
+    }
 }

@@ -1,8 +1,8 @@
 @extends('home.layout.master')
 @section('content')
-@push('styles')
-<title>Zeomart :: Shop</title>
-@endpush
+    @push('styles')
+        <title>Zeomart :: Shop</title>
+    @endpush
     <section class="inner_page_breadcrumb">
         <div class="container">
             <div class="row">
@@ -157,59 +157,54 @@
                 </div>
                 <div class="row">
                     @foreach ($products as $index => $product)
-                        <div>
-                            <div class="col-sm-6 col-lg-4 col-xl p0 pl15-520">
-                                <div class="shop_item bdr1 m--1">
-                                    <div class="thumb pb30">
-                                        <img src="{{ $product->image_one }}" alt="Shop Item1">
-                                        <div class="thumb_info">
-                                            <ul class="mb0">
-                                                <li><a href="page-dashboard-wish-list.html"><span
-                                                            class="flaticon-heart"></span></a>
-                                                </li>
-                                                <li><a href="page-dashboard-wish-list.html"><span
-                                                            class="flaticon-show"></span></a>
-                                                </li>
-                                                <li><a href="page-shop-list-v6.html"><span
-                                                            class="flaticon-graph"></span></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="shop_item_cart_btn d-grid">
-                                            {{-- <a href="{{ route('add.cart', $product->id) }}" class="btn btn-thm">Add to
-                                                Cart</a> --}}
-                                            <input type="hidden" id="cartProductQty" value="1">
-                                            <button type="button" data-product-id="{{ $product->id }}" class="btn btn-thm addToCartBTN">Add to
-                                                Cart</button>
-                                        </div>
+                        <div class="col-sm-6 col-lg-4 col-xl p0 pl15-520">
+                            <div class="shop_item bdr1 m--1">
+                                <div class="thumb pb30">
+                                    <img src="{{ $product->image_one }}" alt="Shop Item1" style="height:230px">
+                                    <div class="thumb_info">
+                                        <ul class="mb0">
+                                            <li><a href="page-dashboard-wish-list.html"><span
+                                                        class="flaticon-heart"></span></a>
+                                            </li>
+                                            <li><a href="page-dashboard-wish-list.html"><span
+                                                        class="flaticon-show"></span></a>
+                                            </li>
+                                        </ul>
                                     </div>
+                                    <div class="shop_item_cart_btn d-grid">
+                                        <input type="hidden" id="cartProductQty" value="1">
+                                        <button type="button" data-product-id="{{ $product->id }}"
+                                            class="btn btn-thm addToCartBTN">Add to
+                                            Cart</button>
+                                    </div>
+                                </div>
 
-                                    <div class="details">
-                                        <div class="sub_title">{{ $product->sku }}</div>
-                                        <div class="title"><a href="#">{{ $product->name }}</a></div>
-                                        <div class="review d-flex">
-                                            <ul class="mb0 me-2">
-                                                <li class="list-inline-item"><a href="#"><i
-                                                            class="fas fa-star"></i></a>
-                                                </li>
-                                                <li class="list-inline-item"><a href="#"><i
-                                                            class="fas fa-star"></i></a>
-                                                </li>
-                                                <li class="list-inline-item"><a href="#"><i
-                                                            class="fas fa-star"></i></a>
-                                                </li>
-                                                <li class="list-inline-item"><a href="#"><i
-                                                            class="fas fa-star"></i></a>
-                                                </li>
-                                                <li class="list-inline-item"><a href="#"><i
-                                                            class="fas fa-star"></i></a>
-                                                </li>
-                                            </ul>
-                                            <div class="review_count"><a href="#">3,014 reviews</a></div>
-                                        </div>
-                                        <div class="si_footer">
-                                            <div class="price">{{ $product->price }}
-                                                TK<small><del>{{ $product->old_price }} TK</del></small></div>
-                                        </div>
+                                <div class="details">
+                                    <div class="sub_title">{{ $product->sku }}</div>
+                                    <div class="title"><a href="#">{{ $product->name }}</a></div>
+                                    <div class="review d-flex">
+                                        <ul class="mb0 me-2">
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="fas fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="fas fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="fas fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="fas fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="fas fa-star"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="review_count"><a href="#">3,014 reviews</a></div>
+                                    </div>
+                                    <div class="si_footer">
+                                        <div class="price">{{ $product->price }}
+                                            TK<small><del>{{ $product->old_price }} TK</del></small></div>
                                     </div>
                                 </div>
                             </div>
@@ -270,10 +265,78 @@
                         'product_Qty': product_Qty
                     },
                     success: function(response) {
-                        alert(response.status);
+                        if (response.status.indexOf('is add to your cart') !== -1) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.status,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: response.status,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
                     }
                 });
-            });
+
+                $.ajax({
+                    url: "cart/data",
+                    success: function(data) {
+                        var carts = data.carts;
+                        var list = $("#cart-list");
+                        var cartTotal = $("#subtitle");
+                        var cartCount = $("#cartCount");
+
+                        list.empty();
+                        cartCount.empty();
+                        cartTotal.empty(); // remove previous content
+
+                        var c = carts.reduce(function(sum, cart) {
+                            return sum + cart.quantity;
+                        }, 0);
+                        cartCount.append(c);
+
+                        var t = carts.reduce(function(sum, cart) {
+                            return sum + cart.total_price;
+                        }, 0);
+                        cartTotal.append(t);
+
+                        // Update the cart data in the HTML
+                        $.each(carts, function(index, cart) {
+                            $.ajax({
+                                url: "products/" + cart.product_id,
+                                success: function(productData) {
+                                    var product = productData.product;
+                                    var item = "<li class='list_content'>" +
+                                        "<div>" +
+                                        "<img class='float-start mt10' src='" + product
+                                        .image_one + "' style='height:75px'>" +
+                                        "<p>" + product.name.substr(0, 35) + "...</p>" +
+                                        "<div class='cart_btn home_page_sidebar mt10'>" +
+                                        "<div class='quantity-block home_page_sidebar'>" +
+                                        "<button class='quantity-arrow-minus home_page_sidebar'><img src={{ asset('home/images/icons/minus.svg') }}></button>" +
+                                        "<input class='quantity-num home_page_sidebar' type='number' value='" +
+                                        cart.quantity + "'>" +
+                                        "<button class='quantity-arrow-plus home_page_sidebar'> <span class='flaticon-close'></span> </button>" +
+                                        "</div>" +
+                                        "<span class='home_page_sidebar price'>" +
+                                        cart.total_price + " TK</span>" +
+                                        "</div>" +
+                                        "<span class='close_icon'><i class='flaticon-close'></i></span>" +
+                                        "</div>" +
+                                        "</li>";
+                                    list.append(item);
+                                }
+                            });
+                        })
+                    }
+                });
+
+            })
         </script>
     @endpush
 @endsection

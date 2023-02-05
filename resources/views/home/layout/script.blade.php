@@ -11,5 +11,6 @@
 <script src={{ asset('home/js/slider.js') }}></script>
 <script src={{ asset('home/js/scrollbalance.js') }}></script>
 <script src={{ asset('home/js/script.js') }}></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @stack('scripts')
 

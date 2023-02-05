@@ -1,6 +1,6 @@
 /*******
 Project/Template Name:  Zeomart - Multi-Vendor & Marketplace HTML Template
-Template Url:  
+Template Url:
 Author: CreativeLayers
 Author Url: https://themeforest.net/user/creativelayers/portfolio
 Version: 1.0
@@ -17228,7 +17228,8 @@ input[type="number"] {
 
 .quantity-num,
 .quantity-num2,
-.quantity-num3 {
+.quantity-num3,
+.quantity-style {
     border: none;
     border-radius: 4px 0 0 4px;
     font-size: 13px;

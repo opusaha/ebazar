@@ -30,7 +30,8 @@ Route::post('/save/register',[HomeAuthController::class,'store'])->name('registe
 Route::get('/login',[HomeAuthController::class,'login'])->name('login');
 Route::post('/user/login',[HomeAuthController::class,'userLogin'])->name('user.login');
 route::get('/shop',[UserController::class,'shop'])->name('shop');
-route::get('/cart',[UserController::class,'cart'])->name('cart');
+Route::get('/cart',[UserController::class,'cart'])->name('cart');
+Route::post('cart/store',[CartController::class,'postCart'])->name('addToCart');
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/logout',[HomeAuthController::class,'logout'])->name('logout');
     Route::get('/account',[UserDashboardController::class,'dashboard'])->name('dashboard');
@@ -38,7 +39,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/orders',[UserDashboardController::class,'orders'])->name('orders');
     Route::get('/wishlist',[UserDashboardController::class,'wishlist'])->name('wishlist');
     Route::get('/invoice',[UserDashboardController::class,'invoice'])->name('invoice');
-    Route::post('cart/store',[CartController::class,'postCart'])->name('addToCart');
+    Route::get('cart/data',[CartController::class,'data']);
+    Route::get('products/{id}',[CartController::class,'show']);
+    Route::get('/cart/{id}',[CartController::class,'destroy']);
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {

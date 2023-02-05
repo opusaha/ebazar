@@ -90,6 +90,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table_body">
+                                @foreach ($carts  as $cart)
                                 <tr>
                                     <th scope="row">
                                         <ul class="cart_list d-block d-xl-flex">
@@ -111,10 +112,10 @@
                                     <td>
                                         <div class="cart_btn">
                                             <div class="quantity-block">
-                                                <button class="quantity-arrow-minus inner_page"> <span
+                                                <button class="quantity-arrow-minus{{$cart->id}} quantity-arrow-minus inner_page"> <span
                                                         class="fa fa-minus"></span> </button>
-                                                <input class="quantity-num inner_page" type="number" value="3">
-                                                <button class="quantity-arrow-plus inner_page"> <span
+                                                <input class="quantity-num{{$cart->id}} quantity-style inner_page" type="number" value="3">
+                                                <button class="quantity-arrow-plus{{$cart->id}} quantity-arrow-plus inner_page"> <span
                                                         class="fas fa-plus"></span> </button>
                                             </div>
                                         </div>
@@ -123,72 +124,7 @@
                                     <td class="">$3.399</td>
                                     <td class=""><span class="flaticon-close"></span></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <ul class="cart_list d-block d-xl-flex">
-                                            <li class="ps-1 ps-sm-4 pe-1 pe-sm-4"><a href="#"><img
-                                                        src="images/shop/cart1.png" alt="cart1.png"></a></li>
-                                            <li class="ms-2 ms-md-3">
-                                                <a class="cart_title" href="#">
-                                                    <span class="fz16">Apple MacBook Pro with <br
-                                                            class="d-none d-md-block"> Apple M1 Chip</span> <br>
-                                                    <span class="fz14"><span class="fw500">Hard Drive Capacity:</span>
-                                                        256</span><br>
-                                                    <span class="fz14"><span class="fw500">Actual Color:</span>
-                                                        Silver</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <td>$3.399</td>
-                                    <td>
-                                        <div class="cart_btn">
-                                            <div class="quantity-block">
-                                                <button class="quantity-arrow-minus2 inner_page"> <span
-                                                        class="fa fa-minus"></span> </button>
-                                                <input class="quantity-num2 inner_page" type="number" value="3">
-                                                <button class="quantity-arrow-plus2 inner_page"> <span
-                                                        class="fas fa-plus"></span> </button>
-                                            </div>
-                                        </div>
-                                        <!-- <input class="cart_count text-center" placeholder="2" type="number"> -->
-                                    </td>
-                                    <td class="">$3.399</td>
-                                    <td class=""><span class="flaticon-close"></span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <ul class="cart_list d-block d-xl-flex">
-                                            <li class="ps-1 ps-sm-4 pe-1 pe-sm-4"><a href="#"><img
-                                                        src="images/shop/cart1.png" alt="cart1.png"></a></li>
-                                            <li class="ms-2 ms-md-3">
-                                                <a class="cart_title" href="#">
-                                                    <span class="fz16">Apple MacBook Pro with <br
-                                                            class="d-none d-md-block"> Apple M1 Chip</span> <br>
-                                                    <span class="fz14"><span class="fw500">Hard Drive Capacity:</span>
-                                                        256</span><br>
-                                                    <span class="fz14"><span class="fw500">Actual Color:</span>
-                                                        Silver</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <td>$3.399</td>
-                                    <td>
-                                        <div class="cart_btn">
-                                            <div class="quantity-block">
-                                                <button class="quantity-arrow-minus3 inner_page"> <span
-                                                        class="fa fa-minus"></span> </button>
-                                                <input class="quantity-num3 inner_page" type="number" value="3">
-                                                <button class="quantity-arrow-plus3 inner_page"> <span
-                                                        class="fas fa-plus"></span> </button>
-                                            </div>
-                                        </div>
-                                        <!-- <input class="cart_count text-center" placeholder="2" type="number"> -->
-                                    </td>
-                                    <td class="">$3.399</td>
-                                    <td class=""><span class="flaticon-close"></span></td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <div class="checkout_form mt30">
