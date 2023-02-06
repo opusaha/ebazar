@@ -14,6 +14,10 @@ class UserController extends Controller
         $products =Product::take(20)->get();
         return view('home.shop',compact('products'));
     }
+    public function singleProduct($slug=null, $id=null){
+        $product = Product::findOrFail($id);
+        return view('home.singleProduct',compact('product'));
+    }
     public function cart(){
         $carts =Cart::where('user_id',Auth::id())->get();
         return view('home.cart',compact('carts'));

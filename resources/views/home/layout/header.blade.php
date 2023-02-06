@@ -1134,7 +1134,7 @@
                                                 style="height:75px">
                                             <p>{{ substr($product->name, 0, 35) }}...</p>
                                             <div class="cart_btn home_page_sidebar mt10">
-                                                <div class="quantity-block home_page_sidebar">
+                                                {{-- <div class="quantity-block home_page_sidebar">
                                                     <button class="quantity-arrow-minus home_page_sidebar"><img
                                                             src={{ asset('home/images/icons/minus.svg') }}
                                                             alt=""></button>
@@ -1142,11 +1142,12 @@
                                                         value={{ $cart->quantity }}>
                                                     <button class="quantity-arrow-plus home_page_sidebar"> <span
                                                             class=flaticon-close></span> </button>
-                                                </div>
+                                                </div> --}}
+                                                <p>Quantity : {{$cart->quantity}}X</p>
                                                 <span class="home_page_sidebar price">{{ $cart->total_price }}
                                                     TK</span>
                                             </div>
-                                            <span class=close_icon><i class=flaticon-close></i></span>
+                                            {{-- <span class=close_icon><i class=flaticon-close></i></span> --}}
                                         </div>
                                     </li>
                                 @endforeach
@@ -1160,7 +1161,7 @@
     <div class=hsidebar_footer_content>
         <div class=list_last_content>
             <div class=lc>
-                <a href=# class="cart_btns btn btn-white">View Cart</a>
+                <a href="{{route('cart')}}" class="cart_btns btn btn-white">View Cart</a>
                 <a href=# class="checkout_btns btn btn-thm">Checkout</a>
             </div>
         </div>

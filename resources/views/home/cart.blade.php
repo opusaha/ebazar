@@ -3,76 +3,12 @@
     @push('styles')
         <title>Zeomart :: Cart</title>
     @endpush
-    <section class="inner_page_breadcrumb">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="breadcrumb_content">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Cart</a></li>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="shop-cart pt30">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-lg-4 m-auto">
                     <div class="main-title text-center mb50">
                         <h2 class="title">Shopping Cart</h2>
-                    </div>
-                    <div class="text-center">
-                        <div class="list_last_content">
-                            <div class="lc">
-                                <p class="para">Buy $98.00 more to enjoy FREE Shipping</p>
-                                <div class="uilayout_range home1_style">
-                                    <div class="sidebar_range_slider mb30 mt25">
-                                        <input class="range-example-km" value="80" type="text"
-                                            style="display: none;">
-                                        <div class="asRange">
-                                            <div class="asRange-bar"></div>
-                                            <div class="asRange-pointer asRange-pointer-1" style="left: 53.3333%;"
-                                                tabindex="0"><span class="asRange-tip">80</span></div><span
-                                                class="asRange-selected" style="left: 0px; width: 53.3333%;"></span>
-                                            <div class="asRange-scale">
-                                                <ul class="asRange-scale-lines">
-                                                    <li class="asRange-scale-grid" style="left: 0%;"></li>
-                                                    <li style="left: 5%;"></li>
-                                                    <li style="left: 10%;"></li>
-                                                    <li style="left: 15%;"></li>
-                                                    <li style="left: 20%;"></li>
-                                                    <li class="asRange-scale-inlineGrid" style="left: 25%;"></li>
-                                                    <li style="left: 30%;"></li>
-                                                    <li style="left: 35%;"></li>
-                                                    <li style="left: 40%;"></li>
-                                                    <li style="left: 45%;"></li>
-                                                    <li class="asRange-scale-grid" style="left: 50%;"></li>
-                                                    <li style="left: 55%;"></li>
-                                                    <li style="left: 60%;"></li>
-                                                    <li style="left: 65%;"></li>
-                                                    <li style="left: 70%;"></li>
-                                                    <li class="asRange-scale-inlineGrid" style="left: 75%;"></li>
-                                                    <li style="left: 80%;"></li>
-                                                    <li style="left: 85%;"></li>
-                                                    <li style="left: 90%;"></li>
-                                                    <li style="left: 95%;"></li>
-                                                    <li class="asRange-scale-grid" style="left: 100%;"></li>
-                                                </ul>
-                                                <ul class="asRange-scale-values">
-                                                    <li style="left: 0%;"><span>0</span></li>
-                                                    <li style="left: 50%;"><span>75</span></li>
-                                                    <li style="left: 100%;"><span>150</span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -89,41 +25,43 @@
                                     <th scope="col">REMOVE</th>
                                 </tr>
                             </thead>
-                            <tbody class="table_body">
-                                @foreach ($carts  as $cart)
-                                <tr>
-                                    <th scope="row">
-                                        <ul class="cart_list d-block d-xl-flex">
-                                            <li class="ps-1 ps-sm-4 pe-1 pe-sm-4"><a href="#"><img
-                                                        src="images/shop/cart1.png" alt="cart1.png"></a></li>
-                                            <li class="ms-2 ms-md-3">
-                                                <a class="cart_title" href="#">
-                                                    <span class="fz16">Apple MacBook Pro with <br
-                                                            class="d-none d-md-block"> Apple M1 Chip</span> <br>
-                                                    <span class="fz14"><span class="fw500">Hard Drive Capacity:</span>
-                                                        256</span><br>
-                                                    <span class="fz14"><span class="fw500">Actual Color:</span>
-                                                        Silver</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <td>$3.399</td>
-                                    <td>
-                                        <div class="cart_btn">
-                                            <div class="quantity-block">
-                                                <button class="quantity-arrow-minus{{$cart->id}} quantity-arrow-minus inner_page"> <span
-                                                        class="fa fa-minus"></span> </button>
-                                                <input class="quantity-num{{$cart->id}} quantity-style inner_page" type="number" value="3">
-                                                <button class="quantity-arrow-plus{{$cart->id}} quantity-arrow-plus inner_page"> <span
-                                                        class="fas fa-plus"></span> </button>
+                            <tbody class="table_body" id="cartBody">
+                                @foreach ($carts as $cart)
+                                    @php $product= \App\Models\Product::findOrFail($cart->product_id); @endphp
+                                    <tr>
+                                        <th scope="row">
+                                            <ul class="cart_list d-block d-xl-flex">
+                                                <li class="ps-1 ps-sm-4 pe-1 pe-sm-4"><a href="#"><img
+                                                            src="{{ $product->image_one }}" alt="cart1.png"
+                                                            style="height:60px"></a></li>
+                                                <li class="ms-2 ms-md-3">
+                                                    <a class="cart_title" href="#">
+                                                        <span class="fz16">{{ $product->name }}</span><br>
+                                                        <span class="fz14"><span class="fw500">Actual Color:</span>
+                                                            Silver</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </th>
+                                        <td>{{ $cart->price }} TK</td>
+                                        <td>
+                                            <div class="cart_btn">
+                                                <div class="quantity-block">
+                                                    <button class="quantity-arrow-minus inner_page"> <span
+                                                            class="fa fa-minus"></span> </button>
+                                                    <input class="quantity-num inner_page" type="number"
+                                                        value="{{ $cart->quantity }}">
+                                                    <button class="quantity-arrow-plus inner_page"> <span
+                                                            class="fas fa-plus"></span> </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- <input class="cart_count text-center" placeholder="2" type="number"> -->
-                                    </td>
-                                    <td class="">$3.399</td>
-                                    <td class=""><span class="flaticon-close"></span></td>
-                                </tr>
+                                        </td>
+                                        <td class="">{{ $cart->total_price }} TK</td>
+                                        <td class=""><button type="button" class="removeCart"
+                                                data-product-id="{{ $cart->id }}"
+                                                style="background-color: transparent;border:none;outline:none"><span
+                                                    class="flaticon-close"></span></button></td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -135,9 +73,9 @@
                                     <a class="btn apply_count_btn" href="#">Apply Coupon</a>
                                 </form>
                                 <form class="form_two">
-                                    <button type="button" class="btn btn_shopping btn-white me-3">Continue
-                                        Shopping</button>
-                                    <button type="button" class="btn btn_cart btn3 btn-thm">Update Cart</button>
+                                    {{-- <a  class="btn btn_shopping btn-white me-3">Continue
+                                        Shopping</a> --}}
+                                    <a href="{{ route('home') }}" class="btn btn_cart btn3 btn-thm">Continue Shopping</a>
                                 </form>
                             </div>
                         </div>
@@ -148,22 +86,24 @@
                         <h4 class="title">Cart Totals</h4>
                         <ul>
                             <li class="subtitle">
-                                <p>Product Subtotal <span class="float-end">$229.99</span></p>
+                                <p>Product Subtotal <span
+                                        class="float-end" id="cartDisplayTotal">{{ number_format($carts->sum('total_price'), 2) }} TK</span></p>
                             </li>
                             <li class="subtitle">
-                                <p>Order Discounts <span class="float-end">-$30.01</span></p>
+                                <p>Order Discounts <span class="float-end">-00.00 TK</span></p>
                             </li>
                             <li class="subtitle">
                                 <p>Estimated Shipping <span class="float-end">Free</span></p>
                             </li>
                             <li class="subtitle">
-                                <p>Estimated Taxes <span class="float-end">$26.00</span></p>
+                                <p>Estimated Taxes <span class="float-end"> 00.00 TK</span></p>
                             </li>
                             <li class="subtitle">
                                 <hr>
                             </li>
                             <li class="subtitle totals">
-                                <p>Total <span class="float-end">$225.98</span></p>
+                                <p>Total <span class="float-end" id="cartDisplaySubTotal">{{ number_format($carts->sum('total_price'), 2) }}
+                                        TK</span></p>
                             </li>
                         </ul>
                         <div class="ui_kit_button payment_widget_btn">
@@ -174,4 +114,115 @@
             </div>
         </div>
     </section>
+    @push('scripts')
+        <script>
+            $('.removeCart').on('click', function(e) {
+                e.preventDefault();
+
+                var product_id = $(this).data('product-id');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "cart/remove",
+                    data: {
+                        'product_id': product_id,
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            title: 'Delete Success!',
+                            text: response.status,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+
+                $.ajax({
+                    url: "cart/data",
+                    success: function(data) {
+                        var carts = data.carts;
+                        var list = $("#cart-list");
+                        var cartList = $("#cartBody");
+                        var cartTotal = $("#subtitle");
+                        var cartCount = $("#cartCount");
+                        var cartDisplayTotal = $('#cartDisplayTotal')
+                        var cartDisplaySubTotal = $('#cartDisplaySubTotal')
+
+                        list.empty();
+                        cartList.empty();
+                        cartCount.empty();
+                        cartTotal.empty();
+                        cartDisplayTotal.empty(); // remove previous content
+                        cartDisplaySubTotal.empty();
+
+                        var c = carts.reduce(function(sum, cart) {
+                            return sum + cart.quantity;
+                        }, 0);
+                        cartCount.append(c);
+
+                        var t = carts.reduce(function(sum, cart) {
+                            return sum + cart.total_price;
+                        }, 0);
+                        cartTotal.append(t);
+                        cartDisplayTotal.append(t);
+                        cartDisplaySubTotal.append(t);
+
+                        // Update the cart data in the HTML
+                        $.each(carts, function(index, cart) {
+                            $.ajax({
+                                url: "products/" + cart.product_id,
+                                success: function(productData) {
+                                    var product = productData.product;
+                                    var item = "<li class='list_content'>" +
+                                        "<div>" +
+                                        "<img class='float-start mt10' src='" + product
+                                        .image_one + "' style='height:75px'>" +
+                                        "<p>" + product.name.substr(0, 35) + "...</p>" +
+                                        "<div class='cart_btn home_page_sidebar mt10'>" +
+                                        "<div class='quantity-block home_page_sidebar'>" +
+                                        "<button class='quantity-arrow-minus home_page_sidebar'><img src={{ asset('home/images/icons/minus.svg') }}></button>" +
+                                        "<input class='quantity-num home_page_sidebar' type='number' value='" +
+                                        cart.quantity + "'>" +
+                                        "<button class='quantity-arrow-plus home_page_sidebar'> <span class='flaticon-close'></span> </button>" +
+                                        "</div>" +
+                                        "<span class='home_page_sidebar price'>" +
+                                        cart.total_price + " TK</span>" +
+                                        "</div>" +
+                                        "<span class='close_icon'><i class='flaticon-close'></i></span>" +
+                                        "</div>" +
+                                        "</li>";
+                                    list.append(item);
+                                    var itemTwo = `<tr><th scope="row">
+                                    <ul class="cart_list d-block d-xl-flex">
+                                    <li class="ps-1 ps-sm-4 pe-1 pe-sm-4">
+                                    <a href="#"><img src="` + product.image_one + `" alt="cart1.png" style="height:60px"></a></li>
+                                    <li class="ms-2 ms-md-3"><a class="cart_title" href="#">
+                                    <span class="fz16">` + product.name.substr(0, 35) + `</span><br>
+                                    <span class="fz14"><span class="fw500">Actual Color:</span>
+                                    Silver</span></a></li></ul></th><td>` + cart.price + ` TK</td><td>
+                                    <div class="cart_btn"><div class="quantity-block">
+                                    <button class="quantity-arrow-minus inner_page">
+                                    <span class="fa fa-minus"></span></button>
+                                    <input class="quantity-num inner_page" type="number" value="` + cart.quantity + `">
+                                    <button class="quantity-arrow-plus inner_page">
+                                    <span class="fas fa-plus"></span></button></div></div></td>
+                                    <td class=""> ` + cart.total_price + ` TK</td><td class="">
+                                    <button type="button" class="removeCart" data-product-id="` + cart.id + `" style="background-color: transparent;border:none;outline:none">
+                                    <span class="flaticon-close"></span></button></td></tr>`;
+                                    cartList.append(itemTwo);
+                                }
+                            });
+                        })
+                    }
+                });
+
+            })
+        </script>
+    @endpush
 @endsection

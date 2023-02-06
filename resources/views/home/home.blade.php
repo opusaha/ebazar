@@ -1,5 +1,8 @@
 @extends('home.layout.master')
 @section('content')
+@push('styles')
+        <title>Zeomart :: Home</title>
+    @endpush
 <section class=home-one>
     <div class=container>
         <div class=row>

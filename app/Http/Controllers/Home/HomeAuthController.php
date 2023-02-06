@@ -35,7 +35,7 @@ class HomeAuthController extends Controller
             $user->save();
             Auth::login($user);
             Session::flash('success', 'Register Success!');
-            return redirect()->route('home');
+            return redirect()->back();
         }
     }
     public function login()
@@ -46,13 +46,13 @@ class HomeAuthController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->has('remember'))) {
             Session::flash('success', 'Login Success!');
-            return redirect()->route('home');
+            return redirect()->back();
         }
     }
     public function logout()
     {
         Auth::logout();
         Session::flash('success', 'Logout Success!');
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }

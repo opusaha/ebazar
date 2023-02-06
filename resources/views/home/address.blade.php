@@ -1,5 +1,8 @@
 @extends('home.layout.master')
 @section('content')
+@push('styles')
+        <title>Zeomart :: Address</title>
+    @endpush
     <section class="our-dashbord dashbord pb90">
         <div class="container">
             <div class="row">

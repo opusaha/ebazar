@@ -53,6 +53,7 @@ class ProductController extends Controller
             $product->quantity = $request->quantity;
             $product->name = $request->name;
             $product->details = $request->details;
+            $product->specification = $request->specification;
             $product->image_one =  $this->saveFile($request, 'image_one');
             $product->image_two =  $this->saveFile($request, 'image_two');
             $product->image_three =  $this->saveFile($request, 'image_three');
@@ -110,6 +111,7 @@ class ProductController extends Controller
             $product->quantity = $request->quantity;
             $product->name = $request->name;
             $product->details = $request->details;
+            $product->specification = $request->specification;
             if ($request->image_one) {
                 $product->image_one =  $this->saveFile($request, 'image_one');
             }

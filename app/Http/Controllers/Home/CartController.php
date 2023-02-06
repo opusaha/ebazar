@@ -14,8 +14,8 @@ class CartController extends Controller
 
     public function postCart(Request $request)
     {
+        $id = $request->input('product_id');
         if (Auth::check()) {
-            $id = $request->input('product_id');
             $qty = $request->input('product_Qty');
             $cartInfo = Cart::where('user_id', Auth::user()->id)->where('product_id', $id)->get();
             if (count($cartInfo) > 0) {
@@ -35,14 +35,13 @@ class CartController extends Controller
                 return response()->json(['status' => Product::findOrFail($id)->name . ' is add to your cart']);
             }
         } else {
-            return response()->json(['status' => 'Please login first']);
+            return response()->json(['status' => 'Please login first. To add '.Product::findOrFail($id)->name .' on your Cart.']);
         }
     }
-    public function cartDelete($id = null)
+    public function delete(Request $request)
     {
-        Cart::findOrFail($id)->delete();
-        Session::flash('success', 'Product removed from cart successfully');
-        return redirect()->route('home');
+        Cart::findOrFail($request->input('product_id'))->delete();
+        return response()->json(['status' => 'Product removed from cart successfully']);
     }
     public function data()
     {
@@ -50,6 +49,13 @@ class CartController extends Controller
         return response()->json(['carts' => $carts]);
     }
     public function show($id)
+    {
+        $product = Product::find($id);
+        return response()->json([
+            'product' => $product
+        ]);
+    }
+    public function showSingle($slug=null, $id=null)
     {
         $product = Product::find($id);
         return response()->json([

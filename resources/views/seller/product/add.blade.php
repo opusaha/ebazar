@@ -152,6 +152,16 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label">Product Specification</label>
+                                        <div>
+                                            <h4>Enter Product Description Here</h4>
+                                            <textarea name="specification" style="width: 100%" rows="15"></textarea>
+                                            @error('specification')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

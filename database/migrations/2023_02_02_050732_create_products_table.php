@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->string('name');
             $table->text('details');
+            $table->text('specification');
             $table->string('image_one')->nullable();
             $table->string('image_two')->nullable();
             $table->string('image_three')->nullable();
