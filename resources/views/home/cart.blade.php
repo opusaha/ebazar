@@ -90,13 +90,13 @@
                                         class="float-end" id="cartDisplayTotal">{{ number_format($carts->sum('total_price'), 2) }} TK</span></p>
                             </li>
                             <li class="subtitle">
-                                <p>Order Discounts <span class="float-end">-00.00 TK</span></p>
+                                <p>Order Discounts <span class="float-end">0.00 TK</span></p>
                             </li>
                             <li class="subtitle">
                                 <p>Estimated Shipping <span class="float-end">Free</span></p>
                             </li>
                             <li class="subtitle">
-                                <p>Estimated Taxes <span class="float-end"> 00.00 TK</span></p>
+                                <p>Estimated Taxes <span class="float-end"> 0.00 TK</span></p>
                             </li>
                             <li class="subtitle">
                                 <hr>
@@ -107,7 +107,7 @@
                             </li>
                         </ul>
                         <div class="ui_kit_button payment_widget_btn">
-                            <button type="button" class="btn btn-thm btn-block">Proceed to checkout</button>
+                            <a href="{{route('checkout')}}"class="btn btn-thm btn-block">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>

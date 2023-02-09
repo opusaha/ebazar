@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\HomeAuthController;
+use App\Http\Controllers\Home\OrderController;
 use App\Http\Controllers\Home\UserController;
 use App\Http\Controllers\Home\UserDashboardController;
 use App\Http\Controllers\Home\WishController;
@@ -35,14 +36,17 @@ route::get('/product/{name}/{id}',[UserController::class,'singleProduct'])->name
 Route::get('/cart',[UserController::class,'cart'])->name('cart');
 Route::post('cart/store',[CartController::class,'postCart'])->name('addToCart');
 Route::post('product/{slug}/cart/store',[CartController::class,'postCart'])->name('addToCart.singleProduct');
-Route::post('wishlist/store',[WishController::class,'store'])->name('addToWish');
+Route::post('wishlist/store',[WishController::class,'store'])->name('wishlist.store');
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/logout',[HomeAuthController::class,'logout'])->name('logout');
+    Route::post('/update-user', [HomeAuthController::class,'update'])->name('update-user');
     Route::get('/account',[UserDashboardController::class,'dashboard'])->name('dashboard');
     Route::get('/address',[UserDashboardController::class,'address'])->name('address');
     Route::get('/orders',[UserDashboardController::class,'orders'])->name('orders');
     Route::get('/wishlist',[UserDashboardController::class,'wishlist'])->name('wishlist');
     Route::get('/invoice',[UserDashboardController::class,'invoice'])->name('invoice');
+    Route::get('/checkout',[OrderController::class,'checkout'])->name('checkout');
+    Route::post('/place/order',[OrderController::class,'placeOrder'])->name('place.order');
 
     // ==================== Ajax Route Starts From Here =================================
     // ==================== Ajax Route Starts From Here =================================

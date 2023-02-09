@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
@@ -21,7 +23,8 @@ class UserDashboardController extends Controller
     }
     public function wishlist()
     {
-        return view('home.wishlist');
+        $wishlist = Wishlist::where('user_id',Auth::id())->get();
+        return view('home.wishlist',compact('wishlist'));
     }
     public function invoice()
     {

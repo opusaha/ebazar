@@ -35,7 +35,7 @@ class HomeAuthController extends Controller
             $user->save();
             Auth::login($user);
             Session::flash('success', 'Register Success!');
-            return redirect()->back();
+            return redirect()->route('home');
         }
     }
     public function login()
@@ -54,5 +54,21 @@ class HomeAuthController extends Controller
         Auth::logout();
         Session::flash('success', 'Logout Success!');
         return redirect()->back();
+    }
+    public function update(Request $request){
+        $validator = $request->validate([
+            'name' => 'required',
+        ]);
+
+
+        $user = User::findOrFail(Auth::id());
+        $user->name = $request->input('name');
+        if($request->input('password')){
+            if($request->input('password') == $request->input('confirm_password')){
+                $user->password = bcrypt($request->input('password'));
+            }
+        }
+        $user->save();
+        return response()->json(['message' => 'User data successfully updated']);
     }
 }

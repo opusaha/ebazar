@@ -117,7 +117,7 @@
                     <div class=wrapper>
                         <ul class=mb0>
                             <li class=list-inline-item>
-                                <a class=header_top_iconbox href=page-account-wishlist.html>
+                                <a class=header_top_iconbox href="{{route('wishlist')}}">
                                     <div class="d-block d-md-flex">
                                         <div class=icon><span class=flaticon-heart></span></div>
                                         <div class=details>
@@ -1388,7 +1388,7 @@
                             <li><a href=page-dashboard-wish-list.html>Downloads</a></li>
                             <li><a href=page-dashboard-address.html>Addresses</a></li>
                             <li><a href=page-dashboard-account-details.html>Account Details</a></li>
-                            <li><a href=page-dashboard-wish-list.html>Wishlist</a></li>
+                            <li><a href="{{route('wishlist')}}">Wishlist</a></li>
                             <li><a href=page-login.html>Logout</a></li>
                         </ul>
                     </li>
@@ -1411,7 +1411,7 @@
                             <li><a href=page-account-details.html>Account Details</a></li>
                             <li><a href=page-account-order.html>Account Order</a></li>
                             <li><a href=page-account-address.html>Account Address</a></li>
-                            <li><a href=page-account-wishlist.html>Account Wishlist</a></li>
+                            <li><a href="{{route('wishlist')}}">Account Wishlist</a></li>
                             <li><a href=page-account-invoice.html>Account Invoice</a></li>
                         </ul>
                     </li>

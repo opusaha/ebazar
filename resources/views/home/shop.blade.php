@@ -163,10 +163,14 @@
                                     <img src="{{ $product->image_one }}" alt="Shop Item1" style="height:230px">
                                     <div class="thumb_info">
                                         <ul class="mb0">
-                                            <li><button type="button" class="btnWishlist" data-product-id="{{ $product->id }}" style="background-color: transparent;border:none;outline:none"><span
-                                                class="flaticon-heart"></span></button>
+                                            <li><button type="button" class="btnWishlist"
+                                                    data-product-id="{{ $product->id }}"
+                                                    style="background-color: transparent;border:none;outline:none"><span
+                                                        class="flaticon-heart"></span></button>
                                             </li>
-                                            <li><a href="{{route('single.product',[str_replace(' ', '-', $product->name), $product->id])}}"><span class="flaticon-show"></span></a>
+                                            <li><a
+                                                    href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                        class="flaticon-show"></span></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -180,7 +184,9 @@
 
                                 <div class="details">
                                     <div class="sub_title">{{ $product->sku }}</div>
-                                    <div class="title"><a href="{{route('single.product',[str_replace(' ', '-', $product->name), $product->id])}}">{{ $product->name }}</a></div>
+                                    <div class="title"><a
+                                            href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                    </div>
                                     <div class="review d-flex">
                                         <ul class="mb0 me-2">
                                             <li class="list-inline-item"><a href="#"><i
@@ -351,7 +357,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "wishlist/store",
+                    url: "{{ route('wishlist.store') }}",
                     data: {
                         'product_id': product_id,
                     },
@@ -363,9 +369,10 @@
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             });
-                        }if (response.status.indexOf('is already available on your wishlist') !== -1) {
+                        } else if (response.status.indexOf('is already available on your wishlist') !== -
+                            1) {
                             Swal.fire({
-                                title: 'OPS!',
+                                title: 'Oops!',
                                 text: response.status,
                                 icon: 'info',
                                 confirmButtonText: 'OK'
