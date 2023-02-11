@@ -63,4 +63,7 @@ class SellerAuthController extends Controller
     {
         return view('seller.auth.forget');
     }
+    public function settings(){
+        return view ('vandor.settings');
+    }
 }

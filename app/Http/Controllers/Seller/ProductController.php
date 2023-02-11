@@ -16,11 +16,12 @@ class ProductController extends Controller
     {
         $categories = Category::where('parent_id', null)->get();
         $products = Product::where('seller_id', Auth::guard('seller')->user()->id)->latest()->paginate(20);
-        return view('seller.product.index', compact('products', 'categories'));
+        return view('vandor.product.index', compact('products', 'categories'));
     }
     public function create()
     {
-        return view('seller.product.add');
+        $categories = Category::where('parent_id', null)->get();
+        return view('vandor.product.create',compact('categories'));
     }
     public function store(Request $request)
     {
@@ -78,7 +79,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('seller.product.edit', compact('id', 'product'));
+        $categories = Category::where('parent_id', null)->get();
+        return view('vandor.product.edit', compact('id', 'product','categories'));
     }
     public function update(Request $request, $id = null)
     {

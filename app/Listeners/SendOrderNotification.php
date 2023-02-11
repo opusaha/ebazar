@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\OrderProcessed;
-use App\Mail\Order;
+use App\Mail\Orders;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +29,6 @@ class SendOrderNotification
      */
     public function handle(OrderProcessed $event)
     {
-        Mail::to(Auth::user()->email)->send(new Order($event->data));
+        Mail::to(Auth::user()->email)->send(new Orders($event->data));
     }
 }

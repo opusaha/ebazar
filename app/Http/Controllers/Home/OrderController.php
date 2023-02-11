@@ -83,8 +83,12 @@ class OrderController extends Controller
         $data['zip'] = $validatedData['zip'];
         $data['country'] = $validatedData['country'];
         $data['delevery_date'] = Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->tomorrow();
-        // event(new OrderProcessed($data));
-        Mail::to(Auth::user()->email)->send(new MailOrder($data));
+        event(new OrderProcessed($data));
+        // Mail::to(Auth::user()->email)->send(new MailOrder($data));
         return redirect()->route('home');
+    }
+    public function sellerOrder(){
+        $orders =Order_detail::where('seller_id',Auth::guard('seller')->user()->id)->latest()->paginate(15);
+        return view('vandor.order.index',compact('orders'));
     }
 }

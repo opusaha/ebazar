@@ -86,6 +86,9 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
         Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+        Route::get('/order',[OrderController::class,'sellerOrder'])->name('order');
+        Route::get('/order/edit/{id}',[OrderController::class,'sellerEdit'])->name('order.edit');
+        Route::get('/settings',[SellerAuthController::class,'settings'])->name('settings');
     });
     // auth
 

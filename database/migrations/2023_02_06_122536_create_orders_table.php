@@ -21,7 +21,6 @@ return new class extends Migration
             $table->unsignedBigInteger('shipping_id');
             $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
             $table->unsignedBigInteger('total_price');
-            $table->string('status');
             $table->string('payment_id');
             $table->text('notes')->nullable();
             $table->timestamps();

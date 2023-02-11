@@ -69,6 +69,7 @@ class HomeAuthController extends Controller
             }
         }
         $user->save();
-        return response()->json(['message' => 'User data successfully updated']);
+        $data= User::findOrFail(Auth::id());
+        return response()->json(['message' => 'User data successfully updated', 'data' => $data]);
     }
 }

@@ -9,7 +9,7 @@ class SellerController extends Controller
 {
     public function dashboard()
     {
-        return view('seller.welcome');
+        return view('vandor.dashboard');
     }
     public function profile()
     {

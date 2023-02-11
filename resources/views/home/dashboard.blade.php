@@ -11,7 +11,7 @@
                         <div class="account_details_user d-flex pb10 bb1 mb10">
                             <img class="me-3" src="{{ asset('home/images/team/ad-thumb.png') }}" alt="">
                             <div class="content_details text-start">
-                                <h5 class="title">{{ Auth::user()->name }}</h5>
+                                <h5 class="title" id="title_name">{{ Auth::user()->name }}</h5>
                                 <a class="stitle" href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                                             <div class="form-group mb-4">
                                                                 <label class="form-label"> Name</label>
                                                                 <input class="form-control" type="text"
-                                                                    placeholder="Your Name" name="name">
+                                                                    placeholder="Your Name" name="name" id="update_name" value="{{Auth::user()->name}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -195,7 +195,10 @@
                         method: 'POST',
                         data: $('#userUpdate').serialize(),
                         success: function(data) {
+                            var name = data['data']['name'];
                             $('#userUpdate')[0].reset();
+                            $("#update_name").val(name);
+                            $("#title_name").text(name)
                             Swal.fire({
                                 title: 'Success!',
                                 text: data.message,

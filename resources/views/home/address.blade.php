@@ -63,20 +63,10 @@
                                     <div class="col-lg-12">
                                         <h2 class="title mb30">Address</h2>
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-6">
                                         <div class="dboard_address mb30-md">
-                                            <h4 class="title mb15">Billing Address <span class="float-end">Edit</span></h4>
-                                            <p>Daniel Robinson</p>
-                                            <p>1418 River Drive, Suite 35 Cottonhall, CA 9622</p>
-                                            <p>United States</p>
-                                            <p class="mt30">sale@zenmart.com</p>
-                                            <p>+3 8493 92 932 021</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 offset-lg-1">
-                                        <div class="dboard_address">
-                                            <h4 class="title mb15">Shipping Address <span class="float-end">Edit</span></h4>
-                                            <p>Daniel Robinson</p>
+                                            {{-- <h4 class="title mb15">Billing Address <span class="float-end">Edit</span></h4> --}}
+                                            <p>{{Auth::user()->name}}</p>
                                             <p>1418 River Drive, Suite 35 Cottonhall, CA 9622</p>
                                             <p>United States</p>
                                             <p class="mt30">sale@zenmart.com</p>

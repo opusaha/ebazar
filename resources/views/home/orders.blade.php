@@ -65,70 +65,32 @@
                                     <table class="table">
                                         <thead class="table-light">
                                             <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Product</th>
+                                                <th scope="col">Invoice ID</th>
+                                                {{-- <th scope="col">Product</th> --}}
                                                 <th scope="col">Date</th>
                                                 <th scope="col">Payment</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Total</th>
-                                                <th scope="col">Action</th>
+                                                {{-- <th scope="col">Action</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($orders as $order)
                                             <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>Paid</td>
-                                                <td class="status"><span class="style1">Delivered</span></td>
-                                                <td>$56.00</td>
-                                                <td class="action"><span class="details">...</span></td>
+                                                <th scope="row">#{{$order->order_number}}</th>
+                                                {{-- <td>Product Name</td> --}}
+                                                <td>{{$order->created_at}}</td>
+                                                <td>COD</td>
+                                                <td class="status"><span class="@if($order->status=='Delivered') style1
+                                                    @elseif ($order->status=='Cancel')
+                                                    style2
+                                                    @else
+                                                    style3
+                                                    @endif">{{$order->status}}</span></td>
+                                                <td>{{$order->total_price}}</td>
+                                                {{-- <td class="action"><span class="details">...</span></td> --}}
                                             </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>Paid</td>
-                                                <td class="status"><span class="style2">Cancel</span></td>
-                                                <td>$56.00</td>
-                                                <td class="action"><span class="details">...</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>Paid</td>
-                                                <td class="status"><span class="style3">In Progress</span></td>
-                                                <td>$56.00</td>
-                                                <td class="action"><span class="details">...</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>Paid</td>
-                                                <td class="status"><span class="style1">Delivered</span></td>
-                                                <td>$56.00</td>
-                                                <td class="action"><span class="details">...</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>Paid</td>
-                                                <td class="status"><span class="style2">Cancel</span></td>
-                                                <td>$56.00</td>
-                                                <td class="action"><span class="details">...</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>Paid</td>
-                                                <td class="status"><span class="style3">In Progress</span></td>
-                                                <td>$56.00</td>
-                                                <td class="action"><span class="details">...</span></td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

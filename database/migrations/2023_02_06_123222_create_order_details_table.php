@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
             $table->integer('quantity');
             $table->integer('price');
+            $table->string('status');
             $table->timestamps();
         });
     }

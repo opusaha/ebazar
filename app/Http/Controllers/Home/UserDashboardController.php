@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Shipping;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,8 @@ class UserDashboardController extends Controller
     }
     public function orders()
     {
-        return view('home.orders');
+        $orders = Order::where('user_id',Auth::id())->get();
+        return view('home.orders',compact('orders'));
     }
     public function wishlist()
     {
