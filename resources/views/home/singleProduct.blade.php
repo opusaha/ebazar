@@ -2,6 +2,7 @@
 @section('content')
     @push('styles')
         <title>Zeomart :: Product</title>
+        <link rel="stylesheet" href="{{asset('home/css/chat.css')}}">
     @endpush
     <section class="inner_page_breadcrumb">
         <div class="container">
@@ -774,6 +775,7 @@
             </div>
         </div>
     </section>
+    @include('home.layout.chat')
     @push('scripts')
         <script>
             $('.addToCartBTN').on('click', function(e) {
@@ -844,10 +846,12 @@
                                     var product = productData.product;
                                     var fullString = product.image_one;
                                     var parts = fullString.split("/");
-                                    var desiredPart = "/" + parts[parts.length - 2] +"/" + parts[parts.length - 1];
+                                    var desiredPart = "/" + parts[parts.length - 2] +
+                                        "/" + parts[parts.length - 1];
                                     var item = "<li class='list_content'>" +
                                         "<div>" +
-                                        "<img class='float-start mt10' src='" + desiredPart + "' style='height:75px'>" +
+                                        "<img class='float-start mt10' src='" +
+                                        desiredPart + "' style='height:75px'>" +
                                         "<p>" + product.name.substr(0, 35) + "...</p>" +
                                         "<div class='cart_btn home_page_sidebar mt10'>" +
                                         "<div class='quantity-block home_page_sidebar'>" +
@@ -871,5 +875,6 @@
 
             })
         </script>
+        <script src="{{asset('home/js/chat.js')}}"></script>
     @endpush
 @endsection
