@@ -39,21 +39,17 @@
                                 </a>
                                 <div class="dropdown-menu">
                                     <div class="user_setting_content">
-                                        <a class="dropdown-item active" href="page-dashboard.html"><i
+                                        <a class="dropdown-item active" href="{{route('seller.dashboard')}}"><i
                                                 class="flaticon-house mr10"></i>Dashboard</a>
-                                        <a class="dropdown-item" href="page-dashboard-products.html"><i
+                                        <a class="dropdown-item" href="{{route('seller.product.index')}}"><i
                                                 class="flaticon-cash-on-delivery mr10"></i>Products</a>
-                                        <a class="dropdown-item" href="page-dashboard-order.html"><i
+                                        <a class="dropdown-item" href="{{route('seller.order')}}"><i
                                                 class="flaticon-checked-box mr10"></i>Order</a>
-                                        <a class="dropdown-item" href="page-dashboard-customer.html"><i
-                                                class="flaticon-growth mr10"></i>Customer</a>
-                                        <a class="dropdown-item" href="page-dashboard-categories.html"><i
-                                                class="flaticon-folder mr10"></i>Categories</a>
-                                        <a class="dropdown-item" href="page-dashboard-message.html"><i
+                                        <a class="dropdown-item" href=""><i
                                                 class="flaticon-mail-inbox-app mr10"></i>Message</a>
-                                        <a class="dropdown-item" href="page-dashboard-setting.html"><i
+                                        <a class="dropdown-item" href="{{route('seller.settings')}}"><i
                                                 class="flaticon-settings mr10"></i>Settings</a>
-                                        <a class="dropdown-item" href="page-login.html"><i
+                                        <a class="dropdown-item" href="{{route('seller.logout')}}"><i
                                                 class="flaticon-exit mr10"></i>Logout</a>
                                     </div>
                                 </div>

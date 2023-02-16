@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Poppins:wght@700&display=swap"
         rel=stylesheet>
     <link rel=stylesheet href={{asset('home/css/responsive.css')}}>
-    @stack('styles')
+    @stack('styles') 
     <link href={{asset('home/images/favicon.ico')}} sizes=128x128 rel="shortcut icon" type=image/x-icon>
     <link href={{asset('home/images/favicon.ico')}} sizes=128x128 rel="shortcut icon">
     <link href={{asset('home/images/apple-touch-icon-60x60.png')}} sizes=60x60 rel=apple-touch-icon>

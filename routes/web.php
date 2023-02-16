@@ -8,9 +8,9 @@ use App\Http\Controllers\Home\UserController;
 use App\Http\Controllers\Home\UserDashboardController;
 use App\Http\Controllers\Home\WishController;
 use App\Http\Controllers\Seller\ProductController;
+use App\Http\Controllers\Seller\SellerAuthController;
 use App\Http\Controllers\Seller\SellerController;
-use App\Http\Controllers\SellerAuthController;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,6 +89,9 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/order',[OrderController::class,'sellerOrder'])->name('order');
         Route::get('/order/edit/{id}',[OrderController::class,'sellerEdit'])->name('order.edit');
         Route::get('/settings',[SellerAuthController::class,'settings'])->name('settings');
+        Route::post('/update/{id}',[SellerAuthController::class,'update'])->name('update');
+        Route::post('/update/password/{id}',[SellerAuthController::class,'updatePassword'])->name('update.password');
+        Route::post('/update/status/{id}',[SellerAuthController::class,'updateStatus'])->name('update.status');
     });
     // auth
 

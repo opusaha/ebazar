@@ -11,7 +11,7 @@
             <a href="{{route('seller.order')}}" class="items-center"><i class="flaticon-checked-box mr15"></i>Order</a>
         </div>
         <div class="sidebar_list_item ">
-            <a href="page-dashboard-message.html" class="items-center"><i
+            <a href="" class="items-center"><i
                     class="flaticon-mail-inbox-app mr15"></i>Message</a>
         </div>
         <div class="sidebar_list_item ">
@@ -19,7 +19,7 @@
                     class="flaticon-settings mr15"></i>Settings</a>
         </div>
         <div class="sidebar_list_item ">
-            <a href="page-login.html" class="items-center"><i class="flaticon-exit mr15"></i>Logout</a>
+            <a href="{{route('seller.logout')}}" class="items-center"><i class="flaticon-exit mr15"></i>Logout</a>
         </div>
     </div>
 </div>

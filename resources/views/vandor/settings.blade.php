@@ -3,6 +3,7 @@
     @push('vandorStyles')
         <title>Zeomart :: Seller Setting's</title>
     @endpush
+    @php $seller =Auth::guard('seller')->user(); @endphp
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">
             <div class="row pb50">
@@ -41,13 +42,16 @@
                                 <div class="tab-pane fade col-lg-12 active show" id="editprofile" role="tabpanel"
                                     aria-labelledby="editprofile-tab">
                                     <div class="account_details_page form_grid">
-                                        <form class="contact_form" name="contact_form" action="#" method="post"
-                                            novalidate="">
+                                        <form class="contact_form" action="{{route('seller.update', Auth::guard('seller')->user()->id)}}" method="post" enctype="multipart/form-data">@csrf
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="d-flex align-items-center bb1 mb30 pb30">
                                                         <div class="flex-shrink-0">
+                                                            @if ($seller->logo)
+                                                            <img src="{{asset($seller->logo)}}" alt="avatar" height="100px" width="100px">
+                                                            @else
                                                             <img src="{{asset('home/images/resource/avatar.png')}}" alt="avatar">
+                                                            @endif
                                                         </div>
                                                         <div class="flex-grow-1 ms-4 editing_list">
                                                             <h5 class="mb0">Your avatar</h5>
@@ -64,42 +68,42 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-4">
                                                         <label class="form-label">Shop Name</label>
-                                                        <input class="form-control" type="text" placeholder="Your Shop Name" name="shop">
+                                                        <input class="form-control" type="text" placeholder="Your Shop Name" name="shop" value="{{$seller->shop}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-4">
                                                         <label class="form-label">Phone Number</label>
                                                         <input class="form-control" type="number"
-                                                            placeholder="Phone Number" name="phone">
+                                                            placeholder="Phone Number" name="phone" value="{{$seller->phone}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-4">
                                                         <label class="form-label">Address:</label>
                                                         <input class="form-control" type="text"
-                                                            placeholder="Address Line" name="address">
+                                                            placeholder="Address Line" name="address" value="{{$seller->address}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-4">
                                                         <label class="form-label">Business type:</label>
                                                         <input class="form-control" type="text"
-                                                            placeholder="Business Type" name="type">
+                                                            placeholder="Business Type" name="type" value="{{$seller->business_type}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group mb30">
                                                         <label class="form-label">About us</label>
-                                                        <textarea class="form-control" rows="8" name="about_us">Beautiful super large botanical garden - amazing it’s in NYC. Getting into the garden with my voucher was easy and seamless! Just went up to the ticket counter and went right in.</textarea>
+                                                        <textarea class="form-control" rows="8" name="about_us">{{$seller->about_us}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group d-grid d-sm-flex mb0">
-                                                        <button type="button"
+                                                        <button type="submit"
                                                             class="style2 btn btn-thm me-3 mb15-520">Update
                                                             Profile</button>
-                                                        <button type="button"
+                                                        <button type="reset"
                                                             class="style2 btn btn-white">Cancel</button>
                                                     </div>
                                                 </div>
@@ -110,8 +114,7 @@
                                 <div class="tab-pane fade col-xl-6" id="password" role="tabpanel"
                                     aria-labelledby="password-tab">
                                     <div class="account_details_page form_grid">
-                                        <form class="contact_form" name="contact_form" action="#" method="post"
-                                            novalidate="">
+                                        <form class="contact_form" action="{{route('seller.update.password', Auth::guard('seller')->user()->id)}}" method="POST">@csrf
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group mb-4">
@@ -136,10 +139,10 @@
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group d-grid d-sm-flex mb0">
-                                                        <button type="button"
+                                                        <button type="submit"
                                                             class="style2 btn btn-thm me-3 mb15-520">Update
                                                             Password</button>
-                                                        <button type="button"
+                                                        <button type="reset"
                                                             class="style2 btn btn-white">Cancel</button>
                                                     </div>
                                                 </div>
@@ -150,8 +153,7 @@
                                 <div class="tab-pane fade col-xl-8" id="closeaccount" role="tabpanel"
                                     aria-labelledby="closeaccount-tab">
                                     <div class="account_details_page form_grid">
-                                        <form class="contact_form" name="contact_form" action="#" method="post"
-                                            novalidate="">
+                                        <form class="contact_form" action="{{route('seller.update.status', Auth::guard('seller')->user()->id)}}" method="POST" >@csrf
                                             <div class="row">
                                                 <div class="col-md-10">
                                                     <h5>Close account</h5>
@@ -168,9 +170,9 @@
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group d-grid d-sm-flex mb0">
-                                                        <button type="button"
+                                                        <button type="submit"
                                                             class="style2 btn btn-thm me-3 mb15-520">Close Account</button>
-                                                        <button type="button"
+                                                        <button type="reset"
                                                             class="style2 btn btn-white">Cancel</button>
                                                     </div>
                                                 </div>

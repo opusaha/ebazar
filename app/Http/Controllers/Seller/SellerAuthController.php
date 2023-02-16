@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Seller;
 
+use App\Http\Controllers\Controller;
 use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class SellerAuthController extends Controller
 {
     public function register()
     {
-        return view('seller.auth.register');
+        return view('vandor.login');
     }
     public function store(Request $request)
     {
@@ -42,7 +43,7 @@ class SellerAuthController extends Controller
 
     public function signIn()
     {
-        return view('seller.auth.login');
+        return view('vandor.login');
     }
     public function login(Request $request)
     {
@@ -65,5 +66,37 @@ class SellerAuthController extends Controller
     }
     public function settings(){
         return view ('vandor.settings');
+    }
+    public function update(Request $request , $id = null){
+        $seller = Seller::findOrFail($id);
+        if($request->logo){
+            $seller->logo =  $this->saveFile($request, 'logo');
+        }
+        if($request->shop){
+            $seller->shop = $request->shop;
+        }
+        if($request->phone){
+            $seller->phone = $request->phone;
+        }
+        if($request->address){
+            $seller->address = $request->address;
+        }
+        if($request->type){
+            $seller->business_type = $request->type;
+        }
+        if($request->about_us){
+            $seller->about_us = $request->about_us;
+        }
+        $seller->save();
+        return redirect()->route('seller.settings');
+    }
+    public function saveFile($request, $fieldName)
+    {
+        $file = $request->file($fieldName);
+        $fileName = rand() . '.' . $file->getClientOriginalExtension();
+        $dir = 'storage/';
+        $imgUrl = $dir . $fileName;
+        $file->move($dir, $fileName);
+        return $imgUrl;
     }
 }
