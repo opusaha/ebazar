@@ -8,7 +8,7 @@
                                 class="fa-sharp fa-solid fa-bars-staggered"></i></a>
                     </div>
                     <div class="dashboard_header_logo">
-                        <a href="{{ route('seller.dashboard') }}" class="logo">Zeomart<span
+                        <a href="{{ route('admin.dashboard') }}" class="logo">Zeomart<span
                                 class="text-thm">.</span></a>
                     </div>
                 </div>
@@ -40,19 +40,17 @@
                                 </a>
                                 <div class="dropdown-menu">
                                     <div class="user_setting_content">
-                                        <a class="dropdown-item active" href="{{ route('seller.dashboard') }}"><i
+                                        <a class="dropdown-item active" href="{{ route('admin.dashboard') }}"><i
                                                 class="flaticon-house mr10"></i>Dashboard</a>
-                                        @if (Auth::guard('seller')->user()->status == 'Approved')
-                                            <a class="dropdown-item" href="{{ route('seller.product.index') }}"><i
-                                                    class="flaticon-cash-on-delivery mr10"></i>Products</a>
-                                            <a class="dropdown-item" href="{{ route('seller.order') }}"><i
-                                                    class="flaticon-checked-box mr10"></i>Order</a>
-                                            <a class="dropdown-item" href=""><i
-                                                    class="flaticon-mail-inbox-app mr10"></i>Message</a>
-                                        @endif
-                                        <a class="dropdown-item" href="{{ route('seller.settings') }}"><i
+                                        <a class="dropdown-item" href=""><i
+                                                class="flaticon-checked-box mr10"></i>Category</a>
+                                        <a class="dropdown-item" href=""><i
+                                                class="flaticon-checked-box mr10"></i>Order</a>
+                                        <a class="dropdown-item" href=""><i
+                                                class="flaticon-mail-inbox-app mr10"></i>Message</a>
+                                        <a class="dropdown-item" href=""><i
                                                 class="flaticon-settings mr10"></i>Settings</a>
-                                        <a class="dropdown-item" href="{{ route('seller.logout') }}"><i
+                                        <a class="dropdown-item" href=""><i
                                                 class="flaticon-exit mr10"></i>Logout</a>
                                     </div>
                                 </div>

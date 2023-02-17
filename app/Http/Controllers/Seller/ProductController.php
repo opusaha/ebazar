@@ -25,41 +25,45 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'old_price' => 'required',
-            'price' => 'required',
-            'tag' => 'required',
-            'category' => 'required|integer',
-            'sku' => 'required',
-            'quantity' => 'required|integer',
-            'name' => 'required',
-            'details' => 'required',
-            'image_one' => 'required|file',
-            'image_two' => 'nullable|file',
-            'image_three' => 'nullable|file',
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            $product = new Product();
-            $product->seller_id = Auth::guard('seller')->user()->id;
-            $product->old_price = $request->old_price;
-            $product->price = $request->price;
-            $product->status = $request->status;
-            $product->tag = $request->tag;
-            $product->category = $request->category;
-            $product->sku = $request->sku;
-            $product->quantity = $request->quantity;
-            $product->name = $request->name;
-            $product->details = $request->details;
-            $product->specification = $request->specification;
-            $product->image_one =  $this->saveFile($request, 'image_one');
-            $product->image_two =  $this->saveFile($request, 'image_two');
-            $product->image_three =  $this->saveFile($request, 'image_three');
-            $product->save();
-            return redirect()->route('seller.product.index');
+        if(Auth::guard('seller')->user()->status == 'Approved'){
+            $validator = Validator::make($request->all(), [
+                'old_price' => 'required',
+                'price' => 'required',
+                'tag' => 'required',
+                'category' => 'required|integer',
+                'sku' => 'required',
+                'quantity' => 'required|integer',
+                'name' => 'required',
+                'details' => 'required',
+                'image_one' => 'required|file',
+                'image_two' => 'nullable|file',
+                'image_three' => 'nullable|file',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            } else {
+                $product = new Product();
+                $product->seller_id = Auth::guard('seller')->user()->id;
+                $product->old_price = $request->old_price;
+                $product->price = $request->price;
+                $product->status = $request->status;
+                $product->tag = $request->tag;
+                $product->category = $request->category;
+                $product->sku = $request->sku;
+                $product->quantity = $request->quantity;
+                $product->name = $request->name;
+                $product->details = $request->details;
+                $product->specification = $request->specification;
+                $product->image_one =  $this->saveFile($request, 'image_one');
+                $product->image_two =  $this->saveFile($request, 'image_two');
+                $product->image_three =  $this->saveFile($request, 'image_three');
+                $product->save();
+                return redirect()->route('seller.product.index');
+            }
+        }else{
+            return redirect()->back();
         }
     }
     public function saveFile($request, $fieldName)

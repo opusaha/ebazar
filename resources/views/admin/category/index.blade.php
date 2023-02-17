@@ -1,4 +1,4 @@
-@extends('seller.layout.master')
+@extends('admin.layout.master')
 @section('content')
     <div class="body d-flex py-3">
         <div class="container-xxl">

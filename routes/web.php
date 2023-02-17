@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\HomeAuthController;
@@ -27,35 +29,35 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home.home');
 })->name('home');
-Route::get('/register',[HomeAuthController::class,'register'])->name('register');
-Route::post('/save/register',[HomeAuthController::class,'store'])->name('register.store');
-Route::get('/login',[HomeAuthController::class,'login'])->name('login');
-Route::post('/user/login',[HomeAuthController::class,'userLogin'])->name('user.login');
-route::get('/shop',[UserController::class,'shop'])->name('shop');
-route::get('/product/{name}/{id}',[UserController::class,'singleProduct'])->name('single.product');
-Route::get('/cart',[UserController::class,'cart'])->name('cart');
-Route::post('cart/store',[CartController::class,'postCart'])->name('addToCart');
-Route::post('product/{slug}/cart/store',[CartController::class,'postCart'])->name('addToCart.singleProduct');
-Route::post('wishlist/store',[WishController::class,'store'])->name('wishlist.store');
-Route::group(['middleware' => 'auth'], function (){
-    Route::get('/logout',[HomeAuthController::class,'logout'])->name('logout');
-    Route::post('/update-user', [HomeAuthController::class,'update'])->name('update-user');
-    Route::get('/account',[UserDashboardController::class,'dashboard'])->name('dashboard');
-    Route::get('/address',[UserDashboardController::class,'address'])->name('address');
-    Route::get('/orders',[UserDashboardController::class,'orders'])->name('orders');
-    Route::get('/wishlist',[UserDashboardController::class,'wishlist'])->name('wishlist');
-    Route::get('/invoice',[UserDashboardController::class,'invoice'])->name('invoice');
-    Route::get('/checkout',[OrderController::class,'checkout'])->name('checkout');
-    Route::post('/place/order',[OrderController::class,'placeOrder'])->name('place.order');
+Route::get('/register', [HomeAuthController::class, 'register'])->name('register');
+Route::post('/save/register', [HomeAuthController::class, 'store'])->name('register.store');
+Route::get('/login', [HomeAuthController::class, 'login'])->name('login');
+Route::post('/user/login', [HomeAuthController::class, 'userLogin'])->name('user.login');
+route::get('/shop', [UserController::class, 'shop'])->name('shop');
+route::get('/product/{name}/{id}', [UserController::class, 'singleProduct'])->name('single.product');
+Route::get('/cart', [UserController::class, 'cart'])->name('cart');
+Route::post('cart/store', [CartController::class, 'postCart'])->name('addToCart');
+Route::post('product/{slug}/cart/store', [CartController::class, 'postCart'])->name('addToCart.singleProduct');
+Route::post('wishlist/store', [WishController::class, 'store'])->name('wishlist.store');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', [HomeAuthController::class, 'logout'])->name('logout');
+    Route::post('/update-user', [HomeAuthController::class, 'update'])->name('update-user');
+    Route::get('/account', [UserDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/address', [UserDashboardController::class, 'address'])->name('address');
+    Route::get('/orders', [UserDashboardController::class, 'orders'])->name('orders');
+    Route::get('/wishlist', [UserDashboardController::class, 'wishlist'])->name('wishlist');
+    Route::get('/invoice', [UserDashboardController::class, 'invoice'])->name('invoice');
+    Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/place/order', [OrderController::class, 'placeOrder'])->name('place.order');
 
     // ==================== Ajax Route Starts From Here =================================
     // ==================== Ajax Route Starts From Here =================================
 
-    Route::get('cart/data',[CartController::class,'data']);
-    Route::get('product/{slug}/cart/data',[CartController::class,'data']);
-    Route::get('products/{id}',[CartController::class,'show']);
-    Route::get('product/{slug}/products/{id}',[CartController::class,'showSingle']);
-    Route::post('cart/remove',[CartController::class,'delete']);
+    Route::get('cart/data', [CartController::class, 'data']);
+    Route::get('product/{slug}/cart/data', [CartController::class, 'data']);
+    Route::get('products/{id}', [CartController::class, 'show']);
+    Route::get('product/{slug}/products/{id}', [CartController::class, 'showSingle']);
+    Route::post('cart/remove', [CartController::class, 'delete']);
 
 
 
@@ -64,12 +66,24 @@ Route::group(['middleware' => 'auth'], function (){
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
-    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+    Route::middleware(admin::class)->group(function () {
+        Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+
+
+        Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+    });
+    Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
+    Route::post('/add', [AdminAuthController::class, 'store'])->name('store');
+    Route::get('/login', [AdminAuthController::class, 'signIn'])->name('signin');
+    Route::post('/sign-in', [AdminAuthController::class, 'login'])->name('login');
+    Route::get('/forgot/password', [AdminAuthController::class, 'forgot'])->name('forgot');
 });
 
 
@@ -82,16 +96,16 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/product', [ProductController::class, 'index'])->name('product.index');
         Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
         Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-        Route::get('/product/details/{id}',[ProductController::class,'details'])->name('product.details');
+        Route::get('/product/details/{id}', [ProductController::class, 'details'])->name('product.details');
         Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
         Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
-        Route::get('/order',[OrderController::class,'sellerOrder'])->name('order');
-        Route::get('/order/edit/{id}',[OrderController::class,'sellerEdit'])->name('order.edit');
-        Route::get('/settings',[SellerAuthController::class,'settings'])->name('settings');
-        Route::post('/update/{id}',[SellerAuthController::class,'update'])->name('update');
-        Route::post('/update/password/{id}',[SellerAuthController::class,'updatePassword'])->name('update.password');
-        Route::post('/update/status/{id}',[SellerAuthController::class,'updateStatus'])->name('update.status');
+        Route::get('/order', [OrderController::class, 'sellerOrder'])->name('order');
+        Route::get('/order/edit/{id}', [OrderController::class, 'sellerEdit'])->name('order.edit');
+        Route::get('/settings', [SellerAuthController::class, 'settings'])->name('settings');
+        Route::post('/update/{id}', [SellerAuthController::class, 'update'])->name('update');
+        Route::post('/update/password/{id}', [SellerAuthController::class, 'updatePassword'])->name('update.password');
+        Route::post('/update/status/{id}', [SellerAuthController::class, 'updateStatus'])->name('update.status');
     });
     // auth
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Seller :: Access</title>
+    <title>Admin :: Access</title>
     <style>
         * {
             box-sizing: border-box;
@@ -255,7 +255,7 @@
             left: 30px;
             width: calc(50% - 30px);
             min-height: 420px;
-            background-image: linear-gradient(45deg, #ff7d32, #2cffca);
+            background: linear-gradient(180deg, transparent 0%, rgb(255, 136, 0) 40%, transparent 100%);
             border-radius: 3px;
             box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
             overflow: hidden;
@@ -452,7 +452,7 @@
             <div class="user_options-forms" id="user_options-forms">
                 <div class="user_forms-login">
                     <h2 class="forms_title">Login</h2>
-                    <form class="forms_form" method="POST" action="{{route('seller.login')}}">@csrf
+                    <form class="forms_form" method="POST" action="{{route('admin.login')}}">@csrf
                         <fieldset class="forms_fieldset">
                             <div class="forms_field">
                                 <input type="email" placeholder="Email" class="forms_field-input" required
@@ -470,7 +470,7 @@
                 </div>
                 <div class="user_forms-signup">
                     <h2 class="forms_title">Sign Up</h2>
-                    <form class="forms_form" method="POST" action="{{route('seller.store')}}">@csrf
+                    <form class="forms_form" method="POST" action="{{route('admin.store')}}">@csrf
                         <fieldset class="forms_fieldset">
                             <div class="forms_field">
                                 <input type="text" placeholder="Full Name" class="forms_field-input" required  name="name"/>
