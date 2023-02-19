@@ -22,7 +22,6 @@ class SellerAuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:sellers',
             'password' => 'required|min:8',
-            'shop' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -34,9 +33,9 @@ class SellerAuthController extends Controller
             $seller->name = $request->name;
             $seller->email = $request->email;
             $seller->password = Hash::make($request->password);
-            $seller->shop = $request->shop;
             $seller->save();
             Session::flash('success', 'Successfully store done!');
+            auth()->guard('seller')->login($seller);
             return redirect()->route('seller.dashboard');
         }
     }
@@ -58,33 +57,35 @@ class SellerAuthController extends Controller
     {
         Auth::guard('seller')->logout();
         Session::flash('success', 'Logout Succcess!');
-        return redirect('/');
+        return redirect()->route('seller.signin');
     }
     public function forgot()
     {
         return view('seller.auth.forget');
     }
-    public function settings(){
-        return view ('vandor.settings');
+    public function settings()
+    {
+        return view('vandor.settings');
     }
-    public function update(Request $request , $id = null){
+    public function update(Request $request, $id = null)
+    {
         $seller = Seller::findOrFail($id);
-        if($request->logo){
+        if ($request->logo) {
             $seller->logo =  $this->saveFile($request, 'logo');
         }
-        if($request->shop){
+        if ($request->shop) {
             $seller->shop = $request->shop;
         }
-        if($request->phone){
+        if ($request->phone) {
             $seller->phone = $request->phone;
         }
-        if($request->address){
+        if ($request->address) {
             $seller->address = $request->address;
         }
-        if($request->type){
+        if ($request->type) {
             $seller->business_type = $request->type;
         }
-        if($request->about_us){
+        if ($request->about_us) {
             $seller->about_us = $request->about_us;
         }
         $seller->save();
@@ -98,5 +99,40 @@ class SellerAuthController extends Controller
         $imgUrl = $dir . $fileName;
         $file->move($dir, $fileName);
         return $imgUrl;
+    }
+    public function updatePassword(Request $request, $id =null)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $seller = Seller::findOrFail($id);
+
+        if (!Hash::check($request->current_password, $seller->password)) {
+            // Current password is incorrect
+            return redirect()->back()->with('error', 'The current password is incorrect.');
+        }
+        if($request->new_password == $request->confirm_password){
+            $seller->password = Hash::make($request->new_password);
+            $seller->save();
+            return redirect()->back()->with('success', 'Your password has been changed.');
+        }else{
+            return redirect()->back()->with('error', 'The current password and confirm password are not matched.');
+        }
+    }
+    public function updateStatus(Request $request, $id = null)
+    {
+        $seller = Seller::findOrFail($id);
+        if (!$seller) {
+            return redirect()->back()->with('error', 'Account not found');
+        }
+        if (!Hash::check($request->password, $seller->password)) {
+            return redirect()->back()->with('error', 'Invalid password.');
+        }
+        $seller->status = $seller->status == 'deactive' ? 'approved' : 'deactive';
+        $seller->save();
+
+        return redirect()->route('seller.settings')->with('success', 'Account status updated successfully.');
     }
 }

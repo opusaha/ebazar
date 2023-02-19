@@ -10,7 +10,18 @@
                 <div class="col-lg-12">
                     <div class="dashboard_title_area">
                         <h2>Settings</h2>
-                        <p class="para">Lorem ipsum dolor sit amet, consectetur.</p>
+                        @php $seller = Auth::guard('seller')->user(); @endphp
+                        <p class="para">
+                            @if ($seller->status == 'pending')
+                                You account is pending , please wait for aproval
+                            @elseif ($seller->status == 'approved')
+                                Welcome to Seller Dashboard. You are ready to sell your service.
+                            @elseif ($seller->status == 'deactive')
+                                Welcome to Seller Dashboard. Your account is curently deactivated.
+                            @else
+                                Account Suspended.
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>
@@ -30,10 +41,10 @@
                                         data-bs-target="#password" type="button" role="tab" aria-controls="password"
                                         aria-selected="false">Password</button>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                <li class="nav-item @if($seller-> status == 'pending' || $seller-> status == 'suspended') d-none @endif " role="presentation">
                                     <button class="nav-link" id="closeaccount-tab" data-bs-toggle="tab"
                                         data-bs-target="#closeaccount" type="button" role="tab"
-                                        aria-controls="closeaccount" aria-selected="false">Close Account</button>
+                                        aria-controls="closeaccount" aria-selected="false">@if($seller-> status == 'approved') Deactive @elseif($seller-> status == 'deactive') Active @endif Account</button>
                                 </li>
                             </ul>
                             <!-- nav tab Nav List End -->
@@ -120,21 +131,21 @@
                                                     <div class="form-group mb-4">
                                                         <label class="form-label">Current password</label>
                                                         <input class="form-control" type="text"
-                                                            placeholder="Your Password">
+                                                            placeholder="Your Password" name="current_password">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group mb-4">
                                                         <label class="form-label">New password</label>
                                                         <input class="form-control" type="text"
-                                                            placeholder="Your Password">
+                                                            placeholder="Your Password" name="new_password">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group mb30">
                                                         <label class="form-label">Confirm New Password</label>
                                                         <input class="form-control email" type="email"
-                                                            placeholder="Your Email">
+                                                            placeholder="Your Email" name="confirm_password">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
@@ -150,28 +161,26 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade col-xl-8" id="closeaccount" role="tabpanel"
+                                <div class="tab-pane fade col-xl-8 @if($seller-> status == 'pending' || $seller-> status == 'suspended') d-none @endif " id="closeaccount" role="tabpanel"
                                     aria-labelledby="closeaccount-tab">
                                     <div class="account_details_page form_grid">
                                         <form class="contact_form" action="{{route('seller.update.status', Auth::guard('seller')->user()->id)}}" method="POST" >@csrf
                                             <div class="row">
                                                 <div class="col-md-10">
-                                                    <h5>Close account</h5>
-                                                    <p class="fz15 heading-color">Warning: If you close your account, you
-                                                        will be unsubscribed from all your 5 courses, and will lose access
-                                                        forever.</p>
+                                                    <h5>@if($seller-> status == 'approved') Deactive @elseif($seller-> status == 'deactive') Active @endif account</h5>
+                                                    <p class="fz15 heading-color">Warning: If you want to take a break then you can keep deactive your account. </p>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="form-group mb30">
                                                         <label class="form-label">Enter Password</label>
-                                                        <input class="form-control" type="text"
-                                                            placeholder="Enter Password">
+                                                        <input class="form-control" type="password"
+                                                            placeholder="Enter Password" name="password">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group d-grid d-sm-flex mb0">
                                                         <button type="submit"
-                                                            class="style2 btn btn-thm me-3 mb15-520">Close Account</button>
+                                                            class="style2 btn btn-thm me-3 mb15-520">@if($seller-> status == 'approved') Deactive @elseif($seller-> status == 'deactive') Active @endif Account</button>
                                                         <button type="reset"
                                                             class="style2 btn btn-white">Cancel</button>
                                                     </div>

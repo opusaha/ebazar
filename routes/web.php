@@ -78,6 +78,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
         Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+
+        Route::get('/order',[OrderController::class,'adminOrder'])->name('order');
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
     Route::post('/add', [AdminAuthController::class, 'store'])->name('store');
@@ -111,7 +113,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
 
     Route::get('/sign-up', [SellerAuthController::class, 'register'])->name('register');
     Route::post('/add', [SellerAuthController::class, 'store'])->name('store');
-    Route::get('/sign-in', [SellerAuthController::class, 'signIn'])->name('signin');
-    Route::post('/login', [SellerAuthController::class, 'login'])->name('login');
+    Route::get('/login', [SellerAuthController::class, 'signIn'])->name('signin');
+    Route::post('/sign-in', [SellerAuthController::class, 'login'])->name('login');
     Route::get('/forgot/password', [SellerAuthController::class, 'forgot'])->name('forgot');
 });

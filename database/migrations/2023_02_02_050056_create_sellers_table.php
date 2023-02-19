@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('shop');
+            $table->string('shop')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('business_type')->nullable();
             $table->text('about_us')->nullable();
             $table->string('logo')->nullable();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'deactive','suspended'])->default('pending');
             $table->timestamps();
         });
     }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Home;
 
 use App\Events\OrderProcessed;
 use App\Http\Controllers\Controller;
-use App\Mail\Order as MailOrder;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Order_detail;
@@ -13,7 +12,6 @@ use App\Models\Shipping;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -57,7 +55,6 @@ class OrderController extends Controller
         $order->user_id = Auth::id();
         $order->shipping_id = $ship->id;
         $order->total_price = $carts->sum('total_price');
-        $order->status = 'Orderd';
         $order->payment_id = 0;
         $order->notes = $validatedData['form_message'];
         $order->save();
@@ -72,6 +69,9 @@ class OrderController extends Controller
             $details->price = $cart->price;
             $details->save();
             $cart->delete();
+
+            $product->quantity = $product->quantity - $cart->quantity;
+            $product->save();
         }
         $data = [];
         $data['order_id'] = $order->id;
@@ -89,6 +89,10 @@ class OrderController extends Controller
     }
     public function sellerOrder(){
         $orders =Order_detail::where('seller_id',Auth::guard('seller')->user()->id)->latest()->paginate(15);
-        return view('vandor.order.index',compact('orders'));
+        return view('vandor.order.index',['orders' => $orders, 'currentPage' => $orders->currentPage()]);
+    }
+    public function adminOrder(){
+        $orders = Order::latest()->paginate(15);
+        return view('admin.order.index',['orders' => $orders, 'currentPage' => $orders->currentPage()]);
     }
 }

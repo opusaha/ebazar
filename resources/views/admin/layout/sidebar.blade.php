@@ -5,7 +5,7 @@
                     class="flaticon-house mr15"></i>Dashboard</a>
         </div>
         <div class="sidebar_list_item ">
-            <a href="" class="items-center"><i class="flaticon-checked-box mr15"></i>Order</a>
+            <a href="{{route('admin.order')}}" class="items-center"><i class="flaticon-checked-box mr15"></i>Order</a>
         </div>
         <div class="sidebar_list_item ">
             <a href="" class="items-center"><i class="flaticon-checked-box mr15"></i>Category</a>

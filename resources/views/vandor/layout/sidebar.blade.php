@@ -4,7 +4,7 @@
             <a href="{{ route('seller.dashboard') }}" class="items-center -is-active"><i
                     class="flaticon-house mr15"></i>Dashboard</a>
         </div>
-        @if (Auth::guard('seller')->user()->status == 'Approved')
+        @if (Auth::guard('seller')->user()->status == 'approved')
             <div class="sidebar_list_item ">
                 <a href="{{ route('seller.product.index') }}" class="items-center"><i
                         class="flaticon-cash-on-delivery mr15"></i>Products</a>

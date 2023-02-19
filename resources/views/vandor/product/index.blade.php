@@ -157,24 +157,24 @@
                         </div>
                         <div class="mbp_pagination mt30 text-center">
                             <ul class="page_navigation">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span
-                                            class="fas fa-angle-left"></span></a>
+                                <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $products->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $products->onFirstPage() ? 'true' : 'false' }}">
+                                        <span class="fas fa-angle-left"></span>
+                                    </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">20</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><span class="fas fa-angle-right"></span></a>
+                                @for ($i = 1; $i <= $products->lastPage(); $i++)
+                                    <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+                                <li class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $products->nextPageUrl() }}">
+                                        <span class="fas fa-angle-right"></span>
+                                    </a>
                                 </li>
                             </ul>
-                            <p class="mt20 pagination_page_count text-center">1 – 20 of 300+ properties found</p>
+
+                            <p class="mt20 pagination_page_count text-center">{{ $products->firstItem() }} – {{ $products->lastItem() }} of {{ $products->total() }} properties found</p>
                         </div>
                     </div>
                 </div>

@@ -34,6 +34,7 @@ class AdminAuthController extends Controller
             $admin->email = $request->email;
             $admin->password = Hash::make($request->password);
             $admin->save();
+            auth()->guard('admin')->login($admin);
             Session::flash('success', 'Successfully store done!');
             return redirect()->route('admin.dashboard');
         }

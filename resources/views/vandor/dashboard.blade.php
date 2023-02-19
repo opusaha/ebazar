@@ -9,11 +9,22 @@
                 <div class="col-lg-12">
                     <div class="dashboard_title_area">
                         <h2>Dashboard</h2>
-                        <p class="para">Lorem ipsum dolor sit amet, consectetur.</p>
+                        @php $seller = Auth::guard('seller')->user(); @endphp
+                        <p class="para">
+                            @if ($seller->status == 'pending')
+                                You account is pending , please wait for aproval
+                            @elseif ($seller->status == 'approved')
+                                Welcome to Seller Dashboard. You are ready to sell your service.
+                            @elseif ($seller->status == 'deactive')
+                                Welcome to Seller Dashboard. Your account is curently deactivated.
+                            @else
+                                Account Suspended.
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row @if ($seller->status == 'pending' || $seller->status == 'suspended') d-none @endif">
                 <div class="col-lg-6 col-xxl-3">
                     <div class="d-flex justify-content-between statistics_funfact">
                         <div class="details">
@@ -59,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row @if ($seller->status == 'pending' || $seller->status == 'suspended') d-none @endif">
                 <div class="col-xl-8">
                     <div class="application_statics mb30">
                         <div class="report_widget d-block d-sm-flex justify-content-center justify-content-sm-between">
@@ -85,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row @if ($seller->status == 'pending' || $seller->status == 'suspended') d-none @endif">
                 <div class="col-xl-8">
                     <div class="application_statics">
                         <h4 class="title pl30 mb30">Recent Orders</h4>

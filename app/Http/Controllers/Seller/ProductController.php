@@ -16,7 +16,8 @@ class ProductController extends Controller
     {
         $categories = Category::where('parent_id', null)->get();
         $products = Product::where('seller_id', Auth::guard('seller')->user()->id)->latest()->paginate(20);
-        return view('vandor.product.index', compact('products', 'categories'));
+        $currentPage = $products->currentPage();
+        return view('vandor.product.index', compact('products', 'categories','currentPage'));
     }
     public function create()
     {
@@ -25,7 +26,7 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-        if(Auth::guard('seller')->user()->status == 'Approved'){
+        if(Auth::guard('seller')->user()->status == 'approved'){
             $validator = Validator::make($request->all(), [
                 'old_price' => 'required',
                 'price' => 'required',
@@ -57,8 +58,11 @@ class ProductController extends Controller
                 $product->details = $request->details;
                 $product->specification = $request->specification;
                 $product->image_one =  $this->saveFile($request, 'image_one');
-                $product->image_two =  $this->saveFile($request, 'image_two');
-                $product->image_three =  $this->saveFile($request, 'image_three');
+                if($product->image_two){
+                    $product->image_two =  $this->saveFile($request, 'image_two');
+                }elseif($product->image_three){
+                    $product->image_three =  $this->saveFile($request, 'image_three');
+                }
                 $product->save();
                 return redirect()->route('seller.product.index');
             }
