@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CarouselController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SponsorController;
+use App\Http\Controllers\Admin\WebSettingsController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\HomeAuthController;
 use App\Http\Controllers\Home\OrderController;
@@ -79,11 +83,44 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
-        Route::get('/order',[OrderController::class,'adminOrder'])->name('order');
+        Route::get('/order', [OrderController::class, 'adminOrder'])->name('order');
 
-        // Banner Section
+        // Banner Route
 
-        Route::get('/banner');
+        Route::get('/banner', [BannerController::class, 'index'])->name('banner.index');
+        Route::get('/banner/create', [BannerController::class, 'create'])->name('banner.create');
+        Route::post('/banner/store', [BannerController::class, 'store'])->name('banner.store');
+        Route::get('/banner/edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
+        Route::post('/banner/update/{id}', [BannerController::class, 'update'])->name('banner.update');
+        Route::get('/banner/delete/{id}', [BannerController::class, 'delete'])->name('banner.delete');
+
+        // Sponsor Route
+
+        Route::get('/sponsor', [SponsorController::class, 'index'])->name('sponsor.index');
+        Route::get('/sponsor/create', [SponsorController::class, 'create'])->name('sponsor.create');
+        Route::post('/sponsor/store', [SponsorController::class, 'store'])->name('sponsor.store');
+        Route::get('/sponsor/edit/{id}', [SponsorController::class, 'edit'])->name('sponsor.edit');
+        Route::post('/sponsor/update/{id}', [SponsorController::class, 'update'])->name('sponsor.update');
+        Route::get('/sponsor/delete/{id}', [SponsorController::class, 'delete'])->name('sponsor.delete');
+
+        // Website Settings Route
+
+        Route::get('/web-settings', [WebSettingsController::class, 'index'])->name('webSettings.index');
+        Route::get('/web-settings/create', [WebSettingsController::class, 'create'])->name('webSettings.create');
+        Route::post('/web-settings/store', [WebSettingsController::class, 'store'])->name('webSettings.store');
+        Route::get('/web-settings/edit/{id}', [WebSettingsController::class, 'edit'])->name('webSettings.edit');
+        Route::post('/web-settings/update/{id}', [WebSettingsController::class, 'update'])->name('webSettings.update');
+        Route::get('/web-settings/delete/{id}', [WebSettingsController::class, 'delete'])->name('webSettings.delete');
+
+        // Carousel Route
+
+        Route::get('/carousel', [CarouselController::class, 'index'])->name('carousel.index');
+        Route::get('/carousel/create', [CarouselController::class, 'create'])->name('carousel.create');
+        Route::post('/carousel/store', [CarouselController::class, 'store'])->name('carousel.store');
+        Route::get('/carousel/edit/{id}', [CarouselController::class, 'edit'])->name('carousel.edit');
+        Route::post('/carousel/update/{id}', [CarouselController::class, 'update'])->name('carousel.update');
+        Route::get('/carousel/delete/{id}', [CarouselController::class, 'delete'])->name('carousel.delete');
+
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
     Route::post('/add', [AdminAuthController::class, 'store'])->name('store');
@@ -113,14 +150,14 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::post('/update/password/{id}', [SellerAuthController::class, 'updatePassword'])->name('update.password');
         Route::post('/update/status/{id}', [SellerAuthController::class, 'updateStatus'])->name('update.status');
 
-        Route::get('/special/product',[SpecialDealController::class,'specialProduct'])->name('special.product');
-        Route::get('/special/create',[SpecialDealController::class,'create'])->name('special.create');
-        Route::post('/special/store',[SpecialDealController::class,'store'])->name('special.store');
-        Route::get('/special/edit/{id}',[SpecialDealController::class,'edit'])->name('special.edit');
-        Route::post('/special/update/{id}',[SpecialDealController::class,'update'])->name('special.update');
-        Route::get('/special/delete/{id}',[SpecialDealController::class,'delete'])->name('special.delete');
+        Route::get('/special/product', [SpecialDealController::class, 'specialProduct'])->name('special.product');
+        Route::get('/special/create', [SpecialDealController::class, 'create'])->name('special.create');
+        Route::post('/special/store', [SpecialDealController::class, 'store'])->name('special.store');
+        Route::get('/special/edit/{id}', [SpecialDealController::class, 'edit'])->name('special.edit');
+        Route::post('/special/update/{id}', [SpecialDealController::class, 'update'])->name('special.update');
+        Route::get('/special/delete/{id}', [SpecialDealController::class, 'delete'])->name('special.delete');
         // ajax search route
-        Route::get('/search/products', [SpecialDealController::class,'search'])->name('search.products');
+        Route::get('/search/products', [SpecialDealController::class, 'search'])->name('search.products');
     });
     // auth
 

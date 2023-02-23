@@ -71,7 +71,6 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col"></th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Payment</th>
                                         <th scope="col">Status</th>
@@ -84,11 +83,15 @@
                                         <tr>
                                             <th scope="row">#{{ $order->id }}</th>
                                             @php $product = \App\Models\Product::find($order->product_id); @endphp
-                                            <td>{{ $product->name }}</td>
-                                            <td></td>
+                                            <td>
+                                                @isset($product)
+                                                    {{ $product->name }}
+                                                @endisset
+                                            </td>
                                             <td class="action"><span>{{ $order->created_at }}</span></td>
                                             <td>Paid</td>
-                                            <td class="status"><span class="@if ($order->status == 'cancle') style2 @elseif($order->status == 'In Progress') style3
+                                            <td class="status"><span
+                                                    class="@if ($order->status == 'cancle') style2 @elseif($order->status == 'In Progress') style3
                                                 @else style1 @endif">{{ $order->status }}</span>
                                             </td>
                                             <td>{{ $order->price }}</td>
@@ -110,7 +113,8 @@
                         <div class="mbp_pagination mt30 text-center">
                             <ul class="page_navigation">
                                 <li class="page-item {{ $orders->onFirstPage() ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ $orders->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $orders->onFirstPage() ? 'true' : 'false' }}">
+                                    <a class="page-link" href="{{ $orders->previousPageUrl() }}" tabindex="-1"
+                                        aria-disabled="{{ $orders->onFirstPage() ? 'true' : 'false' }}">
                                         <span class="fas fa-angle-left"></span>
                                     </a>
                                 </li>
@@ -119,14 +123,16 @@
                                         <a class="page-link" href="{{ $orders->url($i) }}">{{ $i }}</a>
                                     </li>
                                 @endfor
-                                <li class="page-item {{ $orders->currentPage() == $orders->lastPage() ? 'disabled' : '' }}">
+                                <li
+                                    class="page-item {{ $orders->currentPage() == $orders->lastPage() ? 'disabled' : '' }}">
                                     <a class="page-link" href="{{ $orders->nextPageUrl() }}">
                                         <span class="fas fa-angle-right"></span>
                                     </a>
                                 </li>
                             </ul>
 
-                            <p class="mt20 pagination_page_count text-center">{{ $orders->firstItem() }} – {{ $orders->lastItem() }} of {{ $orders->total() }} properties found</p>
+                            <p class="mt20 pagination_page_count text-center">{{ $orders->firstItem() }} –
+                                {{ $orders->lastItem() }} of {{ $orders->total() }} properties found</p>
                         </div>
                     </div>
                 </div>

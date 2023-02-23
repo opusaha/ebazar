@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('carousels', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('image');
-            $table->string('link');
-            $table->text('details')->nullable();
-            $table->enum('size', ['big', 'small'])->default('small');
+            $table->string('special_tag');
+            $table->string('line_one');
+            $table->string('line_two');
+            $table->string('line_three')->nullable();
+            $table->string('details');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('carousels');
     }
 };
