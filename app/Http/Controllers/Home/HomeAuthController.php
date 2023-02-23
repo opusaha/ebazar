@@ -47,6 +47,8 @@ class HomeAuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->has('remember'))) {
             Session::flash('success', 'Login Success!');
             return redirect()->back();
+        }else{
+            return redirect()->back();
         }
     }
     public function logout()
@@ -59,7 +61,6 @@ class HomeAuthController extends Controller
         $validator = $request->validate([
             'name' => 'required',
         ]);
-
 
         $user = User::findOrFail(Auth::id());
         $user->name = $request->input('name');

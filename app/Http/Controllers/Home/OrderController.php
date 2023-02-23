@@ -64,6 +64,7 @@ class OrderController extends Controller
             $details = new Order_detail();
             $details->order_id = $order->id;
             $details->product_id = $cart->product_id;
+            $details->user_id = Auth::id();
             $details->seller_id = $product->seller_id;
             $details->quantity = $cart->quantity;
             $details->price = $cart->price;

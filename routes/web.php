@@ -12,7 +12,7 @@ use App\Http\Controllers\Home\WishController;
 use App\Http\Controllers\Seller\ProductController;
 use App\Http\Controllers\Seller\SellerAuthController;
 use App\Http\Controllers\Seller\SellerController;
-
+use App\Http\Controllers\Seller\SpecialDealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,8 +50,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     Route::post('/place/order', [OrderController::class, 'placeOrder'])->name('place.order');
 
-    // ==================== Ajax Route Starts From Here =================================
-    // ==================== Ajax Route Starts From Here =================================
+    // ==================== Fontend Ajax Route Starts From Here =================================
+    // ==================== Fontend Ajax Route Starts From Here =================================
 
     Route::get('cart/data', [CartController::class, 'data']);
     Route::get('product/{slug}/cart/data', [CartController::class, 'data']);
@@ -61,8 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-    // ==================== Ajax Route Ends In Here =================================
-    // ==================== Ajax Route Ends in Here =================================
+    // ==================== Fontend Ajax Route Ends In Here ====================================
+    // ==================== Fontend Ajax Route Ends in Here ====================================
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -80,6 +80,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
         Route::get('/order',[OrderController::class,'adminOrder'])->name('order');
+
+        // Banner Section
+
+        Route::get('/banner');
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
     Route::post('/add', [AdminAuthController::class, 'store'])->name('store');
@@ -108,6 +112,15 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::post('/update/{id}', [SellerAuthController::class, 'update'])->name('update');
         Route::post('/update/password/{id}', [SellerAuthController::class, 'updatePassword'])->name('update.password');
         Route::post('/update/status/{id}', [SellerAuthController::class, 'updateStatus'])->name('update.status');
+
+        Route::get('/special/product',[SpecialDealController::class,'specialProduct'])->name('special.product');
+        Route::get('/special/create',[SpecialDealController::class,'create'])->name('special.create');
+        Route::post('/special/store',[SpecialDealController::class,'store'])->name('special.store');
+        Route::get('/special/edit/{id}',[SpecialDealController::class,'edit'])->name('special.edit');
+        Route::post('/special/update/{id}',[SpecialDealController::class,'update'])->name('special.update');
+        Route::get('/special/delete/{id}',[SpecialDealController::class,'delete'])->name('special.delete');
+        // ajax search route
+        Route::get('/search/products', [SpecialDealController::class,'search'])->name('search.products');
     });
     // auth
 

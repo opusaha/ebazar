@@ -183,7 +183,7 @@
             align-items: center;
             width: 100%;
             height: 100vh;
-            background: url({{asset('storage/2.jpg')}}) no-repeat center;
+            background: url({{ asset('storage/2.jpg') }}) no-repeat center;
             background-size: cover;
         }
 
@@ -432,6 +432,17 @@
 </head>
 
 <body>
+    @if (session('success'))
+        <script>
+            toastr.success('{{ session('success') }}');
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            toastr.error('{{ session('error') }}');
+        </script>
+    @endif
+
 
     <section class="user">
         <div class="user_options-container">
@@ -444,7 +455,8 @@
 
                 <div class="user_options-registered">
                     <h2 class="user_registered-title">Have an account?</h2>
-                    <p class="user_registered-text">Sign in to sell your product. eBazar is the largest ecommarce platform of the world.</p>
+                    <p class="user_registered-text">Sign in to sell your product. eBazar is the largest ecommarce
+                        platform of the world.</p>
                     <button class="user_registered-login" id="login-button">Login</button>
                 </div>
             </div>
@@ -452,14 +464,15 @@
             <div class="user_options-forms" id="user_options-forms">
                 <div class="user_forms-login">
                     <h2 class="forms_title">Login</h2>
-                    <form class="forms_form" method="POST" action="{{route('admin.login')}}">@csrf
+                    <form class="forms_form" method="POST" action="{{ route('admin.login') }}">@csrf
                         <fieldset class="forms_fieldset">
                             <div class="forms_field">
-                                <input type="email" placeholder="Email" class="forms_field-input" required
-                                    autofocus  name="email"/>
+                                <input type="email" placeholder="Email" class="forms_field-input" required autofocus
+                                    name="email" />
                             </div>
                             <div class="forms_field">
-                                <input type="password" placeholder="Password" class="forms_field-input" required  name="password"/>
+                                <input type="password" placeholder="Password" class="forms_field-input" required
+                                    name="password" />
                             </div>
                         </fieldset>
                         <div class="forms_buttons">
@@ -470,16 +483,19 @@
                 </div>
                 <div class="user_forms-signup">
                     <h2 class="forms_title">Sign Up</h2>
-                    <form class="forms_form" method="POST" action="{{route('admin.store')}}">@csrf
+                    <form class="forms_form" method="POST" action="{{ route('admin.store') }}">@csrf
                         <fieldset class="forms_fieldset">
                             <div class="forms_field">
-                                <input type="text" placeholder="Full Name" class="forms_field-input" required  name="name"/>
+                                <input type="text" placeholder="Full Name" class="forms_field-input" required
+                                    name="name" />
                             </div>
                             <div class="forms_field">
-                                <input type="email" placeholder="Email" class="forms_field-input" required name="email"/>
+                                <input type="email" placeholder="Email" class="forms_field-input" required
+                                    name="email" />
                             </div>
                             <div class="forms_field">
-                                <input type="password" placeholder="Password" class="forms_field-input" required name="password"/>
+                                <input type="password" placeholder="Password" class="forms_field-input" required
+                                    name="password" />
                             </div>
                         </fieldset>
                         <div class="forms_buttons">

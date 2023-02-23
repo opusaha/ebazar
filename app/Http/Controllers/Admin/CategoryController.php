@@ -31,8 +31,9 @@ class CategoryController extends Controller
         } else {
             $category = new Category();
             $category->name = $request->name;
-            $category->parent_id = $request->parent_id;
-
+            if($request->parent_id){
+                $category->parent_id = $request->parent_id;
+            }
             if ($request->hasFile('logo')) {
                 $logo = $request->file('logo');
                 $filename = time() . '.' . $logo->getClientOriginalExtension();
@@ -61,7 +62,9 @@ class CategoryController extends Controller
         } else {
             $category = Category::findOrFail($id);
             $category->name = $request->name;
-            $category->parent_id = $request->parent_id;
+            if($request->parent_id){
+                $category->parent_id = $request->parent_id;
+            }
 
             if ($request->hasFile('logo')) {
                 $logo = $request->file('logo');

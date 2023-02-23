@@ -1,43 +1,61 @@
 @extends('admin.layout.master')
 @section('content')
-    <div class="body d-flex py-3">
-        <div class="container-xxl">
-            <div class="row align-items-center">
-                <div class="border-0 mb-4">
-                    <div
-                        class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                        <h3 class="fw-bold mb-0">Categorie List</h3>
-                        <a href="categories-add.html" class="btn btn-primary py-2 px-5 btn-set-task w-sm-100"><i
-                                class="icofont-plus-circle me-2 fs-6"></i> Add Categories</a>
+    @push('adminStyles')
+        <title>Zeomart :: Seller Product</title>
+    @endpush
+    <div class="dashboard__main pl0-md">
+        <div class="dashboard__content bgc-gmart-gray">
+            <div class="row pb50">
+                <div class="col-lg-12">
+                    <div class="dashboard_title_area">
+                        <h2>Category</h2>
+                        <p class="para">You will get all category in here</p>
                     </div>
                 </div>
-            </div> <!-- Row end  -->
-            <div class="row g-3 mb-3">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <table id="myDataTable" class="table table-hover align-middle mb-0" style="width: 100%;">
-                                <thead>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="dashboard_product_list account_user_deails">
+                        <div class="row d-block d-sm-flex justify-content-center justify-content-sm-between">
+                            <div class="col-sm-6 col-lg-9"></div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="dashboard_page_add_listing text-center text-lg-end mb30 mb15-520 d-grid">
+                                    <a href="{{route('admin.category.create')}}" class="btn btn-new btn-lg btn-thm">Add New Category</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order_table table-responsive">
+                            <table class="table">
+                                <thead class="table-light">
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Categorie</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
+                                        <th scope="col">SL</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Parent Category</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $key => $cat)
+                                    @foreach ($categories as $cat)
                                         <tr>
-                                            <td><strong>#000{{$key +1}}</strong></td>
-                                            <td>{{$cat->name}}</td>
-                                            <td>{{date('F j, Y', strtotime($cat->created_at))}}</td>
-                                            <td>
-                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <a href="{{route('admin.category.edit',$cat->id)}}" class="btn btn-outline-secondary"><i
-                                                            class="icofont-edit text-success"></i></a>
-                                                    <a href="{{route('admin.category.delete',$cat->id)}}" class="btn btn-outline-secondary deleterow"><i
-                                                            class="icofont-ui-delete text-danger"></i></a>
-                                                </div>
+                                            <th scope="row">#{{ $cat->id }}</th>
+                                            <td>{{ $cat->name }}</td>
+                                            @php $category = \App\Models\Category::where('parent_id',$cat->parent_id)->first(); @endphp
+                                            <td class="action"><span>{{ $category->name }}</span></td>
+                                            <td class="editing_list align-middle">
+                                                <ul>
+                                                    <li class="list-inline-item mb-1">
+                                                        <a href="{{route('admin.category.edit', $cat->id)}}" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title=""
+                                                            data-bs-original-title="Edit" aria-label="View"><span
+                                                                class="flaticon-pencil"></span></a>
+                                                    </li>
+                                                    <li class="list-inline-item mb-1">
+                                                        <a href="{{route('admin.category.delete', $cat->id)}}" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title=""
+                                                            data-bs-original-title="Delete" aria-label="Edit"><span
+                                                                class="flaticon-delete"></span></a>
+                                                    </li>
+                                                </ul>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -48,5 +66,6 @@
                 </div>
             </div>
         </div>
+        @include('admin.layout.footer')
     </div>
 @endsection

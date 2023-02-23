@@ -42,15 +42,15 @@
                                     <div class="user_setting_content">
                                         <a class="dropdown-item active" href="{{ route('admin.dashboard') }}"><i
                                                 class="flaticon-house mr10"></i>Dashboard</a>
-                                        <a class="dropdown-item" href=""><i
+                                        <a class="dropdown-item" href="{{route('admin.category.index')}}"><i
                                                 class="flaticon-checked-box mr10"></i>Category</a>
-                                        <a class="dropdown-item" href=""><i
+                                        <a class="dropdown-item" href="{{route('admin.order')}}"><i
                                                 class="flaticon-checked-box mr10"></i>Order</a>
-                                        <a class="dropdown-item" href=""><i
-                                                class="flaticon-mail-inbox-app mr10"></i>Message</a>
+                                        {{-- <a class="dropdown-item" href=""><i
+                                                class="flaticon-mail-inbox-app mr10"></i>Message</a> --}}
                                         <a class="dropdown-item" href=""><i
                                                 class="flaticon-settings mr10"></i>Settings</a>
-                                        <a class="dropdown-item" href=""><i
+                                        <a class="dropdown-item" href="{{ route('admin.logout') }}"><i
                                                 class="flaticon-exit mr10"></i>Logout</a>
                                     </div>
                                 </div>

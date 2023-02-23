@@ -67,10 +67,10 @@
                                         <div class="dboard_address mb30-md">
                                             {{-- <h4 class="title mb15">Billing Address <span class="float-end">Edit</span></h4> --}}
                                             <p>{{Auth::user()->name}}</p>
-                                            <p>1418 River Drive, Suite 35 Cottonhall, CA 9622</p>
-                                            <p>United States</p>
-                                            <p class="mt30">sale@zenmart.com</p>
-                                            <p>+3 8493 92 932 021</p>
+                                            <p>{{Auth::user()->email}}</p>
+                                            <p>Narsingdi, Bangladesh</p>
+                                            {{-- <p> class="mt30">sale@zenmart.com</p>
+                                            <p>+3 8493 92 932 021</p> --}}
                                         </div>
                                     </div>
                                 </div>

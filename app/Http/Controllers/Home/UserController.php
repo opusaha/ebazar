@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function shop(){
-        $products =Product::take(20)->get();
+        $products =Product::latest()->paginate();
         return view('home.shop',compact('products'));
     }
     public function singleProduct($slug=null, $id=null){

@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('special-deals:expire')->hourly();
     }
 
     /**
@@ -30,3 +31,8 @@ class Kernel extends ConsoleKernel
         require base_path('routes/console.php');
     }
 }
+
+
+//  * * * * * live server er trminal a paste kora lagbe
+// * * * * * cd /path/to/your/laravel/project && php artisan schedule:run >> /dev/null 2>&1
+

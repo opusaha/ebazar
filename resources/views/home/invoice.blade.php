@@ -1,6 +1,6 @@
 @extends('home.layout.master')
 @section('content')
-@push('styles')
+    @push('styles')
         <title>Zeomart :: Invoice</title>
     @endpush
     <section class="our-dashbord dashbord pb80">
@@ -9,25 +9,25 @@
                 <div class="col-lg-3 col-xl-2 dn-md">
                     <div class="users_account_details extra-dashboard-menu">
                         <div class="account_details_user d-flex pb10 bb1 mb10">
-                            <img class="me-3" src="{{asset('home/images/team/ad-thumb.png')}}" alt="">
+                            <img class="me-3" src="{{ asset('home/images/team/ad-thumb.png') }}" alt="">
                             <div class="content_details text-start">
-                                <h5 class="title">{{Auth::user()->name}}</h5>
-                                <a class="stitle" href="mailto:{{Auth::user()->email}}">{{Auth::user()->email}}</a>
+                                <h5 class="title">{{ Auth::user()->name }}</h5>
+                                <a class="stitle" href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a>
                             </div>
                         </div>
                         <div class="ed_menu_list">
                             <ul>
-                                <li><a class="active" href="{{route('dashboard')}}"><span
+                                <li><a class="active" href="{{ route('dashboard') }}"><span
                                             class="flaticon-growth"></span>Account Details</a></li>
-                                <li><a href="{{route('orders')}}"><span class="flaticon-checked-box"></span>Order</a>
+                                <li><a href="{{ route('orders') }}"><span class="flaticon-checked-box"></span>Order</a>
                                 </li>
-                                <li><a href="{{route('address')}}"><span class="flaticon-location"></span>Address</a>
+                                <li><a href="{{ route('address') }}"><span class="flaticon-location"></span>Address</a>
                                 </li>
-                                <li><a href="{{route('wishlist')}}"><span class="flaticon-badge"></span>Wishlist</a>
+                                <li><a href="{{ route('wishlist') }}"><span class="flaticon-badge"></span>Wishlist</a>
                                 </li>
-                                <li><a href="{{route('invoice')}}"><span class="flaticon-invoice"></span>Invoices</a>
+                                <li><a href="{{ route('invoice') }}"><span class="flaticon-invoice"></span>Invoices</a>
                                 </li>
-                                <li><a href="{{route('logout')}}"><span class="flaticon-exit"></span>Logout</a></li>
+                                <li><a href="{{ route('logout') }}"><span class="flaticon-exit"></span>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -40,17 +40,18 @@
                                     <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bars pr10"></i>
                                         Dashboard Navigation</button>
                                     <ul id="myDropdown" class="dropdown-content">
-                                        <li><a class="active" href="{{route('dashboard')}}"><span
+                                        <li><a class="active" href="{{ route('dashboard') }}"><span
                                                     class="flaticon-growth"></span>Account Details</a></li>
-                                        <li><a href="{{route('orders')}}"><span
+                                        <li><a href="{{ route('orders') }}"><span
                                                     class="flaticon-checked-box"></span>Order</a></li>
-                                        <li><a href="{{route('address')}}"><span
+                                        <li><a href="{{ route('address') }}"><span
                                                     class="flaticon-location"></span>Address</a></li>
-                                        <li><a href="{{route('wishlist')}}"><span
+                                        <li><a href="{{ route('wishlist') }}"><span
                                                     class="flaticon-badge"></span>Wishlist</a></li>
-                                        <li><a href="{{route('invoice')}}"><span
+                                        <li><a href="{{ route('invoice') }}"><span
                                                     class="flaticon-invoice"></span>Invoices</a></li>
-                                        <li><a href="{{route('logout')}}"><span class="flaticon-exit"></span>Logout</a></li>
+                                        <li><a href="{{ route('logout') }}"><span class="flaticon-exit"></span>Logout</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -72,52 +73,43 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>$56.00</td>
-                                                <td class="status"><span class="style1">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>$56.00</td>
-                                                <td class="status"><span class="style2">Cancel</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>$56.00</td>
-                                                <td class="status"><span class="style3">In Progress</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>$56.00</td>
-                                                <td class="status"><span class="style1">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>$56.00</td>
-                                                <td class="status"><span class="style2">Cancel</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">#1923</th>
-                                                <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
-                                                <td>Aug 15, 2020</td>
-                                                <td>$56.00</td>
-                                                <td class="status"><span class="style3">In Progress</span></td>
-                                            </tr>
+                                            @php $orders = \App\Models\Order_detail::where('user_id',Auth::id())->latest()->paginate(10); @endphp
+                                            @foreach ($orders as $order)
+                                                <tr>
+                                                    <th scope="row">#1923</th>
+                                                    <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
+                                                    <td>Aug 15, 2020</td>
+                                                    <td>$56.00</td>
+                                                    <td class="status"><span class="@if($order->status == 'Deliverd') style1
+                                                        @elseif ($order->status == 'Orderd' ||$order->status == 'Shipped')
+                                                        style3 @else style2 @endif">{{$order->status}}</span></td>
+                                                </tr>
+                                            @endforeachyou
                                         </tbody>
                                     </table>
                                 </div>
-
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mbp_pagination mt30 text-center">
+                                <ul class="page_navigation">
+                                    <li class="page-item {{ $orders->onFirstPage() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $orders->onFirstPage() ? 'true' : 'false' }}">
+                                            <span class="fas fa-angle-left"></span>
+                                        </a>
+                                    </li>
+                                    @for ($i = 1; $i <= $orders->lastPage(); $i++)
+                                        <li class="page-item {{ $i == $orders->currentPage() ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $orders->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+                                    <li class="page-item {{ $orders->currentPage() == $orders->lastPage() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $orders->nextPageUrl() }}">
+                                            <span class="fas fa-angle-right"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <p class="mt20 pagination_page_count text-center">{{ $orders->firstItem() }} – {{ $orders->lastItem() }} of {{ $orders->total() }} properties found</p>
                             </div>
                         </div>
                     </div>

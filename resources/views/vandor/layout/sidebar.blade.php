@@ -10,12 +10,16 @@
                         class="flaticon-cash-on-delivery mr15"></i>Products</a>
             </div>
             <div class="sidebar_list_item ">
+                <a href="{{ route('seller.special.product') }}" class="items-center"><i
+                        class="fa-light fa-sparkles mr15"></i>Special product</a>
+            </div>
+            <div class="sidebar_list_item ">
                 <a href="{{ route('seller.order') }}" class="items-center"><i
                         class="flaticon-checked-box mr15"></i>Order</a>
             </div>
-            <div class="sidebar_list_item ">
+            {{-- <div class="sidebar_list_item ">
                 <a href="" class="items-center"><i class="flaticon-mail-inbox-app mr15"></i>Message</a>
-            </div>
+            </div> --}}
         @endif
         <div class="sidebar_list_item ">
             <a href="{{ route('seller.settings') }}" class="items-center"><i

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
+
+
 class AdminAuthController extends Controller
 {
     public function register()
@@ -47,10 +49,10 @@ class AdminAuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
-            Session::flash('success', 'Login Succcess!');
+            toast('Success Login', 'success');
             return redirect()->route('admin.dashboard');
         }
-        Session::flash('success', 'Authentication Error!');
+        toast('Auth Failed', 'error');
         return back();
     }
     public function logout()

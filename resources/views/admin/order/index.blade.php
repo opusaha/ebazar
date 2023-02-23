@@ -1,6 +1,6 @@
-@extends('vandor.layout.master')
+@extends('admin.layout.master')
 @section('content')
-    @push('vandorStyles')
+    @push('adminStyles')
         <title>Zeomart :: Seller Order's</title>
     @endpush
     <div class="dashboard__main pl0-md">
@@ -132,6 +132,6 @@
                 </div>
             </div>
         </div>
-        @include('vandor.layout.footer')
+        @include('admin.layout.footer')
     </div>
 @endsection
