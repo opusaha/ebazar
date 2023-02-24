@@ -13,6 +13,7 @@ use App\Http\Controllers\Home\OrderController;
 use App\Http\Controllers\Home\UserController;
 use App\Http\Controllers\Home\UserDashboardController;
 use App\Http\Controllers\Home\WishController;
+use App\Http\Controllers\Seller\CouponController;
 use App\Http\Controllers\Seller\ProductController;
 use App\Http\Controllers\Seller\SellerAuthController;
 use App\Http\Controllers\Seller\SellerController;
@@ -43,6 +44,9 @@ Route::get('/cart', [UserController::class, 'cart'])->name('cart');
 Route::post('cart/store', [CartController::class, 'postCart'])->name('addToCart');
 Route::post('product/{slug}/cart/store', [CartController::class, 'postCart'])->name('addToCart.singleProduct');
 Route::post('wishlist/store', [WishController::class, 'store'])->name('wishlist.store');
+
+    // User Auth Route
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [HomeAuthController::class, 'logout'])->name('logout');
     Route::post('/update-user', [HomeAuthController::class, 'update'])->name('update-user');
@@ -74,7 +78,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
-
 
         Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
         Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
@@ -120,7 +123,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/carousel/edit/{id}', [CarouselController::class, 'edit'])->name('carousel.edit');
         Route::post('/carousel/update/{id}', [CarouselController::class, 'update'])->name('carousel.update');
         Route::get('/carousel/delete/{id}', [CarouselController::class, 'delete'])->name('carousel.delete');
-
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
     Route::post('/add', [AdminAuthController::class, 'store'])->name('store');
@@ -136,6 +138,8 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/profile', [SellerController::class, 'profile'])->name('profile');
         Route::get('/logout', [SellerAuthController::class, 'logout'])->name('logout');
 
+        // Product Route
+
         Route::get('/product', [ProductController::class, 'index'])->name('product.index');
         Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
         Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
@@ -143,12 +147,20 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
         Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+        // Seller order Route
+
         Route::get('/order', [OrderController::class, 'sellerOrder'])->name('order');
         Route::get('/order/edit/{id}', [OrderController::class, 'sellerEdit'])->name('order.edit');
+
+        // Seller Settings Route
+
         Route::get('/settings', [SellerAuthController::class, 'settings'])->name('settings');
         Route::post('/update/{id}', [SellerAuthController::class, 'update'])->name('update');
         Route::post('/update/password/{id}', [SellerAuthController::class, 'updatePassword'])->name('update.password');
         Route::post('/update/status/{id}', [SellerAuthController::class, 'updateStatus'])->name('update.status');
+
+        // Special product
 
         Route::get('/special/product', [SpecialDealController::class, 'specialProduct'])->name('special.product');
         Route::get('/special/create', [SpecialDealController::class, 'create'])->name('special.create');
@@ -158,6 +170,15 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/special/delete/{id}', [SpecialDealController::class, 'delete'])->name('special.delete');
         // ajax search route
         Route::get('/search/products', [SpecialDealController::class, 'search'])->name('search.products');
+
+        // Coupon Route
+
+        Route::get('/coupon', [CouponController::class, 'index'])->name('coupon.index');
+        Route::get('/coupon/create', [CouponController::class, 'create'])->name('coupon.create');
+        Route::post('/coupon/store', [CouponController::class, 'store'])->name('coupon.store');
+        Route::get('/coupon/edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
+        Route::post('/coupon/update/{id}', [CouponController::class, 'update'])->name('coupon.update');
+        Route::get('/coupon/delete/{id}', [CouponController::class, 'delete'])->name('coupon.delete');
     });
     // auth
 
