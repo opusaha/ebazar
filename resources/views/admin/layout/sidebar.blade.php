@@ -8,6 +8,9 @@
             <a href="{{route('admin.order')}}" class="items-center {{ Route::currentRouteName() == 'admin.order' ? '-is-active' : '' }}"><i class="flaticon-checked-box mr15"></i>Order</a>
         </div>
         <div class="sidebar_list_item ">
+            <a href="{{route('admin.seller')}}" class="items-center {{ Route::currentRouteName() == 'admin.seller' ? '-is-active' : '' }}"><i class="fa-light fa-person-carry-box mr15"></i>All Seller</a>
+        </div>
+        <div class="sidebar_list_item ">
             <a href="{{route('admin.category.index')}}" class="items-center {{ Route::currentRouteName() == 'admin.category.index' ? '-is-active' : '' }}"><i class="flaticon-checked-box mr15"></i>Category</a>
         </div>
         {{-- <div class="sidebar_list_item ">
@@ -22,6 +25,9 @@
         <div class="sidebar_list_item ">
             <a href="" class="items-center"><i
                     class="flaticon-settings mr15"></i>Settings</a>
+        </div>
+        <div class="sidebar_list_item ">
+            <a href="{{route('admin.webSection')}}" class="items-center {{ Route::currentRouteName() == 'admin.webSection' ? '-is-active' : '' }}"><i class="fa-light fa-grid-2 mr15"></i>Website Product Section</a>
         </div>
         <div class="sidebar_list_item ">
             <a href="{{route('admin.webSettings.index')}}" class="items-center {{ Route::currentRouteName() == 'admin.webSettings.index' ? '-is-active' : '' }}"><i class="fa-light fa-gears mr15"></i>Website Settings</a>

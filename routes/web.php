@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminSellerController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CarouselController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MultiCategoryProductController;
+use App\Http\Controllers\Admin\SingleCategoryProductController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\WebSettingsController;
 use App\Http\Controllers\Home\CartController;
@@ -106,6 +109,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/sponsor/update/{id}', [SponsorController::class, 'update'])->name('sponsor.update');
         Route::get('/sponsor/delete/{id}', [SponsorController::class, 'delete'])->name('sponsor.delete');
 
+        // Category wise Product Section
+
+        Route::get('/web-section', [MultiCategoryProductController::class, 'index'])->name('webSection');
+        Route::get('/multiCatProduct/create', [MultiCategoryProductController::class, 'create'])->name('multiCatProduct.create');
+        Route::post('/multiCatProduct/store', [MultiCategoryProductController::class, 'store'])->name('multiCatProduct.store');
+        Route::get('/multiCatProduct/edit/{id}', [MultiCategoryProductController::class, 'edit'])->name('multiCatProduct.edit');
+        Route::post('/multiCatProduct/update/{id}', [MultiCategoryProductController::class, 'update'])->name('multiCatProduct.update');
+        Route::get('/multiCatProduct/delete/{id}', [MultiCategoryProductController::class, 'delete'])->name('multiCatProduct.delete');
+
+        Route::post('/singleCatProduct/store', [SingleCategoryProductController::class, 'store'])->name('singleCatProduct.store');
+        Route::post('/singleCatProduct/update/{id}', [SingleCategoryProductController::class, 'update'])->name('singleCatProduct.update');
+        Route::get('/singleCatProduct/delete/{id}', [SingleCategoryProductController::class, 'delete'])->name('singleCatProduct.delete');
+
         // Website Settings Route
 
         Route::get('/web-settings', [WebSettingsController::class, 'index'])->name('webSettings.index');
@@ -123,6 +139,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/carousel/edit/{id}', [CarouselController::class, 'edit'])->name('carousel.edit');
         Route::post('/carousel/update/{id}', [CarouselController::class, 'update'])->name('carousel.update');
         Route::get('/carousel/delete/{id}', [CarouselController::class, 'delete'])->name('carousel.delete');
+
+        // Admin Seller Route
+
+        Route::get('/seller',[AdminSellerController::class,'index'])->name('seller');
+        Route::post('/seller/update/{id}',[AdminSellerController::class,'update'])->name('seller.update');
+        Route::get('/search/seller',[AdminSellerController::class,'searchSeller'])->name('search.seller');
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
     Route::post('/add', [AdminAuthController::class, 'store'])->name('store');

@@ -284,7 +284,7 @@
                 </div>
             </div>
         </div>
-        @include('vandor.layout.footer')
+        @include('admin.layout.footer')
     </div>
     @push('adminScripts')
         <script>
