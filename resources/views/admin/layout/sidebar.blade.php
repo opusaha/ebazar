@@ -27,19 +27,22 @@
                     class="flaticon-settings mr15"></i>Settings</a>
         </div>
         <div class="sidebar_list_item ">
+            <a href="{{route('admin.carousel.index')}}" class="items-center {{ Route::currentRouteName() == 'admin.carousel.index' ? '-is-active' : '' }}"><i class="fa-light fa-conveyor-belt-boxes mr15"></i>Carousel</a>
+        </div>
+        <div class="sidebar_list_item ">
+            <a href="{{route('admin.faqcat')}}" class="items-center {{ Route::currentRouteName() == 'admin.faqcat' ? '-is-active' : '' }}"><i class="fa-light fa-rectangles-mixed mr15"></i>FAQ Categories</a>
+        </div>
+        <div class="sidebar_list_item ">
+            <a href="{{route('admin.help')}}" class="items-center {{ Route::currentRouteName() == 'admin.help' ? '-is-active' : '' }}"><i class="fa-light fa-seal-question mr15"></i>FAQ List</a>
+        </div>
+        <div class="sidebar_list_item ">
+            <a href="{{route('admin.page')}}" class="items-center {{ Route::currentRouteName() == 'admin.page' ? '-is-active' : '' }}"><i class="fa-light fa-file-lines mr15"></i>Page</a>
+        </div>
+        <div class="sidebar_list_item ">
             <a href="{{route('admin.webSection')}}" class="items-center {{ Route::currentRouteName() == 'admin.webSection' ? '-is-active' : '' }}"><i class="fa-light fa-grid-2 mr15"></i>Website Product Section</a>
         </div>
         <div class="sidebar_list_item ">
             <a href="{{route('admin.webSettings.index')}}" class="items-center {{ Route::currentRouteName() == 'admin.webSettings.index' ? '-is-active' : '' }}"><i class="fa-light fa-gears mr15"></i>Website Settings</a>
-        </div>
-        <div class="sidebar_list_item ">
-            <a href="{{route('admin.carousel.index')}}" class="items-center {{ Route::currentRouteName() == 'admin.carousel.index' ? '-is-active' : '' }}"><i class="fa-light fa-conveyor-belt-boxes mr15"></i>Carousel</a>
-        </div>
-        <div class="sidebar_list_item ">
-            <a href="{{route('admin.faqcat')}}" class="items-center {{ Route::currentRouteName() == 'admin.faqcat' ? '-is-active' : '' }}"><i class="fa-light fa-conveyor-belt-boxes mr15"></i>FAQ Categories</a>
-        </div>
-        <div class="sidebar_list_item ">
-            <a href="{{route('admin.help')}}" class="items-center {{ Route::currentRouteName() == 'admin.help' ? '-is-active' : '' }}"><i class="fa-light fa-conveyor-belt-boxes mr15"></i>FAQ List</a>
         </div>
         <div class="sidebar_list_item ">
             <a href="{{ route('admin.logout') }}" class="items-center"><i class="flaticon-exit mr15"></i>Logout</a>

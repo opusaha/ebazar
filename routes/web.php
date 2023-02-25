@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HelpCategoryController;
 use App\Http\Controllers\Admin\HelpController;
 use App\Http\Controllers\Admin\MultiCategoryProductController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SingleCategoryProductController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\WebSettingsController;
@@ -162,6 +163,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/help/edit/{id}', [HelpController::class, 'edit'])->name('help.edit');
         Route::post('/help/update/{id}', [HelpController::class, 'update'])->name('help.update');
         Route::get('/help/delete/{id}', [HelpController::class, 'delete'])->name('help.delete');
+
+        // Page Route Section
+
+        Route::get('/page', [PageController::class, 'index'])->name('page');
+        Route::get('/page/create', [PageController::class, 'create'])->name('page.create');
+        Route::post('/page/store', [PageController::class, 'store'])->name('page.store');
+        Route::get('/page/edit/{id}', [PageController::class, 'edit'])->name('page.edit');
+        Route::post('/page/update/{id}', [PageController::class, 'update'])->name('page.update');
+        Route::get('/page/delete/{id}', [PageController::class, 'delete'])->name('page.delete');
 
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
