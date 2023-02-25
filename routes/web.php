@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\AdminSellerController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CarouselController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\HelpCategoryController;
+use App\Http\Controllers\Admin\HelpController;
 use App\Http\Controllers\Admin\MultiCategoryProductController;
 use App\Http\Controllers\Admin\SingleCategoryProductController;
 use App\Http\Controllers\Admin\SponsorController;
@@ -145,6 +147,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/seller',[AdminSellerController::class,'index'])->name('seller');
         Route::post('/seller/update/{id}',[AdminSellerController::class,'update'])->name('seller.update');
         Route::get('/search/seller',[AdminSellerController::class,'searchSeller'])->name('search.seller');
+
+        // Help category and FAQ section
+        Route::get('/faq-cat', [HelpCategoryController::class, 'index'])->name('faqcat');
+        Route::get('/faq-cat/create', [HelpCategoryController::class, 'create'])->name('faqcat.create');
+        Route::post('/faq-cat/store', [HelpCategoryController::class, 'store'])->name('faqcat.store');
+        Route::get('/faq-cat/edit/{id}', [HelpCategoryController::class, 'edit'])->name('faqcat.edit');
+        Route::post('/faq-cat/update/{id}', [HelpCategoryController::class, 'update'])->name('faqcat.update');
+        Route::get('/faq-cat/delete/{id}', [HelpCategoryController::class, 'delete'])->name('faqcat.delete');
+
+        Route::get('/help', [HelpController::class, 'index'])->name('help');
+        Route::get('/help/create', [HelpController::class, 'create'])->name('help.create');
+        Route::post('/help/store', [HelpController::class, 'store'])->name('help.store');
+        Route::get('/help/edit/{id}', [HelpController::class, 'edit'])->name('help.edit');
+        Route::post('/help/update/{id}', [HelpController::class, 'update'])->name('help.update');
+        Route::get('/help/delete/{id}', [HelpController::class, 'delete'])->name('help.delete');
+
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
     Route::post('/add', [AdminAuthController::class, 'store'])->name('store');

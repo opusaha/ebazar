@@ -36,6 +36,12 @@
             <a href="{{route('admin.carousel.index')}}" class="items-center {{ Route::currentRouteName() == 'admin.carousel.index' ? '-is-active' : '' }}"><i class="fa-light fa-conveyor-belt-boxes mr15"></i>Carousel</a>
         </div>
         <div class="sidebar_list_item ">
+            <a href="{{route('admin.faqcat')}}" class="items-center {{ Route::currentRouteName() == 'admin.faqcat' ? '-is-active' : '' }}"><i class="fa-light fa-conveyor-belt-boxes mr15"></i>FAQ Categories</a>
+        </div>
+        <div class="sidebar_list_item ">
+            <a href="{{route('admin.help')}}" class="items-center {{ Route::currentRouteName() == 'admin.help' ? '-is-active' : '' }}"><i class="fa-light fa-conveyor-belt-boxes mr15"></i>FAQ List</a>
+        </div>
+        <div class="sidebar_list_item ">
             <a href="{{ route('admin.logout') }}" class="items-center"><i class="flaticon-exit mr15"></i>Logout</a>
         </div>
     </div>
