@@ -1,7 +1,8 @@
 @extends('admin.layout.master')
 @section('content')
     @push('adminStyles')
-        <title>Zeomart :: Admin Edit sponsor</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Admin Edit Sponsor</title>
     @endpush
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">

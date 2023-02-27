@@ -1,8 +1,8 @@
 @extends('home.layout.master')
 @section('content')
     @push('styles')
-        <title>Zeomart :: Product</title>
-        <link rel="stylesheet" href="{{asset('home/css/chat.css')}}">
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Get your Product</title>
     @endpush
     <section class="inner_page_breadcrumb">
         <div class="container">
@@ -875,6 +875,5 @@
 
             })
         </script>
-        <script src="{{asset('home/js/chat.js')}}"></script>
     @endpush
 @endsection

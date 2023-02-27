@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class BannerController extends Controller
 {
+    public function saveFile($request, $fieldName)
+    {
+        $file = $request->file($fieldName);
+        $fileName = rand() . '.' . $file->getClientOriginalExtension();
+        $dir = 'storage/';
+        $imgUrl = $dir . $fileName;
+        $file->move($dir, $fileName);
+        return $imgUrl;
+    }
     public function index()
     {
         $banners = Banner::latest()->get();
@@ -38,10 +47,7 @@ class BannerController extends Controller
             $banner->details = $request->details;
             $banner->size = $request->size;
             if ($request->hasFile('image')) {
-                $logo = $request->file('image');
-                $filename = time() . '.' . $logo->getClientOriginalExtension();
-                $path = $logo->storeAs('public/banner', $filename);
-                $banner->image = $path;
+                $banner->image =  $this->saveFile($request, 'image');
             }
             $banner->save();
             return redirect()->route('admin.banner.index');
@@ -73,10 +79,7 @@ class BannerController extends Controller
             $banner->details = $request->details;
             $banner->size = $request->size;
             if ($request->hasFile('image')) {
-                $logo = $request->file('image');
-                $filename = time() . '.' . $logo->getClientOriginalExtension();
-                $path = $logo->storeAs('public/banner', $filename);
-                $banner->image = $path;
+                $banner->image =  $this->saveFile($request, 'image');
             }
             $banner->save();
             return redirect()->route('admin.banner.index');

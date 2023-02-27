@@ -1,7 +1,8 @@
 @extends('admin.layout.master')
 @section('content')
     @push('adminStyles')
-        <title>Zeomart :: Seller Product</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Admin Categories</title>
     @endpush
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">
@@ -39,8 +40,10 @@
                                         <tr>
                                             <th scope="row">#{{ $cat->id }}</th>
                                             <td>{{ $cat->name }}</td>
-                                            @php $category = \App\Models\Category::where('parent_id',$cat->parent_id)->first(); @endphp
-                                            <td class="action"><span>{{ $category->name }}</span></td>
+                                            @php $category = \App\Models\Category::find($cat->parent_id); @endphp
+                                            <td class="action"><span>@isset($category)
+                                                {{ $category->name }}
+                                            @endisset</span></td>
                                             <td class="editing_list align-middle">
                                                 <ul>
                                                     <li class="list-inline-item mb-1">

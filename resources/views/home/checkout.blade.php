@@ -1,7 +1,8 @@
 @extends('home.layout.master')
 @section('content')
     @push('styles')
-        <title>Zeomart :: Product</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Checkout</title>
     @endpush
     <section class="shop-checkouts pt30">
         <div class="container">

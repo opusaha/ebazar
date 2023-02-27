@@ -1,25 +1,7 @@
 <section class="footer_one home1 bdrt1">
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+
     <div class="container pb60">
-        <div class=row>
-            <div class="col-lg-6 offset-lg-3">
-                <div class="mailchimp_widget mb30-md text-center">
-                    <div class="icon float-start"><span class=flaticon-email-1></span></div>
-                    <div class=details>
-                        <h3 class=title>Subscribe and get 20% discount.</h3>
-                    </div>
-                </div>
-                <div class=footer_social_widget>
-                    <form class=footer_mailchimp_form>
-                        <div class="row align-items-center">
-                            <div class=col-auto>
-                                <input type=email class=form-control placeholder="Your email address">
-                                <button class="ms-sm-2 btn-thm" type=submit>Subscribe</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <div class="row mt60">
             <div class="col-sm-6 col-md-5 col-lg-3 col-xl-3">
                 <div class=footer_contact_widget>
@@ -28,14 +10,18 @@
                         <div class=icon><span class=flaticon-phone-call></span></div>
                         <div class="details ms-4">
                             <h5 class=title>Monday-Friday: 08am-9pm</h5>
-                            <a href=#>+(1) 123 456 7890</a>
+                            <a href=#>@isset($settings)
+                                {{$settings->phone}}
+                            @endisset</a>
                         </div>
                     </div>
                     <div class="footer_contact_iconbox d-flex">
                         <div class=icon><span class=flaticon-email></span></div>
                         <div class="details ms-4">
                             <h5 class=title>Need help with your order?</h5>
-                            <a href=#>support@zeomart.com</a>
+                            <a href=#>@isset($settings)
+                                {{$settings->email}}
+                            @endisset</a></a>
                         </div>
                     </div>
                 </div>
@@ -80,21 +66,22 @@
                 <div class=footer_social_widget>
                     <h4 class=title>Follow us</h4>
                     <div class="social_icon_list mt30">
-                        <ul class=mb20>
-                            <li class=list-inline-item><a href=#><i class="fab fa-facebook"></i></a></li>
-                            <li class=list-inline-item><a href=#><i class="fab fa-twitter"></i></a></li>
-                            <li class=list-inline-item><a href=#><i class="fab fa-instagram"></i></a></li>
-                            <li class=list-inline-item><a href=#><i class="fab fa-linkedin-in"></i></a>
+                        <ul class=mb20>@isset($settings)
+                            <li class=list-inline-item><a href="{{$settings->facebook}}"><i class="fab fa-facebook"></i></a></li>
+                            <li class=list-inline-item><a href="{{$settings->twitter}}"><i class="fab fa-twitter"></i></a></li>
+                            <li class=list-inline-item><a href="{{$settings->instagram}}"><i class="fab fa-instagram"></i></a></li>
+                            <li class=list-inline-item><a href="{{$settings->linkedIn}}"><i class="fab fa-linkedin-in"></i></a>
                             </li>
+                        @endisset
                         </ul>
                     </div>
                 </div>
                 <div class="footer_mobile_app_widget mb25">
                     <h4 class="title mb10">Mobile Apps</h4>
                     <div class=mobile_app_list>
-                        <ul class=mb0>
-                            <li><a href=#><span class=flaticon-apple></span>iOS App</a></li>
-                            <li><a href=#><span class=flaticon-android></span>Android App</a></li>
+                        <ul class=mb0>@isset($settings)
+                            <li><a href="{{$settings->app_one}}"><span class=flaticon-apple></span>iOS App</a></li>
+                            <li><a href="{{$settings->app_two}}"><span class=flaticon-android></span>Android App</a></li>@endisset
                         </ul>
                     </div>
                 </div>
@@ -125,11 +112,11 @@
         <div class=row>
             <div class=col-lg-6>
                 <div class="copyright-widget text-center text-lg-start d-block d-lg-flex mb15-md">
-                    <p class=me-4>© 2022 Zeomart. All Rights Reserved</p>
+                    <p class=me-4>© {{date("Y")}} Zeomart. All Rights Reserved</p>
                     <p><a href=#>Privacy</a>·<a href=#>Terms</a>·<a href=#>Sitemap</a></p>
                 </div>
             </div>
-            <div class=col-lg-6>
+            {{-- <div class=col-lg-6>
                 <div class="footer_bottom_right_widgets text-center text-lg-end">
                     <ul class=mb0>
                         <li class="list-inline-item mb20-340">
@@ -150,7 +137,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

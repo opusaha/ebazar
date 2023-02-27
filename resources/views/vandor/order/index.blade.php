@@ -1,7 +1,8 @@
 @extends('vandor.layout.master')
 @section('content')
     @push('vandorStyles')
-        <title>Zeomart :: Seller Order's</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Seller Order's</title>
     @endpush
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">

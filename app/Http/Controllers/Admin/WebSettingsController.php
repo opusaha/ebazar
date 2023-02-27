@@ -26,6 +26,7 @@ class WebSettingsController extends Controller
             'email' => 'required|email|max:255',
             'facebook' => 'nullable|string|max:255',
             'twitter' => 'nullable|string|max:255',
+            'name' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
             'linkedIn' => 'nullable|string|max:255',
             'app_one' => 'nullable|string|max:255',
@@ -39,6 +40,7 @@ class WebSettingsController extends Controller
         }
 
         $setting = new WebsiteSettings();
+        $setting->name = $request->name;
         $setting->logo = $this->saveFile($request, 'logo');
         $setting->phone = $request->input('phone');
         $setting->email = $request->input('email');
@@ -78,6 +80,7 @@ class WebSettingsController extends Controller
         }
 
         $setting = WebsiteSettings::findOrFail($id);
+        $setting->name = $request->name;
         if($request->logo){
             $setting->logo = $this->saveFile($request, 'logo');
         }

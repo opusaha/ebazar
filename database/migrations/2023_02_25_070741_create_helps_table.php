@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('help_category_id')->nullable();
             $table->foreign('help_category_id')->references('id')->on('help_categories')->onDelete('cascade');
             $table->string('question');
+            $table->string('slug');
             $table->text('answer');
             $table->timestamps();
         });

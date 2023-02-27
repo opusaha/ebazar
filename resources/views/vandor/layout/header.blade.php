@@ -7,8 +7,9 @@
                         <a href="#" class="dashboard_sidebar_toggle_icon text-thm1 vam"><i
                                 class="fa-sharp fa-solid fa-bars-staggered"></i></a>
                     </div>
+                    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
                     <div class="dashboard_header_logo">
-                        <a href="{{ route('seller.dashboard') }}" class="logo">Zeomart<span
+                        <a href="{{ route('seller.dashboard') }}" class="logo">{{$settings->name}}<span
                                 class="text-thm">.</span></a>
                     </div>
                 </div>

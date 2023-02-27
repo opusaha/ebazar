@@ -1,7 +1,8 @@
 @extends('home.layout.master')
 @section('content')
     @push('styles')
-        <title>Zeomart :: Orders</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Orders</title>
     @endpush
     <section class="our-dashbord dashbord pb80">
         <div class="container">

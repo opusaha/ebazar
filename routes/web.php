@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SingleCategoryProductController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\WebSettingsController;
 use App\Http\Controllers\Home\CartController;
+use App\Http\Controllers\Home\FontendController;
 use App\Http\Controllers\Home\HomeAuthController;
 use App\Http\Controllers\Home\OrderController;
 use App\Http\Controllers\Home\UserController;
@@ -37,9 +38,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home.home');
-})->name('home');
+
+Route::get('/',[FontendController::class,'home'])->name('home');
 Route::get('/register', [HomeAuthController::class, 'register'])->name('register');
 Route::post('/save/register', [HomeAuthController::class, 'store'])->name('register.store');
 Route::get('/login', [HomeAuthController::class, 'login'])->name('login');

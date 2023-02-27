@@ -1,7 +1,8 @@
 @extends('home.layout.master')
 @section('content')
-@push('styles')
-        <title>Zeomart :: Address</title>
+    @push('styles')
+        @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+        <title>{{ $settings->name }} :: Address</title>
     @endpush
     <section class="our-dashbord dashbord pb90">
         <div class="container">
@@ -9,25 +10,25 @@
                 <div class="col-lg-3 col-xl-2 dn-md">
                     <div class="users_account_details extra-dashboard-menu">
                         <div class="account_details_user d-flex pb10 bb1 mb10">
-                            <img class="me-3" src="{{asset('home/images/team/ad-thumb.png')}}" alt="">
+                            <img class="me-3" src="{{ asset('home/images/team/ad-thumb.png') }}" alt="">
                             <div class="content_details text-start">
-                                <h5 class="title">{{Auth::user()->name}}</h5>
-                                <a class="stitle" href="mailto:{{Auth::user()->email}}">{{Auth::user()->email}}</a>
+                                <h5 class="title">{{ Auth::user()->name }}</h5>
+                                <a class="stitle" href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a>
                             </div>
                         </div>
                         <div class="ed_menu_list">
                             <ul>
-                                <li><a class="active" href="{{route('dashboard')}}"><span
+                                <li><a class="active" href="{{ route('dashboard') }}"><span
                                             class="flaticon-growth"></span>Account Details</a></li>
-                                <li><a href="{{route('orders')}}"><span class="flaticon-checked-box"></span>Order</a>
+                                <li><a href="{{ route('orders') }}"><span class="flaticon-checked-box"></span>Order</a>
                                 </li>
-                                <li><a href="{{route('address')}}"><span class="flaticon-location"></span>Address</a>
+                                <li><a href="{{ route('address') }}"><span class="flaticon-location"></span>Address</a>
                                 </li>
-                                <li><a href="{{route('wishlist')}}"><span class="flaticon-badge"></span>Wishlist</a>
+                                <li><a href="{{ route('wishlist') }}"><span class="flaticon-badge"></span>Wishlist</a>
                                 </li>
-                                <li><a href="{{route('invoice')}}"><span class="flaticon-invoice"></span>Invoices</a>
+                                <li><a href="{{ route('invoice') }}"><span class="flaticon-invoice"></span>Invoices</a>
                                 </li>
-                                <li><a href="{{route('logout')}}"><span class="flaticon-exit"></span>Logout</a></li>
+                                <li><a href="{{ route('logout') }}"><span class="flaticon-exit"></span>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -40,17 +41,18 @@
                                     <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bars pr10"></i>
                                         Dashboard Navigation</button>
                                     <ul id="myDropdown" class="dropdown-content">
-                                        <li><a class="active" href="{{route('dashboard')}}"><span
+                                        <li><a class="active" href="{{ route('dashboard') }}"><span
                                                     class="flaticon-growth"></span>Account Details</a></li>
-                                        <li><a href="{{route('orders')}}"><span
+                                        <li><a href="{{ route('orders') }}"><span
                                                     class="flaticon-checked-box"></span>Order</a></li>
-                                        <li><a href="{{route('address')}}"><span
+                                        <li><a href="{{ route('address') }}"><span
                                                     class="flaticon-location"></span>Address</a></li>
-                                        <li><a href="{{route('wishlist')}}"><span
+                                        <li><a href="{{ route('wishlist') }}"><span
                                                     class="flaticon-badge"></span>Wishlist</a></li>
-                                        <li><a href="{{route('invoice')}}"><span
+                                        <li><a href="{{ route('invoice') }}"><span
                                                     class="flaticon-invoice"></span>Invoices</a></li>
-                                        <li><a href="{{route('logout')}}"><span class="flaticon-exit"></span>Logout</a></li>
+                                        <li><a href="{{ route('logout') }}"><span class="flaticon-exit"></span>Logout</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -66,8 +68,8 @@
                                     <div class="col-lg-6">
                                         <div class="dboard_address mb30-md">
                                             {{-- <h4 class="title mb15">Billing Address <span class="float-end">Edit</span></h4> --}}
-                                            <p>{{Auth::user()->name}}</p>
-                                            <p>{{Auth::user()->email}}</p>
+                                            <p>{{ Auth::user()->name }}</p>
+                                            <p>{{ Auth::user()->email }}</p>
                                             <p>Narsingdi, Bangladesh</p>
                                             {{-- <p> class="mt30">sale@zenmart.com</p>
                                             <p>+3 8493 92 932 021</p> --}}

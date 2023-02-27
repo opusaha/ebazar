@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -31,18 +32,26 @@ class CategoryController extends Controller
         } else {
             $category = new Category();
             $category->name = $request->name;
+            $category->position = $request->position;
+            $category->slug = Str::slug($request->name);
             if($request->parent_id){
                 $category->parent_id = $request->parent_id;
             }
             if ($request->hasFile('logo')) {
-                $logo = $request->file('logo');
-                $filename = time() . '.' . $logo->getClientOriginalExtension();
-                $path = $logo->storeAs('public/logos', $filename);
-                $category->logo = $path;
+                $category->logo =  $this->saveFile($request, 'logo');
             }
             $category->save();
             return redirect()->route('admin.category.index');
         }
+    }
+    public function saveFile($request, $fieldName)
+    {
+        $file = $request->file($fieldName);
+        $fileName = rand() . '.' . $file->getClientOriginalExtension();
+        $dir = 'storage/';
+        $imgUrl = $dir . $fileName;
+        $file->move($dir, $fileName);
+        return $imgUrl;
     }
     public function edit($id=null)
     {
@@ -53,7 +62,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id=null)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories',
+            'name' => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -62,15 +71,14 @@ class CategoryController extends Controller
         } else {
             $category = Category::findOrFail($id);
             $category->name = $request->name;
+            $category->position = $request->position;
+            $category->slug = Str::slug($request->name);
             if($request->parent_id){
                 $category->parent_id = $request->parent_id;
             }
 
             if ($request->hasFile('logo')) {
-                $logo = $request->file('logo');
-                $filename = time() . '.' . $logo->getClientOriginalExtension();
-                $path = $logo->storeAs('public/logos', $filename);
-                $category->logo = $path;
+                $category->logo =  $this->saveFile($request, 'logo');
             }
             $category->save();
             return redirect()->route('admin.category.index');

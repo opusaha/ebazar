@@ -1,7 +1,8 @@
 @extends('admin.layout.master')
 @section('content')
     @push('adminStyles')
-        <title>Zeomart :: Admin New Website Settings<</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Admin New Web-Settings</title>
     @endpush
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">
@@ -14,6 +15,13 @@
                 </div>
             </div>
             <form class="row" action="{{ route('admin.webSettings.store') }}" method="POST" enctype="multipart/form-data">@csrf
+                <div class="mb-3 col-md-6">
+                    <label for="" class="form-label"> Name:</label>
+                    <input type="text" name="name" class="form-control" >
+                    @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
                 <div class="mb-3 col-md-6">
                     <label for="" class="form-label"> Logo:</label>
                     <input type="file" name="logo" class="form-control">

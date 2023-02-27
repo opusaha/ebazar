@@ -1,7 +1,8 @@
 @extends('admin.layout.master')
 @section('content')
     @push('adminStyles')
-        <title>Zeomart :: Seller New Product</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Admin Edit Category</title>
     @endpush
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">
@@ -26,10 +27,21 @@
                     <select name="parent_id" class="form-control">
                         <option value="">Select Parent Category</option>
                         @foreach ($categories as $cat)
-                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            <option value="{{ $cat->id }}" {{ $category->parent_id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                         @endforeach
                     </select>
                 </div>
+                <div class="mb-3 col-md-6">
+                    <label for="" class="form-label"> Category Position:</label>
+                    <select name="position" class="form-control">
+                        <option value="1" {{ $category->position == 1 ? 'selected' : '' }}>1</option>
+                        <option value="2" {{ $category->position == 2 ? 'selected' : '' }}>2</option>
+                        <option value="3" {{ $category->position == 3 ? 'selected' : '' }}>3</option>
+                        <option value="4" {{ $category->position == 4 ? 'selected' : '' }}>4</option>
+                        <option value="5" {{ $category->position == 5 ? 'selected' : '' }}>5</option>
+                    </select>
+                </div>
+
                 <div class="mb-3 col-md-6">
                     <label for="" class="form-label"> Category Logo:</label>
                     <input type="file" name="logo" class="form-control">

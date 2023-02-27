@@ -1,7 +1,9 @@
 @extends('vandor.layout.master')
 @section('content')
     @push('vandorStyles')
-        <title>Zeomart :: Seller Setting's</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Seller Settings</title>
+    @endpush
     @endpush
     @php $seller =Auth::guard('seller')->user(); @endphp
     <div class="dashboard__main pl0-md">

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('sku');
             $table->integer('quantity');
             $table->string('name');
+            $table->string('slug');
             $table->text('details');
             $table->text('specification');
             $table->string('image_one')->nullable();

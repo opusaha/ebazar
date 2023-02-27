@@ -1,7 +1,8 @@
 @extends('home.layout.master')
 @section('content')
     @push('styles')
-        <title>Zeomart :: Invoice</title>
+        @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+        <title>{{ $settings->name }} :: Invoice</title>
     @endpush
     <section class="our-dashbord dashbord pb80">
         <div class="container">
@@ -73,16 +74,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php $orders = \App\Models\Order_detail::where('user_id',Auth::id())->latest()->paginate(10); @endphp
+                                            @php
+                                                $orders = \App\Models\Order_detail::where('user_id', Auth::id())
+                                                    ->latest()
+                                                    ->paginate(10);
+                                            @endphp
                                             @foreach ($orders as $order)
                                                 <tr>
                                                     <th scope="row">#1923</th>
                                                     <td>Lenovo IdeaPad 3 15.6" Laptop - Sand</td>
                                                     <td>Aug 15, 2020</td>
                                                     <td>$56.00</td>
-                                                    <td class="status"><span class="@if($order->status == 'Deliverd') style1
-                                                        @elseif ($order->status == 'Orderd' ||$order->status == 'Shipped')
-                                                        style3 @else style2 @endif">{{$order->status}}</span></td>
+                                                    <td class="status"><span
+                                                            class="@if ($order->status == 'Deliverd') style1
+                                                        @elseif ($order->status == 'Orderd' || $order->status == 'Shipped')
+                                                        style3 @else style2 @endif">{{ $order->status }}</span>
+                                                    </td>
                                                 </tr>
                                             @endforeachyou
                                         </tbody>
@@ -94,7 +101,8 @@
                             <div class="mbp_pagination mt30 text-center">
                                 <ul class="page_navigation">
                                     <li class="page-item {{ $orders->onFirstPage() ? 'disabled' : '' }}">
-                                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $orders->onFirstPage() ? 'true' : 'false' }}">
+                                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" tabindex="-1"
+                                            aria-disabled="{{ $orders->onFirstPage() ? 'true' : 'false' }}">
                                             <span class="fas fa-angle-left"></span>
                                         </a>
                                     </li>
@@ -103,13 +111,15 @@
                                             <a class="page-link" href="{{ $orders->url($i) }}">{{ $i }}</a>
                                         </li>
                                     @endfor
-                                    <li class="page-item {{ $orders->currentPage() == $orders->lastPage() ? 'disabled' : '' }}">
+                                    <li
+                                        class="page-item {{ $orders->currentPage() == $orders->lastPage() ? 'disabled' : '' }}">
                                         <a class="page-link" href="{{ $orders->nextPageUrl() }}">
                                             <span class="fas fa-angle-right"></span>
                                         </a>
                                     </li>
                                 </ul>
-                                <p class="mt20 pagination_page_count text-center">{{ $orders->firstItem() }} – {{ $orders->lastItem() }} of {{ $orders->total() }} properties found</p>
+                                <p class="mt20 pagination_page_count text-center">{{ $orders->firstItem() }} –
+                                    {{ $orders->lastItem() }} of {{ $orders->total() }} properties found</p>
                             </div>
                         </div>
                     </div>

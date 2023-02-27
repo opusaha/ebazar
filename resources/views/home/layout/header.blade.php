@@ -1,13 +1,19 @@
 <div class=preloader></div>
 @if (Auth::check())
-    @php $carts = \App\Models\Cart::where('user_id',Auth::id())->get(); @endphp
+    @php
+    $carts = \App\Models\Cart::where('user_id',Auth::id())->get();
+
+    @endphp
 @endif
+@php $settings = \App\Models\WebsiteSettings::first(); @endphp
 <div class="header_middle pt20 pb20 dn-992">
     <div class=container>
         <div class=row>
             <div class="col-lg-2 col-xxl-2">
                 <div class=header_top_logo_home1>
-                    <div class=logo>Zeomart<span class=text-thm>.</span></div>
+                    <div class=logo>@isset($settings)
+                        {{$settings->name}}
+                    @endisset<span class=text-thm>.</span></div>
                 </div>
             </div>
             <div class="col-lg-5 col-xxl-6">

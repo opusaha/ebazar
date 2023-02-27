@@ -1,7 +1,8 @@
 @extends('home.layout.master')
 @section('content')
     @push('styles')
-        <title>Zeomart :: Wishlist</title>
+    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+    <title>{{$settings->name}} :: Wishlist Zone</title>
     @endpush
     <section class="our-dashbord dashbord pb80">
         <div class="container">

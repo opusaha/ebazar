@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -55,6 +56,7 @@ class ProductController extends Controller
                 $product->sku = $request->sku;
                 $product->quantity = $request->quantity;
                 $product->name = $request->name;
+                $product->slug = Str::slug($request->name);
                 $product->details = $request->details;
                 $product->specification = $request->specification;
                 $product->image_one =  $this->saveFile($request, 'image_one');
@@ -120,6 +122,7 @@ class ProductController extends Controller
             $product->sku = $request->sku;
             $product->quantity = $request->quantity;
             $product->name = $request->name;
+            $product->slug = Str::slug($request->name);
             $product->details = $request->details;
             $product->specification = $request->specification;
             if ($request->image_one) {

@@ -1,7 +1,8 @@
 @extends('home.layout.master')
 @section('content')
     @push('styles')
-        <title>Zeomart :: Shop</title>
+        @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+        <title>{{ $settings->name }} :: Shop</title>
     @endpush
     <section class="inner_page_breadcrumb">
         <div class="container">
@@ -225,7 +226,8 @@
                         <div class="mbp_pagination mt30 text-center">
                             <ul class="page_navigation">
                                 <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ $products->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $products->onFirstPage() ? 'true' : 'false' }}">
+                                    <a class="page-link" href="{{ $products->previousPageUrl() }}" tabindex="-1"
+                                        aria-disabled="{{ $products->onFirstPage() ? 'true' : 'false' }}">
                                         <span class="fas fa-angle-left"></span>
                                     </a>
                                 </li>
@@ -234,13 +236,15 @@
                                         <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
                                     </li>
                                 @endfor
-                                <li class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
+                                <li
+                                    class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
                                     <a class="page-link" href="{{ $products->nextPageUrl() }}">
                                         <span class="fas fa-angle-right"></span>
                                     </a>
                                 </li>
                             </ul>
-                            <p class="mt20 pagination_page_count text-center">{{ $products->firstItem() }} – {{ $products->lastItem() }} of {{ $products->total() }} properties found</p>
+                            <p class="mt20 pagination_page_count text-center">{{ $products->firstItem() }} –
+                                {{ $products->lastItem() }} of {{ $products->total() }} properties found</p>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 @extends('home.layout.master')
 @section('content')
-@push('styles')
-        <title>Zeomart :: Register</title>
+    @push('styles')
+        @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+        <title>{{ $settings->name }} :: Register</title>
     @endpush
     <section class="our-log-reg bgc-f5">
         <div class="container">
