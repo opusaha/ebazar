@@ -32,4 +32,4 @@ This is a Laravel based ecommerce website that allows multiple vendors to upload
 
 ## Credits
 
-This project was developed by [Your Name] and is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project was developed by [Opu saha](https://github.com/opusaha/) and is licensed under the [MIT License](https://opensource.org/licenses/MIT).
