@@ -67,10 +67,10 @@
                     <h4 class=title>Follow us</h4>
                     <div class="social_icon_list mt30">
                         <ul class=mb20>@isset($settings)
-                            <li class=list-inline-item><a href="{{$settings->facebook}}"><i class="fab fa-facebook"></i></a></li>
-                            <li class=list-inline-item><a href="{{$settings->twitter}}"><i class="fab fa-twitter"></i></a></li>
-                            <li class=list-inline-item><a href="{{$settings->instagram}}"><i class="fab fa-instagram"></i></a></li>
-                            <li class=list-inline-item><a href="{{$settings->linkedIn}}"><i class="fab fa-linkedin-in"></i></a>
+                            <li class=list-inline-item><a href="https://{{$settings->facebook}}"><i class="fab fa-facebook"></i></a></li>
+                            <li class=list-inline-item><a href="https://{{$settings->twitter}}"><i class="fab fa-twitter"></i></a></li>
+                            <li class=list-inline-item><a href="https://{{$settings->instagram}}"><i class="fab fa-instagram"></i></a></li>
+                            <li class=list-inline-item><a href="https://{{$settings->linkedIn}}"><i class="fab fa-linkedin-in"></i></a>
                             </li>
                         @endisset
                         </ul>

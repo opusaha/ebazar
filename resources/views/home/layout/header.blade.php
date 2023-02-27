@@ -1232,7 +1232,7 @@
             <div class=menu_and_widgets>
                 <div class="mobile_menu_bar float-start">
                     <a class=menubar href=#menu><span></span></a>
-                    <a class=mobile_logo href=#>Zeomart<span class=text-thm>.</span></a>
+                    <a class=mobile_logo href=#>{{$settings->logo}}<span class=text-thm>.</span></a>
                 </div>
                 <div class=mobile_menu_widget_icons>
                     <ul class="cart mt15">
