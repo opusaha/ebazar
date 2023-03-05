@@ -22,6 +22,11 @@
                         class="flaticon-checked-box mr15"></i>Order</a>
             </div>
             <div class="sidebar_list_item ">
+                <a href="{{ route('seller.response') }}"
+                    class="items-center {{ Route::currentRouteName() == 'seller.response' ? '-is-active' : '' }}"><i
+                        class="fas fa-question mr15"></i>Question & Answer's</a>
+            </div>
+            <div class="sidebar_list_item ">
                 <a href="{{ route('seller.coupon.index') }}"
                     class="items-center {{ Route::currentRouteName() == 'seller.coupon.index' ? '-is-active' : '' }}"><i
                         class="fa-light fa-tags mr15"></i>Coupon</a>

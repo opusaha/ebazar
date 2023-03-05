@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Shipping;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -69,10 +70,18 @@ class OrderController extends Controller
             $details->quantity = $cart->quantity;
             $details->price = $cart->price;
             $details->save();
-            $cart->delete();
+
 
             $product->quantity = $product->quantity - $cart->quantity;
             $product->save();
+
+            $review = new Review();
+            $review->user_id = Auth::id();
+            $review->product_id = $cart->product_id;
+            $review->order_id = $order->id;
+            $review->save();
+
+            $cart->delete();
         }
         $data = [];
         $data['order_id'] = $order->id;
@@ -84,7 +93,7 @@ class OrderController extends Controller
         $data['zip'] = $validatedData['zip'];
         $data['country'] = $validatedData['country'];
         $data['delevery_date'] = Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->tomorrow();
-        event(new OrderProcessed($data));
+        // event(new OrderProcessed($data));
         // Mail::to(Auth::user()->email)->send(new MailOrder($data));
         return redirect()->route('home');
     }
@@ -95,5 +104,33 @@ class OrderController extends Controller
     public function adminOrder(){
         $orders = Order::latest()->paginate(15);
         return view('admin.order.index',['orders' => $orders, 'currentPage' => $orders->currentPage()]);
+    }
+    public function review(Request $request, $order_id=null, $product_id=null)
+    {
+        $review = Review::where('order_id',$order_id)->where('product_id',$product_id)->first();
+        $review->comment = $request->comment;
+        if($request->rating == ''){
+            $review->rating = 5;
+        }else{
+            $review->rating = $request->rating;
+        }
+        if ($request->image_one) {
+            $review->image_one =  $this->saveFile($request, 'image_one');
+        }
+        if ($request->image_two) {
+            $review->image_two =  $this->saveFile($request, 'image_two');
+        }
+        $review->status = 'reviewed';
+        $review->save();
+        return redirect()->back();
+    }
+    public function saveFile($request, $fieldName)
+    {
+        $file = $request->file($fieldName);
+        $fileName = rand() . '.' . $file->getClientOriginalExtension();
+        $dir = 'storage/';
+        $imgUrl = $dir . $fileName;
+        $file->move($dir, $fileName);
+        return $imgUrl;
     }
 }

@@ -1,8 +1,8 @@
 @extends('vandor.layout.master')
 @section('content')
     @push('vandorStyles')
-    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
-    <title>{{$settings->name}} :: Seller Edit Product</title>
+        @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+        <title>{{ $settings->name }} :: Seller Edit Product</title>
     @endpush
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">
@@ -14,7 +14,8 @@
                     </div>
                 </div>
             </div>
-            <form class="row" action="{{ route('seller.product.update',$id) }}" method="POST" enctype="multipart/form-data">@csrf
+            <form class="row" action="{{ route('seller.product.update', $id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="mb-3 col-md-6">
                     <label for="" class="form-label"> Product Name:</label>
                     <input type="text" name="name" class="form-control" value="{{ $product->name }}">
@@ -48,11 +49,26 @@
                 </div>
                 <div class="mb-3 col-md-6">
                     <label for="" class="form-label"> Product Category:</label>
-                    <select name="category" id="" class="form-control">
+                    <select name="category" id="category" class="form-control">
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ old('status') == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}</option>
                         @endforeach
+                    </select>
+                    @error('category')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="" class="form-label"> Product Sub Category:</label>
+                    <select name="sub_category" id="subCategory" class="form-control">
+                        @isset($product->sub_category)
+                            @php $cat = \App\Models\Category::find($product->sub_category); @endphp
+                            <option value="{{ $product->sub_category }}">{{ $cat->name }}</option>
+                        @else
+                            <option>Find a sub category</option>
+                        @endisset
+
                     </select>
                     @error('category')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -81,21 +97,21 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-6">
                     <label for="" class="form-label"> Product Image One:</label>
                     <input type="file" name="image_one" id="" class="form-control">
                     @error('image_one')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-6">
                     <label for="" class="form-label"> Product Image Two:</label>
                     <input type="file" name="image_two" id="" class="form-control">
                     @error('image_two')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-6">
                     <label for="" class="form-label"> Product Image Three:</label>
                     <input type="file" name="image_three" id="" class="form-control">
                     @error('image_three')
@@ -123,4 +139,32 @@
         </div>
         @include('vandor.layout.footer')
     </div>
+    @push('vandorScripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#category').on('change', function() {
+                    let id = $(this).val();
+                    $('#subCategory').empty();
+                    $('#subCategory').append(`<option value="0" disabled selected>Processing...</option>`);
+                    $.ajax({
+                        type: 'GET',
+                        url: "/seller/product/subcategory/" + id,
+                        success: function(response) {
+                            var response = JSON.parse(response);
+                            $('#subCategory').empty();
+                            $('#subCategory').append(
+                                `<option value="0" disabled selected>Select your Sub Category</option>`
+                            );
+                            response.forEach(element => {
+                                $('#subCategory').append(
+                                    `<option value="${element['id']}">${element['name']}</option>`
+                                );
+                            });
+                        }
+                    });
+                }).trigger('change');
+            });
+        </script>
+    @endpush
 @endsection

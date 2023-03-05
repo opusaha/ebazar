@@ -53,16 +53,20 @@ class ProductController extends Controller
                 $product->status = $request->status;
                 $product->tag = $request->tag;
                 $product->category = $request->category;
+                $product->sub_category = $request->sub_category;
                 $product->sku = $request->sku;
                 $product->quantity = $request->quantity;
                 $product->name = $request->name;
                 $product->slug = Str::slug($request->name);
                 $product->details = $request->details;
                 $product->specification = $request->specification;
-                $product->image_one =  $this->saveFile($request, 'image_one');
-                if($product->image_two){
+                if ($request->image_one) {
+                    $product->image_one =  $this->saveFile($request, 'image_one');
+                }
+                if ($request->image_two) {
                     $product->image_two =  $this->saveFile($request, 'image_two');
-                }elseif($product->image_three){
+                }
+                if ($request->image_three) {
                     $product->image_three =  $this->saveFile($request, 'image_three');
                 }
                 $product->save();
@@ -119,6 +123,7 @@ class ProductController extends Controller
             $product->status = $request->status;
             $product->tag = $request->tag;
             $product->category = $request->category;
+            $product->sub_category = $request->sub_category;
             $product->sku = $request->sku;
             $product->quantity = $request->quantity;
             $product->name = $request->name;
@@ -144,5 +149,9 @@ class ProductController extends Controller
         Storage::delete($product->image_path);
         $product->delete();
         return redirect()->route('seller.product.index');
+    }
+    public function subCategory($id=null)
+    {
+        echo json_encode(Category::where('parent_id',$id)->get());
     }
 }

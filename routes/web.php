@@ -17,6 +17,8 @@ use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\FontendController;
 use App\Http\Controllers\Home\HomeAuthController;
 use App\Http\Controllers\Home\OrderController;
+use App\Http\Controllers\Home\QuestionAndAnswerController;
+use App\Http\Controllers\Home\ReviewController;
 use App\Http\Controllers\Home\UserController;
 use App\Http\Controllers\Home\UserDashboardController;
 use App\Http\Controllers\Home\WishController;
@@ -50,6 +52,7 @@ Route::get('/cart', [UserController::class, 'cart'])->name('cart');
 Route::post('cart/store', [CartController::class, 'postCart'])->name('addToCart');
 Route::post('product/{slug}/cart/store', [CartController::class, 'postCart'])->name('addToCart.singleProduct');
 Route::post('wishlist/store', [WishController::class, 'store'])->name('wishlist.store');
+Route::post('/question',[QuestionAndAnswerController::class,'question'])->name('ask.question');
 
     // User Auth Route
 
@@ -63,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/invoice', [UserDashboardController::class, 'invoice'])->name('invoice');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     Route::post('/place/order', [OrderController::class, 'placeOrder'])->name('place.order');
+    Route::post('/post-review/{order_id}/{product_id}',[OrderController::class,'review'])->name('post.review');
 
     // ==================== Fontend Ajax Route Starts From Here =================================
     // ==================== Fontend Ajax Route Starts From Here =================================
@@ -173,6 +177,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/page/update/{id}', [PageController::class, 'update'])->name('page.update');
         Route::get('/page/delete/{id}', [PageController::class, 'delete'])->name('page.delete');
 
+        // Reviews
+
+        Route::get('/reviews',[ReviewController::class,'index'])->name('reviews');
+        Route::get('review/update/{id}',[ReviewController::class,'status'])->name('review.update');
+
     });
     Route::get('/sign-up', [AdminAuthController::class, 'register'])->name('register');
     Route::post('/add', [AdminAuthController::class, 'store'])->name('store');
@@ -197,6 +206,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
         Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+        Route::get('/product/subcategory/{id}',[ProductController::class,'subCategory'])->name('sub.category');
 
         // Seller order Route
 
@@ -220,6 +230,11 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/special/delete/{id}', [SpecialDealController::class, 'delete'])->name('special.delete');
         // ajax search route
         Route::get('/search/products', [SpecialDealController::class, 'search'])->name('search.products');
+
+        // Seller Answer
+
+        Route::get('/response-&-replay',[QuestionAndAnswerController::class,'response'])->name('response');
+        Route::post('/answer',[QuestionAndAnswerController::class,'answer'])->name('answer');
 
         // Coupon Route
 

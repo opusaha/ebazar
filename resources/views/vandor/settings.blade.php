@@ -4,7 +4,6 @@
     @php $settings = \App\Models\WebsiteSettings::first(); @endphp
     <title>{{$settings->name}} :: Seller Settings</title>
     @endpush
-    @endpush
     @php $seller =Auth::guard('seller')->user(); @endphp
     <div class="dashboard__main pl0-md">
         <div class="dashboard__content bgc-gmart-gray">

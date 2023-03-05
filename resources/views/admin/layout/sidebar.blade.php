@@ -8,6 +8,9 @@
             <a href="{{route('admin.order')}}" class="items-center {{ Route::currentRouteName() == 'admin.order' ? '-is-active' : '' }}"><i class="flaticon-checked-box mr15"></i>Order</a>
         </div>
         <div class="sidebar_list_item ">
+            <a href="{{route('admin.reviews')}}" class="items-center {{ Route::currentRouteName() == 'admin.reviews' ? '-is-active' : '' }}"><i class="fa-light fa-comments mr15"></i>Reviews</a>
+        </div>
+        <div class="sidebar_list_item ">
             <a href="{{route('admin.seller')}}" class="items-center {{ Route::currentRouteName() == 'admin.seller' ? '-is-active' : '' }}"><i class="fa-light fa-person-carry-box mr15"></i>All Seller</a>
         </div>
         <div class="sidebar_list_item ">
