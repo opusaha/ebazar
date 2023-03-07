@@ -8,6 +8,7 @@ use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\MultiCategoryProductSection;
 use App\Models\Product;
+use App\Models\Seller;
 use App\Models\SingleCategoryProductSection;
 use App\Models\SpecialDeals;
 use App\Models\Sponsor;
@@ -60,5 +61,16 @@ class FontendController extends Controller
     {
         $shopByCat = Category::where('parent_id',null)->get();
         return view('home.categories',compact('shopByCat'));
+    }
+    public function sellers()
+    {
+        $sellers = Seller::orderby('name')->get();
+        return view('home.sellers',compact('sellers'));
+    }
+    public function sellerProduct($id=null)
+    {
+        $products = Product::where('seller_id',$id)->latest()->paginate(20);
+        $title = Seller::findOrFail($id)->name;
+        return view('home.shop',compact('products','title'));
     }
 }

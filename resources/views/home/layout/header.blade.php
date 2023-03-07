@@ -43,23 +43,6 @@
                                                 required>
                                         </div>
                                     </form>
-                                    @push('scripts')
-                                        <script>
-                                            $(document).ready(function() {
-                                                $('#searchCat').change(function() {
-                                                    var selectedOptionValue = $(this).val();
-                                                    $('#searchCatId').val(selectedOptionValue);
-                                                });
-
-                                                $('#searchSubmit').click(function() {
-                                                    $('#searchform').submit();
-                                                });
-                                                $('#mobileSearchButton').click(function() {
-                                                    $('#mobileSearchProduct').submit();
-                                                });
-                                            });
-                                        </script>
-                                    @endpush
                                 </div>
                             </div>
                             <div class="col-auto p0">
@@ -876,6 +859,8 @@
             <ul id=respMenu class="ace-responsive-menu menu_list_custom_code wa pl200" data-menu-style=horizontal>
                 <li class=visible_list> <a href="{{ route('home') }}"><span class=title>Home</span></a>
                 </li>
+                <li class=visible_list> <a href="{{ route('seller.list') }}"><span class=title>Seller</span></a>
+                </li>
                 <li class=visible_list> <a href=#><span class=title>Blog</span></a>
                 </li>
             </ul>
@@ -1069,3 +1054,20 @@
         toastr.success('{{ session('success') }}');
     </script>
 @endif
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#searchCat').change(function() {
+                var selectedOptionValue = $(this).val();
+                $('#searchCatId').val(selectedOptionValue);
+            });
+
+            $('#searchSubmit').click(function() {
+                $('#searchform').submit();
+            });
+            $('#mobileSearchButton').click(function() {
+                $('#mobileSearchProduct').submit();
+            });
+        });
+    </script>
+@endpush

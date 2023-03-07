@@ -49,6 +49,8 @@ Route::post('/user/login', [HomeAuthController::class, 'userLogin'])->name('user
 Route::post('/search',[FontendController::class,'search'])->name('search.product');
 Route::get('/category/{id}',[FontendController::class,'category'])->name('category');
 Route::get('/all-category',[FontendController::class,'allCategory'])->name('all.categories');
+Route::get('/sellers',[FontendController::class,'sellers'])->name('seller.list');
+Route::get('/seller/product/{id}',[FontendController::class,'sellerProduct'])->name('seller.product');
 route::get('/product/{name}/{id}', [UserController::class, 'singleProduct'])->name('single.product');
 route::get('/special-product/{name}/{id}', [UserController::class, 'singleSpecialProduct'])->name('single.special.product');
 Route::get('/cart', [UserController::class, 'cart'])->name('cart');
