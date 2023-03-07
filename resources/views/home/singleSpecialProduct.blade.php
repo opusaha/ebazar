@@ -123,31 +123,33 @@
                         <ul class="d-flex">
                             <li class="border-right">APPLE</li>
                             <li class="mx-3">
-                                @php
-                                    $reviews = \App\Models\Review::where('product_id', $product->id)->get();
-                                    $total_rating = 0;
-                                    foreach ($reviews as $review) {
-                                        $total_rating += $review->rating;
-                                    }
-                                    $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
-                                @endphp
                                 <div class="sspd_review">
                                     <ul class="mb0">
-                                        @for ($i = 1; $i <= $average_rating; $i++)
-                                            <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                                        @endfor
+                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
-                            <li>{{ count($reviews) }} reviews</li>
+                            <li>3,014 reviews</li>
                         </ul>
                         <h4 class="title mb15">{{ $product->name }}</h4>
                         <hr>
-                        <div class="sspd_price mb25 mt20">{{ $product->price }}Tk<small><del class="mr10">
+                        <div class="sspd_price mb25 mt20">{{ $product->special_price }}Tk<small><del class="mr10">
                                     {{ $product->old_price }} TK</del></small></div>
                         <div class="shop_single_table style3 table-responsive">
                             <div>
                                 {!! $product->details !!}
+                            </div>
+                            <div class="shop_single_description">
+                                <a href="#">See More <span class="fas fa-angle-down ml10"></span></a>
                             </div>
                         </div>
                         <hr>
@@ -206,9 +208,9 @@
                             <span class="icon fz30 heading-color"><span class="flaticon-shop"></span></span>
                             <div class="details ms-0 ms-sm-4 mt-2 mt-sm-0">
                                 @php $seller= \App\Models\Seller::find($product->seller_id) @endphp
-                                <p class="heading-color">Sold and shipped by {{ $seller->name }} by<a
-                                        href="{{ route('home') }}" class="fw500 heading-color fz16">
-                                        {{ $settings->name }}</a></p>
+                                <p class="heading-color">Sold and shipped by {{$seller->name}} by<a href="{{route('home')}}"
+                                    class="fw500 heading-color fz16">
+                                        {{$settings->name}}</a></p>
                             </div>
                         </div>
                         <div class="vendor_iconbox style2 d-block d-sm-flex mb-0">
@@ -313,7 +315,7 @@
                                                         </ul>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="price">$ {{ $pro->price }}
+                                                        <div class="price">$ {{ $pro->special_price }}
                                                             <small><del>${{ $pro->old_price }}</del></small>
                                                         </div>
                                                         <a class="btn btn-white bdr_thm"
@@ -733,7 +735,6 @@
             for (const star of stars) {
                 star.addEventListener('click', function() {
                     ratingValue = this.value;
-                    console.log(ratingValue); // log the selected rating value
                     $('#myRatting').val(ratingValue)
 
                     // highlight the selected stars with a gold color

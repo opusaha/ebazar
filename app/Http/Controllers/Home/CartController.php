@@ -20,8 +20,14 @@ class CartController extends Controller
             $cartInfo = Cart::where('user_id', Auth::user()->id)->where('product_id', $id)->get();
             if (count($cartInfo) > 0) {
                 $myItem = Cart::where('user_id', Auth::user()->id)->where('product_id', $id)->first();
+                $product = Product::findOrFail($id);
+                if($product->special_price != null){
+                    $price = $product->special_price;
+                }else{
+                    $price = $product->price;
+                }
                 $myItem->quantity = $myItem->quantity + $qty;
-                $myItem->total_price = $myItem->quantity * $myItem->price;
+                $myItem->total_price = $myItem->quantity * $price;
                 $myItem->save();
                 return response()->json(['status' => Product::findOrFail($id)->name . ' is add to your cart']);
             } else {
@@ -29,7 +35,12 @@ class CartController extends Controller
                 $cart->user_id = Auth::user()->id;
                 $cart->product_id = $id;
                 $cart->quantity = $qty;
-                $cart->price = Product::findOrFail($id)->price;
+                $product = Product::findOrFail($id);
+                if($product->special_price != null){
+                    $cart->price = $product->special_price;
+                }else{
+                    $cart->price = $product->price;
+                }
                 $cart->total_price = $cart->quantity * $cart->price;
                 $cart->save();
                 return response()->json(['status' => Product::findOrFail($id)->name . ' is add to your cart']);

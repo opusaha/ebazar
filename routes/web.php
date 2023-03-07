@@ -46,11 +46,15 @@ Route::get('/register', [HomeAuthController::class, 'register'])->name('register
 Route::post('/save/register', [HomeAuthController::class, 'store'])->name('register.store');
 Route::get('/login', [HomeAuthController::class, 'login'])->name('login');
 Route::post('/user/login', [HomeAuthController::class, 'userLogin'])->name('user.login');
-route::get('/shop', [UserController::class, 'shop'])->name('shop');
+Route::post('/search',[FontendController::class,'search'])->name('search.product');
+Route::get('/category/{id}',[FontendController::class,'category'])->name('category');
+Route::get('/all-category',[FontendController::class,'allCategory'])->name('all.categories');
 route::get('/product/{name}/{id}', [UserController::class, 'singleProduct'])->name('single.product');
+route::get('/special-product/{name}/{id}', [UserController::class, 'singleSpecialProduct'])->name('single.special.product');
 Route::get('/cart', [UserController::class, 'cart'])->name('cart');
 Route::post('cart/store', [CartController::class, 'postCart'])->name('addToCart');
 Route::post('product/{slug}/cart/store', [CartController::class, 'postCart'])->name('addToCart.singleProduct');
+Route::post('special-product/{slug}/cart/store', [CartController::class, 'postCart']);
 Route::post('wishlist/store', [WishController::class, 'store'])->name('wishlist.store');
 Route::post('/question',[QuestionAndAnswerController::class,'question'])->name('ask.question');
 
@@ -73,6 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('cart/data', [CartController::class, 'data']);
     Route::get('product/{slug}/cart/data', [CartController::class, 'data']);
+    Route::get('special-product/{slug}/cart/data', [CartController::class, 'data']);
     Route::get('products/{id}', [CartController::class, 'show']);
     Route::get('product/{slug}/products/{id}', [CartController::class, 'showSingle']);
     Route::post('cart/remove', [CartController::class, 'delete']);

@@ -32,7 +32,7 @@
                                     @foreach ($reviews as $review)
                                     <tr>
                                         <td><img src="{{asset($review->image_one)}}" height="80"></td>
-                                        <td><img src="{{asset($review->image_one)}}" height="80"></td>
+                                        <td><img src="{{asset($review->image_two)}}" height="80"></td>
                                         @php
                                             $product = \App\Models\Product::find($review->product_id);
                                         @endphp

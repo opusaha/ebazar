@@ -1,8 +1,8 @@
 @extends('home.layout.master')
 @section('content')
     @push('styles')
-    @php $settings = \App\Models\WebsiteSettings::first(); @endphp
-        <title>{{$settings->name}} :: Home</title>
+        @php $settings = \App\Models\WebsiteSettings::first(); @endphp
+        <title>{{ $settings->name }} :: Home</title>
     @endpush
     <section class=home-one>
         <div class=container>
@@ -12,7 +12,7 @@
                         <div class="banner-style-one owl-theme owl-carousel">
                             @foreach ($carousels as $carousel)
                                 <div class="slide slide-one"
-                                    style=background-image:url({{ asset($carousel->image) }});height:600px>
+                                    style="background-image:url({{ asset($carousel->image) }});height:600px">
                                     <div class=container>
                                         <div class="row home-content">
                                             <div class="col-lg-6 offset-lg-1 col-xl-5"><span
@@ -81,642 +81,102 @@
             </div>
         </div>
     </section>
-    <section class="deliver-divider pt30 pb70">
-        <div class=container>
-            <div class=row>
-                <div class=col-lg-12>
-                    <div class="d-flex db-500 justify-content-between">
-                        <div class="main-title mb0-500 d-block d-lg-flex">
-                            <h2>Deal of the Day</h2>
-                            <div class=deal_countdown>
-                                <ul class="deal_counter ml0-md" id=timer>
-                                    <li class="list-inline-item days"></li>
-                                    <li class=list-inline-item><span class=title>Days :</span></li>
-                                    <li class="list-inline-item hours"></li>
-                                    <li class=list-inline-item><span class=title>Hours :</span></li>
-                                    <li class="list-inline-item minutes"></li>
-                                    <li class=list-inline-item><span class=title>Minutes :</span></li>
-                                    <li class="list-inline-item seconds"></li>
-                                    <li class=list-inline-item><span class=title>Seconds</span></li>
-                                </ul>
+    @if (count($specialProducts) < 4)
+        <section class="deliver-divider pt30 pb70" id="dealOfTheDay">
+            <div class=container>
+                <div class=row>
+                    <div class=col-lg-12>
+                        <div class="d-flex db-500 justify-content-between">
+                            <div class="main-title mb0-500 d-block d-lg-flex">
+                                <h2>Deal of the Day</h2>
+                                <div class=deal_countdown>
+                                    <ul class="deal_counter ml0-md" id=timer>
+                                        <li class="list-inline-item days"></li>
+                                        <li class=list-inline-item><span class=title>Days :</span></li>
+                                        <li class="list-inline-item hours"></li>
+                                        <li class=list-inline-item><span class=title>Hours :</span></li>
+                                        <li class="list-inline-item minutes"></li>
+                                        <li class=list-inline-item><span class=title>Minutes :</span></li>
+                                        <li class="list-inline-item seconds"></li>
+                                        <li class=list-inline-item><span class=title>Seconds</span></li>
+                                    </ul>
+                                </div>
                             </div>
+                            <div class="main-title mb-5"> <a class="title_more_btn mt10">View
+                                    All</a> </div>
                         </div>
-                        <div class="main-title mb-5"> <a class="title_more_btn mt10" href=page-shop-list-v2.html>View
-                                All</a> </div>
                     </div>
                 </div>
-            </div>
-            <div class=row>
-                <div class=col-lg-12>
-                    <div class="navi_pagi_bottom_center shop_item_5grid_slider dod_slider owl-carousel owl-theme">
-                        <div class="item ovh">
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.0s>
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd1.png') }}
-                                        alt="Deal Day1">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SAMSUNG</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Samsung 65" 4K UHD HDR
-                                            QLED Tizen Smart TV</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del> <span class="off_tag text-thm1">20%
-                                                    Off</span></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
+                <div class=row>
+                    <div class=col-lg-12>
+                        <div class="navi_pagi_bottom_center shop_item_5grid_slider dod_slider owl-carousel owl-theme">
+                            @foreach ($specialProducts as $specialProduct)
+                                @php
+                                    $product = \App\Models\Product::find($specialProduct->product_id);
+                                @endphp
+                                <div class="item ovh">
+                                    <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
+                                        data-wow-duration={{ $loop->index * 0.1 + 1.0 . 's' }}>
+                                        <div class="thumb pb30"> <img src="{{ asset($product->image_one) }}" alt="Deal Day1"
+                                                style="height:270px; width:100%;">
+                                            <div class=thumb_info>
+                                                <ul class=mb0>
+                                                    <li><a
+                                                            href="{{ route('single.special.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                                class=flaticon-show></span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="shop_item_cart_btn d-grid">
+                                                <input type="hidden" id="cartProductQty" value="1">
+                                                <button type="button" data-product-id="{{ $product->id }}"
+                                                    class="btn btn-thm addToCartBTN">Add to
+                                                    Cart</button>
+                                            </div>
+                                        </div>
+                                        <div class=details>
+                                            <div class=title><a
+                                                    href="{{ route('single.special.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                            </div>
+                                            <div class="review d-flex db-500">
+                                                @php
+                                                    $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                    $total_rating = 0;
+                                                    foreach ($reviews as $review) {
+                                                        $total_rating += $review->rating;
+                                                    }
+                                                    $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                @endphp
+
+                                                <ul class="mb0 me-2">
+                                                    @for ($i = 1; $i <= $average_rating; $i++)
+                                                        <li class="list-inline-item"><i class="fas fa-star"></i>
+                                                        </li>
+                                                    @endfor
+                                                </ul>
+                                                <div class=review_count>{{ count($reviews) }} reviews</div>
+                                            </div>
+                                            <div class=si_footer>
+                                                <div class=price>${{ $product->special_price }}
+                                                    <small><del>${{ $product->price }}</del> <span
+                                                            class="off_tag text-thm1">{{ (($product->price - $product->special_price) / $product->price) * 100 }}%
+                                                            Off</span></small>
+                                                </div>
+                                                <div class="line mt20"></div>
+                                                <div class="sell_stock mt10">
+                                                    <div class=sell>Remaining {{ $product->quantity }}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="item ovh">
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.2s>
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd2.png') }}
-                                        alt="Deal Day2">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SONY</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Ozark Trail 6-Person Clip
-                                            & Camp Dome Tent</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item ovh">
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.4s>
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd3.png') }}
-                                        alt="Deal Day3">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SONY</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Beats by Dr. Dre Studio3
-                                            Skyline Over-Ear Noise Cancelling</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item ovh">
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.6s>
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd4.png') }}
-                                        alt="Deal Day4">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>Eastsport</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Eastsport Unisex Campus
-                                            Tech Backpack Charcoal</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item ovh">
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.8s>
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd5.png') }}
-                                        alt="Deal Da5">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>rolex</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Pre-Owned Rolex Day-date
-                                            1802 Gold Watch (Certified Authenti...</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd1.png') }}
-                                        alt="Deal Day1">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SAMSUNG</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Samsung 65" 4K UHD HDR
-                                            QLED Tizen Smart TV</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del> <span class="off_tag text-thm1">20%
-                                                    Off</span></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd2.png') }}
-                                        alt="Deal Day2">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SONY</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Ozark Trail 6-Person Clip
-                                            & Camp Dome Tent</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd3.png') }}
-                                        alt="Deal Day3">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SONY</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Beats by Dr. Dre Studio3
-                                            Skyline Over-Ear Noise Cancelling</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd4.png') }}
-                                        alt="Deal Day4">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>Eastsport</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Eastsport Unisex Campus
-                                            Tech Backpack Charcoal</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd5.png') }}
-                                        alt="Deal Da5">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>rolex</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Pre-Owned Rolex Day-date
-                                            1802 Gold Watch (Certified Authenti...</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd1.png') }}
-                                        alt="Deal Day1">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SAMSUNG</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Samsung 65" 4K UHD HDR
-                                            QLED Tizen Smart TV</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del> <span class="off_tag text-thm1">20%
-                                                    Off</span></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd2.png') }}
-                                        alt="Deal Day2">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SONY</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Ozark Trail 6-Person Clip
-                                            & Camp Dome Tent</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd3.png') }}
-                                        alt="Deal Day3">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>SONY</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Beats by Dr. Dre Studio3
-                                            Skyline Over-Ear Noise Cancelling</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd4.png') }}
-                                        alt="Deal Day4">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>Eastsport</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Eastsport Unisex Campus
-                                            Tech Backpack Charcoal</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=item>
-                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                <div class="thumb pb30"> <img src={{ asset('home/images/shop-items/dd5.png') }}
-                                        alt="Deal Da5">
-                                    <div class=thumb_info>
-                                        <ul class=mb0>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-heart></span></a>
-                                            </li>
-                                            <li><a href=page-dashboard-wish-list.html><span class=flaticon-show></span></a>
-                                            </li>
-                                            <li><a href=page-shop-list-v6.html><span class=flaticon-graph></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="shop_item_cart_btn d-grid"> <a href=page-shop-cart.html
-                                            class="btn btn-thm">Add to Cart</a> </div>
-                                </div>
-                                <div class=details>
-                                    <div class=sub_title>rolex</div>
-                                    <div class=title><a href=page-shop-single-v1.html>Pre-Owned Rolex Day-date
-                                            1802 Gold Watch (Certified Authenti...</a></div>
-                                    <div class="review d-flex db-500">
-                                        <ul class="mb0 me-2">
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                            <li class=list-inline-item><a href=#><i class="fas fa-star"></i></a></li>
-                                        </ul>
-                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                    </div>
-                                    <div class=si_footer>
-                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                        <div class="line mt20"></div>
-                                        <div class="sell_stock mt10">
-                                            <div class=sell>Sold 56</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
     <section class="top-category pb30 pt20">
         <div class=container>
             <div class=row>
@@ -725,16 +185,15 @@
                         <div class=main-title>
                             <h2>Shop by Category</h2>
                         </div>
-                        <div class="main-title mb-5"><a class="title_more_btn mt10" href=page-shop-list-v2.html>View All
+                        <div class="main-title mb-5"><a class="title_more_btn mt10" href="{{route('all.categories')}}">View All
                                 Categories</a></div>
                     </div>
                 </div>
             </div>
             <div class="row ovh">
                 @foreach ($shopByCat as $category)
-                    <div class="col-6 col-md-3 col-xl wow fadeInUp"
-                        data-wow-duration={{ $loop->index * 0.2 + 0.7 . 's' }}>
-                        <a href="">
+                    <div class="col-6 col-md-3 col-xl wow fadeInUp" data-wow-duration={{ $loop->index * 0.2 + 0.7 . 's' }}>
+                        <a href="{{route('category',$category->id)}}">
                             <div class=iconbox>
                                 <div class=icon><img src="{{ asset($category->logo) }}" alt="{{ $category->name }}">
                                 </div>
@@ -765,7 +224,7 @@
         </div>
     </section>
     @isset($multiCatProductOne)
-        <section class="featured-product pt0 pb90">
+        <section class="featured-product pt0 pb90" id="importentProduct">
             <div class=container>
                 <div class=row>
                     <div class=col-lg-6>
@@ -782,16 +241,22 @@
                                 $catFour = \App\Models\Category::find($multiCatProductOne->category_four);
                             @endphp
                             <div class="nav nav-tabs mb30 justify-content-start justify-content-lg-end" role=tablist>
-                                <button class="nav-link active" id=nav-home-tab data-bs-toggle=tab data-bs-target=#nav-home
-                                    role=tab aria-controls=nav-home aria-selected=true>{{ $catOne->name }}</button>
-                                <button class=nav-link id=nav-shopping-tab data-bs-toggle=tab data-bs-target=#nav-shopping
-                                    role=tab aria-controls=nav-shopping aria-selected=false>{{ $catTwo->name }}</button>
-                                <button class=nav-link id=nav-hotels-tab data-bs-toggle=tab data-bs-target=#nav-hotels role=tab
-                                    aria-controls=nav-hotels aria-selected=false>{{ $catThree->name }}</button>
-                                <button class=nav-link id=nav-destination-tab data-bs-toggle=tab data-bs-target=#nav-destination
-                                    role=tab aria-controls=nav-destination aria-selected=false>{{ $catFour->name }}</button>
-                                <button class="nav-link me-0" id=nav-bread-tab data-bs-toggle=tab data-bs-target=#nav-bread
-                                    role=tab aria-controls=nav-bread aria-selected=false>All</button>
+                                @isset($catOne)
+                                    <button class="nav-link active" id=nav-home-tab data-bs-toggle=tab data-bs-target=#nav-home
+                                        role=tab aria-controls=nav-home aria-selected=true>{{ $catOne->name }}</button>
+                                @endisset
+                                @isset($catTwo)
+                                    <button class=nav-link id=nav-shopping-tab data-bs-toggle=tab data-bs-target=#nav-shopping
+                                        role=tab aria-controls=nav-shopping aria-selected=false>{{ $catTwo->name }}</button>
+                                @endisset
+                                @isset($catThree)
+                                    <button class=nav-link id=nav-hotels-tab data-bs-toggle=tab data-bs-target=#nav-hotels role=tab
+                                        aria-controls=nav-hotels aria-selected=false>{{ $catThree->name }}</button>
+                                @endisset
+                                @isset($catFour)
+                                    <button class=nav-link id=nav-destination-tab data-bs-toggle=tab data-bs-target=#nav-destination
+                                        role=tab aria-controls=nav-destination aria-selected=false>{{ $catFour->name }}</button>
+                                @endisset
                             </div>
                         </div>
                     </div>
@@ -803,1172 +268,278 @@
                                 <div class="tab-pane fade show active" id=nav-home role=tabpanel aria-labelledby=nav-home-tab>
                                     <div
                                         class="best_item_slider_shop_lising_page shop_item_5grid_slider slider_dib_sm nav_none_400 dots_none owl-theme owl-carousel">
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.1s>
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm1.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
+                                        @php
+                                            $catOneProducts = \App\Models\Product::where('category', $multiCatProductOne->category_one)
+                                                ->latest()
+                                                ->take(5)
+                                                ->get();
+                                        @endphp
+                                        @foreach ($catOneProducts as $product)
+                                            <div class="item ovh">
+                                                <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
+                                                    data-wow-duration={{ $loop->index * 0.2 + 0.7 . 's' }}>
+                                                    <div class="thumb pb30">
+                                                        <img src="{{ asset($product->image_one) }}" alt="{{ $product->name }}"
+                                                            style="height:300px; width:100%;">
+                                                        <div class=thumb_info>
+                                                            <ul class=mb0>
+                                                                <li><button type="button" class="btnWishlist"
+                                                                        data-product-id="{{ $product->id }}"
+                                                                        style="background-color: transparent;border:none;outline:none"><span
+                                                                            class="flaticon-heart"></span></button></li>
+                                                                <li><a
+                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                                            class=flaticon-show></span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="shop_item_cart_btn d-grid">
+                                                            <input type="hidden" id="cartProductQty" value="1">
+                                                            <button type="button" data-product-id="{{ $product->id }}"
+                                                                class="btn btn-thm addToCartBTN">Add to
+                                                                Cart</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SAMSUNG</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Great Value
-                                                            Ultra Strong Paper Towels, Split Sheets, 6 Double </a>
-                                                    </div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.3s>
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm2.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SONY</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Dell Inspiron
-                                                            3000 15.6" Touchscreen Laptop - Black (Intel Core
-                                                            i5-1035G1/256GB SSD/8GB RAM/Windows 11 S)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
+                                                    <div class=details>
+                                                        <div class=sub_title>{{ $product->sku }}</div>
+                                                        <div class=title><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                            </a>
+                                                        </div>
+                                                        <div class="review d-flex db-500">
+                                                            @php
+                                                                $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                $total_rating = 0;
+                                                                foreach ($reviews as $review) {
+                                                                    $total_rating += $review->rating;
+                                                                }
+                                                                $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                            @endphp
+
+                                                            <ul class="mb0 me-2">
+                                                                @for ($i = 1; $i <= $average_rating; $i++)
+                                                                    <li class="list-inline-item"><i class="fas fa-star"></i>
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                            <div class=review_count>{{ count($reviews) }} reviews</div>
+                                                        </div>
+                                                        <div class=si_footer>
+                                                            <div class=price>
+                                                                ${{ $product->price }}<small><del>${{ $product->old_price }}</del></small>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.5s>
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm3.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>Eastsport</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>LG Gram 17"
-                                                            Laptop -Obsidian Black (Intel Evo Core i7-1165G7/1TB
-                                                            SSD/16GB RAM) -En -Only at Best Buy</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.7s>
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm4.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>HP 15.6"
-                                                            Touchscreen Laptop - Natural Silver (AMD Ryzen 5
-                                                            5625U/1TB SSD/12GB RAM/Windows 11)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.9s>
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm5.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Marketside
-                                                            Large Cage Free Brown Eggs, 36 Oz, 18 Ct</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
+
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id=nav-shopping role=tabpanel aria-labelledby=nav-shopping-tab>
                                     <div
                                         class="best_item_slider_shop_lising_page shop_item_5grid_slider slider_dib_sm nav_none_400 dots_none owl-theme owl-carousel">
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm1.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
+
+                                        @php
+                                            $catTwoProducts = \App\Models\Product::where('category', $multiCatProductOne->category_two)
+                                                ->latest()
+                                                ->take(5)
+                                                ->get();
+                                        @endphp
+                                        @foreach ($catTwoProducts as $product)
+                                            <div class=item>
+                                                <div class="shop_item bdrtrb1 px-2 px-sm-3">
+                                                    <div class="thumb pb30">
+                                                        <img src="{{ asset($product->image_one) }}"
+                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                        <div class=thumb_info>
+                                                            <ul class=mb0>
+                                                                <li><button type="button" class="btnWishlist"
+                                                                        data-product-id="{{ $product->id }}"
+                                                                        style="background-color: transparent;border:none;outline:none"><span
+                                                                            class="flaticon-heart"></span></button></li>
+                                                                <li><a
+                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                                            class=flaticon-show></span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="shop_item_cart_btn d-grid">
+                                                            <input type="hidden" id="cartProductQty" value="1">
+                                                            <button type="button" data-product-id="{{ $product->id }}"
+                                                                class="btn btn-thm addToCartBTN">Add to
+                                                                Cart</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SAMSUNG</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Great Value
-                                                            Ultra Strong Paper Towels, Split Sheets, 6 Double </a>
-                                                    </div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm2.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SONY</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Dell Inspiron
-                                                            3000 15.6" Touchscreen Laptop - Black (Intel Core
-                                                            i5-1035G1/256GB SSD/8GB RAM/Windows 11 S)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
+                                                    <div class=details>
+                                                        <div class=sub_title>{{ $product->sku }}</div>
+                                                        <div class=title><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                            </a>
+                                                        </div>
+                                                        <div class="review d-flex db-500">
+                                                            @php
+                                                                $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                $total_rating = 0;
+                                                                foreach ($reviews as $review) {
+                                                                    $total_rating += $review->rating;
+                                                                }
+                                                                $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                            @endphp
+
+                                                            <ul class="mb0 me-2">
+                                                                @for ($i = 1; $i <= $average_rating; $i++)
+                                                                    <li class="list-inline-item"><i class="fas fa-star"></i>
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                            <div class=review_count>{{ count($reviews) }} reviews</div>
+                                                        </div>
+                                                        <div class=si_footer>
+                                                            <div class=price>
+                                                                ${{ $product->price }}<small><del>${{ $product->old_price }}</del></small>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm3.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>Eastsport</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>LG Gram 17"
-                                                            Laptop -Obsidian Black (Intel Evo Core i7-1165G7/1TB
-                                                            SSD/16GB RAM) -En -Only at Best Buy</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm4.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>HP 15.6"
-                                                            Touchscreen Laptop - Natural Silver (AMD Ryzen 5
-                                                            5625U/1TB SSD/12GB RAM/Windows 11)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm5.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Marketside
-                                                            Large Cage Free Brown Eggs, 36 Oz, 18 Ct</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
+
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id=nav-hotels role=tabpanel aria-labelledby=nav-hotels-tab>
                                     <div
                                         class="best_item_slider_shop_lising_page shop_item_5grid_slider slider_dib_sm nav_none_400 dots_none owl-theme owl-carousel">
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm1.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
+                                        @php
+                                            $catThreeProducts = \App\Models\Product::where('category', $multiCatProductOne->category_three)
+                                                ->latest()
+                                                ->take(5)
+                                                ->get();
+                                        @endphp
+                                        @foreach ($catThreeProducts as $product)
+                                            <div class=item>
+                                                <div class="shop_item bdrtrb1 px-2 px-sm-3">
+                                                    <div class="thumb pb30">
+                                                        <img src="{{ asset($product->image_one) }}"
+                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                        <div class=thumb_info>
+                                                            <ul class=mb0>
+                                                                <li><button type="button" class="btnWishlist"
+                                                                        data-product-id="{{ $product->id }}"
+                                                                        style="background-color: transparent;border:none;outline:none"><span
+                                                                            class="flaticon-heart"></span></button></li>
+                                                                <li><a
+                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                                            class=flaticon-show></span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="shop_item_cart_btn d-grid">
+                                                            <input type="hidden" id="cartProductQty" value="1">
+                                                            <button type="button" data-product-id="{{ $product->id }}"
+                                                                class="btn btn-thm addToCartBTN">Add to
+                                                                Cart</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SAMSUNG</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Great Value
-                                                            Ultra Strong Paper Towels, Split Sheets, 6 Double </a>
-                                                    </div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm2.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SONY</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Dell Inspiron
-                                                            3000 15.6" Touchscreen Laptop - Black (Intel Core
-                                                            i5-1035G1/256GB SSD/8GB RAM/Windows 11 S)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
+                                                    <div class=details>
+                                                        <div class=sub_title>{{ $product->sku }}</div>
+                                                        <div class=title><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                            </a>
+                                                        </div>
+                                                        <div class="review d-flex db-500">
+                                                            @php
+                                                                $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                $total_rating = 0;
+                                                                foreach ($reviews as $review) {
+                                                                    $total_rating += $review->rating;
+                                                                }
+                                                                $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                            @endphp
+
+                                                            <ul class="mb0 me-2">
+                                                                @for ($i = 1; $i <= $average_rating; $i++)
+                                                                    <li class="list-inline-item"><i class="fas fa-star"></i>
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                            <div class=review_count>{{ count($reviews) }} reviews</div>
+                                                        </div>
+                                                        <div class=si_footer>
+                                                            <div class=price>
+                                                                ${{ $product->price }}<small><del>${{ $product->old_price }}</del></small>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm3.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>Eastsport</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>LG Gram 17"
-                                                            Laptop -Obsidian Black (Intel Evo Core i7-1165G7/1TB
-                                                            SSD/16GB RAM) -En -Only at Best Buy</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm4.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>HP 15.6"
-                                                            Touchscreen Laptop - Natural Silver (AMD Ryzen 5
-                                                            5625U/1TB SSD/12GB RAM/Windows 11)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm5.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Marketside
-                                                            Large Cage Free Brown Eggs, 36 Oz, 18 Ct</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id=nav-destination role=tabpanel
                                     aria-labelledby=nav-destination-tab>
                                     <div
                                         class="best_item_slider_shop_lising_page shop_item_5grid_slider slider_dib_sm nav_none_400 dots_none owl-theme owl-carousel">
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm1.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
+                                        @php
+                                            $catFourProducts = \App\Models\Product::where('category', $multiCatProductOne->category_four)
+                                                ->latest()
+                                                ->take(5)
+                                                ->get();
+                                        @endphp
+                                        @foreach ($catFourProducts as $product)
+                                            <div class=item>
+                                                <div class="shop_item bdrtrb1 px-2 px-sm-3">
+                                                    <div class="thumb pb30">
+                                                        <img src="{{ asset($product->image_one) }}"
+                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                        <div class=thumb_info>
+                                                            <ul class=mb0>
+                                                                <li><button type="button" class="btnWishlist"
+                                                                        data-product-id="{{ $product->id }}"
+                                                                        style="background-color: transparent;border:none;outline:none"><span
+                                                                            class="flaticon-heart"></span></button></li>
+                                                                <li><a
+                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                                            class=flaticon-show></span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="shop_item_cart_btn d-grid">
+                                                            <input type="hidden" id="cartProductQty" value="1">
+                                                            <button type="button" data-product-id="{{ $product->id }}"
+                                                                class="btn btn-thm addToCartBTN">Add to
+                                                                Cart</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SAMSUNG</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Great Value
-                                                            Ultra Strong Paper Towels, Split Sheets, 6 Double </a>
-                                                    </div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm2.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SONY</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Dell Inspiron
-                                                            3000 15.6" Touchscreen Laptop - Black (Intel Core
-                                                            i5-1035G1/256GB SSD/8GB RAM/Windows 11 S)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
+                                                    <div class=details>
+                                                        <div class=sub_title>{{ $product->sku }}</div>
+                                                        <div class=title><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                            </a>
+                                                        </div>
+                                                        <div class="review d-flex db-500">
+                                                            @php
+                                                                $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                $total_rating = 0;
+                                                                foreach ($reviews as $review) {
+                                                                    $total_rating += $review->rating;
+                                                                }
+                                                                $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                            @endphp
+
+                                                            <ul class="mb0 me-2">
+                                                                @for ($i = 1; $i <= $average_rating; $i++)
+                                                                    <li class="list-inline-item"><i class="fas fa-star"></i>
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                            <div class=review_count>{{ count($reviews) }} reviews</div>
+                                                        </div>
+                                                        <div class=si_footer>
+                                                            <div class=price>
+                                                                ${{ $product->price }}<small><del>${{ $product->old_price }}</del></small>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm3.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>Eastsport</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>LG Gram 17"
-                                                            Laptop -Obsidian Black (Intel Evo Core i7-1165G7/1TB
-                                                            SSD/16GB RAM) -En -Only at Best Buy</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm4.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>HP 15.6"
-                                                            Touchscreen Laptop - Natural Silver (AMD Ryzen 5
-                                                            5625U/1TB SSD/12GB RAM/Windows 11)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm5.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Marketside
-                                                            Large Cage Free Brown Eggs, 36 Oz, 18 Ct</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id=nav-bread role=tabpanel aria-labelledby=nav-bread-tab>
-                                    <div
-                                        class="best_item_slider_shop_lising_page shop_item_5grid_slider slider_dib_sm nav_none_400 dots_none owl-theme owl-carousel">
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm1.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SAMSUNG</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Great Value
-                                                            Ultra Strong Paper Towels, Split Sheets, 6 Double </a>
-                                                    </div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm2.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SONY</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Dell Inspiron
-                                                            3000 15.6" Touchscreen Laptop - Black (Intel Core
-                                                            i5-1035G1/256GB SSD/8GB RAM/Windows 11 S)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm3.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>Eastsport</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>LG Gram 17"
-                                                            Laptop -Obsidian Black (Intel Evo Core i7-1165G7/1TB
-                                                            SSD/16GB RAM) -En -Only at Best Buy</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$399.00 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm4.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>HP 15.6"
-                                                            Touchscreen Laptop - Natural Silver (AMD Ryzen 5
-                                                            5625U/1TB SSD/12GB RAM/Windows 11)</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=item>
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3">
-                                                <div class="thumb pb30">
-                                                    <img src={{ asset('home/images/shop-items/bslm5.png') }}
-                                                        alt="Best Seller Item">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid">
-                                                        <a href=page-shop-cart.html class="btn btn-thm">Add to
-                                                            Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Marketside
-                                                            Large Cage Free Brown Eggs, 36 Oz, 18 Ct</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$18.124 <small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -1991,7 +562,7 @@
         </div>
     </section>
     @isset($singleCatProductOne)
-        <section class="featured-product pt0">
+        <section class="featured-product pt0" id="bestSales">
             <div class=container>
                 <div class=row>
                     <div class=col-md-5>
@@ -2017,222 +588,70 @@
                                     aria-labelledby=nav-narive-tab>
                                     <div
                                         class="best_item_slider_shop_lising_page shop_item_5grid_slider slider_dib_sm nav_none_400 dots_none owl-theme owl-carousel">
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.1s>
-                                                <div class="thumb pb30"><img src={{ asset('home/images/shop-items/fp1.png') }}
-                                                        alt="Furniture Product">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
+                                        @php
+                                            $singleCatProductsOne = \App\Models\Product::where('category', $singleCatProductOne->category)
+                                                ->latest()
+                                                ->take(5)
+                                                ->get();
+                                        @endphp
+                                        @foreach ($singleCatProductsOne as $product)
+                                            <div class="item ovh">
+                                                <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
+                                                    data-wow-duration="{{ $loop->index * 0.2 + 0.7 . 's' }}">
+                                                    <div class="thumb pb30">
+                                                        <img src="{{ asset($product->image_one) }}"
+                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                        <div class=thumb_info>
+                                                            <ul class=mb0>
+                                                                <li><button type="button" class="btnWishlist"
+                                                                        data-product-id="{{ $product->id }}"
+                                                                        style="background-color: transparent;border:none;outline:none"><span
+                                                                            class="flaticon-heart"></span></button></li>
+                                                                <li><a
+                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                                            class=flaticon-show></span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="shop_item_cart_btn d-grid">
+                                                            <input type="hidden" id="cartProductQty" value="1">
+                                                            <button type="button" data-product-id="{{ $product->id }}"
+                                                                class="btn btn-thm addToCartBTN">Add to
+                                                                Cart</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                            class="btn btn-thm">Add to
-                                                            Cart</a></div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SAMSUNG</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Samsung 65" 4K
-                                                            UHD HDR QLED Tizen Smart TV</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50<small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.3s>
-                                                <div class="thumb pb30"><img src={{ asset('home/images/shop-items/fp2.png') }}
-                                                        alt="Furniture Product">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                            class="btn btn-thm">Add to
-                                                            Cart</a></div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>SONY</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Ozark Trail
-                                                            6-Person Clip & Camp Dome Tent</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50<small><del>$45</del></small></div>
+                                                    <div class=details>
+                                                        <div class=sub_title>{{ $product->sku }}</div>
+                                                        <div class=title><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                            </a>
+                                                        </div>
+                                                        <div class="review d-flex db-500">
+                                                            @php
+                                                                $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                $total_rating = 0;
+                                                                foreach ($reviews as $review) {
+                                                                    $total_rating += $review->rating;
+                                                                }
+                                                                $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                            @endphp
+
+                                                            <ul class="mb0 me-2">
+                                                                @for ($i = 1; $i <= $average_rating; $i++)
+                                                                    <li class="list-inline-item"><i class="fas fa-star"></i>
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                            <div class=review_count>{{ count($reviews) }} reviews</div>
+                                                        </div>
+                                                        <div class=si_footer>
+                                                            <div class=price>
+                                                                ${{ $product->price }}<small><del>${{ $product->old_price }}</del></small>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.5s>
-                                                <div class="thumb pb30"><img src={{ asset('home/images/shop-items/fp3.png') }}
-                                                        alt="Furniture Product">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                            class="btn btn-thm">Add to
-                                                            Cart</a></div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>Eastsport</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Beats by Dr.
-                                                            Dre Studio3 Skyline Over-Ear Noise Cancelling</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$399.00<small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.7s>
-                                                <div class="thumb pb30"><img src={{ asset('home/images/shop-items/fp4.png') }}
-                                                        alt="Furniture Product">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                            class="btn btn-thm">Add to
-                                                            Cart</a></div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Eastsport
-                                                            Unisex Campus Tech Backpack Charcoal</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$32.50<small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item ovh">
-                                            <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn" data-wow-duration=1.9s>
-                                                <div class="thumb pb30"><img src={{ asset('home/images/shop-items/fp5.png') }}
-                                                        alt="Furniture Product">
-                                                    <div class=thumb_info>
-                                                        <ul class=mb0>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-heart></span></a></li>
-                                                            <li><a href=page-dashboard-wish-list.html><span
-                                                                        class=flaticon-show></span></a></li>
-                                                            <li><a href=page-shop-list-v6.html><span
-                                                                        class=flaticon-graph></span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                            class="btn btn-thm">Add to
-                                                            Cart</a></div>
-                                                </div>
-                                                <div class=details>
-                                                    <div class=sub_title>rolex</div>
-                                                    <div class=title><a href=page-shop-single-v1.html>Pre-Owned
-                                                            Rolex Day-date 1802 Gold Watch (Certified
-                                                            Authenti...</a></div>
-                                                    <div class="review d-flex db-500">
-                                                        <ul class="mb0 me-2">
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                            <li class=list-inline-item><a href=#><i
-                                                                        class="fas fa-star"></i></a></li>
-                                                        </ul>
-                                                        <div class=review_count><a href=#>3,014 reviews</a></div>
-                                                    </div>
-                                                    <div class=si_footer>
-                                                        <div class=price>$18.124<small><del>$45</del></small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -2272,250 +691,75 @@
                                         <div class=col-lg-12>
                                             <div
                                                 class="best_item_slider_shop_lising_page shop_item_5grid_slider slider_dib_sm nav_none_400 dots_none nav_none owl-theme owl-carousel">
-                                                <div class="item ovh">
-                                                    <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
-                                                        data-wow-duration=1.1s>
-                                                        <div class="thumb pb30"><img
-                                                                src={{ asset('home/images/shop-items/ep1.png') }}
-                                                                alt="Electronics Product">
-                                                            <div class=thumb_info>
-                                                                <ul class=mb0>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-heart></span></a>
-                                                                    </li>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-show></span></a></li>
-                                                                    <li><a href=page-shop-list-v6.html><span
-                                                                                class=flaticon-graph></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                                    class="btn btn-thm">Add to Cart</a></div>
-                                                        </div>
-                                                        <div class=details>
-                                                            <div class=sub_title>Apple</div>
-                                                            <div class=title><a href=page-shop-single-v1.html>Apple
-                                                                    Watch SE (GPS) 40mm Space Grey Aluminum Case
-                                                                    with</a></div>
-                                                            <div class="review d-flex db-500">
-                                                                <ul class="mb0 me-2">
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                </ul>
-                                                                <div class=review_count><a href=#>3,014 reviews</a>
+                                                @php
+                                                    $singleCatProductsTwo = \App\Models\Product::where('category', $singleCatProductTwo->category)
+                                                        ->latest()
+                                                        ->take(5)
+                                                        ->get();
+                                                @endphp
+                                                @foreach ($singleCatProductsTwo as $product)
+                                                    <div class="item ovh">
+                                                        <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
+                                                            data-wow-duration={{ $loop->index * 0.2 + 0.7 . 's' }}>
+                                                            <div class="thumb pb30">
+                                                                <img src="{{ asset($product->image_one) }}"
+                                                                    alt="{{ $product->name }}"
+                                                                    style="height:300px; width:100%;">
+                                                                <div class=thumb_info>
+                                                                    <ul class=mb0>
+                                                                        <li><button type="button" class="btnWishlist"
+                                                                                data-product-id="{{ $product->id }}"
+                                                                                style="background-color: transparent;border:none;outline:none"><span
+                                                                                    class="flaticon-heart"></span></button>
+                                                                        </li>
+                                                                        <li><a
+                                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}"><span
+                                                                                    class=flaticon-show></span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="shop_item_cart_btn d-grid">
+                                                                    <input type="hidden" id="cartProductQty" value="1">
+                                                                    <button type="button"
+                                                                        data-product-id="{{ $product->id }}"
+                                                                        class="btn btn-thm addToCartBTN">Add to
+                                                                        Cart</button>
                                                                 </div>
                                                             </div>
-                                                            <div class=si_footer>
-                                                                <div class=price>$32.50<small><del>$45</del></small>
+                                                            <div class=details>
+                                                                <div class=sub_title>{{ $product->sku }}</div>
+                                                                <div class=title><a
+                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="item ovh">
-                                                    <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
-                                                        data-wow-duration=1.3s>
-                                                        <div class="thumb pb30"><img
-                                                                src={{ asset('home/images/shop-items/ep2.png') }}
-                                                                alt="Electronics Product">
-                                                            <div class=thumb_info>
-                                                                <ul class=mb0>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-heart></span></a>
-                                                                    </li>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-show></span></a></li>
-                                                                    <li><a href=page-shop-list-v6.html><span
-                                                                                class=flaticon-graph></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                                    class="btn btn-thm">Add to Cart</a></div>
-                                                        </div>
-                                                        <div class=details>
-                                                            <div class=sub_title>Apple</div>
-                                                            <div class=title><a href=page-shop-single-v1.html>Apple
-                                                                    iPhone 11 64GB Smartphone - Black.</a></div>
-                                                            <div class="review d-flex db-500">
-                                                                <ul class="mb0 me-2">
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                </ul>
-                                                                <div class=review_count><a href=#>3,014 reviews</a>
+                                                                <div class="review d-flex db-500">
+                                                                    @php
+                                                                        $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                        $total_rating = 0;
+                                                                        foreach ($reviews as $review) {
+                                                                            $total_rating += $review->rating;
+                                                                        }
+                                                                        $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                                    @endphp
+
+                                                                    <ul class="mb0 me-2">
+                                                                        @for ($i = 1; $i <= $average_rating; $i++)
+                                                                            <li class="list-inline-item"><i
+                                                                                    class="fas fa-star"></i>
+                                                                            </li>
+                                                                        @endfor
+                                                                    </ul>
+                                                                    <div class=review_count>{{ count($reviews) }} reviews
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class=si_footer>
-                                                                <div class=price>$32.50<small><del>$45</del></small>
+                                                                <div class=si_footer>
+                                                                    <div class=price>
+                                                                        ${{ $product->price }}<small><del>${{ $product->old_price }}</del></small>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="item ovh">
-                                                    <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
-                                                        data-wow-duration=1.5s>
-                                                        <div class="thumb pb30"><img
-                                                                src={{ asset('home/images/shop-items/ep3.png') }}
-                                                                alt="Electronics Product">
-                                                            <div class=thumb_info>
-                                                                <ul class=mb0>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-heart></span></a>
-                                                                    </li>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-show></span></a></li>
-                                                                    <li><a href=page-shop-list-v6.html><span
-                                                                                class=flaticon-graph></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                                    class="btn btn-thm">Add to Cart</a></div>
-                                                        </div>
-                                                        <div class=details>
-                                                            <div class=sub_title>Eastsport</div>
-                                                            <div class=title><a href=page-shop-single-v1.html>iRobot
-                                                                    Roomba i3+ EVO Wi-Fi Connected Self-Empty
-                                                                    Robot.</a></div>
-                                                            <div class="review d-flex db-500">
-                                                                <ul class="mb0 me-2">
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                </ul>
-                                                                <div class=review_count><a href=#>3,014 reviews</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class=si_footer>
-                                                                <div class=price>
-                                                                    $399.00<small><del>$45</del></small></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="item ovh">
-                                                    <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
-                                                        data-wow-duration=1.7s>
-                                                        <div class="thumb pb30"><img
-                                                                src={{ asset('home/images/shop-items/ep4.png') }}
-                                                                alt="Electronics Product">
-                                                            <div class=thumb_info>
-                                                                <ul class=mb0>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-heart></span></a>
-                                                                    </li>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-show></span></a></li>
-                                                                    <li><a href=page-shop-list-v6.html><span
-                                                                                class=flaticon-graph></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                                    class="btn btn-thm">Add to Cart</a></div>
-                                                        </div>
-                                                        <div class=details>
-                                                            <div class=sub_title>rolex</div>
-                                                            <div class=title><a href=page-shop-single-v1.html>Dyson
-                                                                    V7 Complete Cordless Stick Vacuum -
-                                                                    Iron/Blue</a></div>
-                                                            <div class="review d-flex db-500">
-                                                                <ul class="mb0 me-2">
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                </ul>
-                                                                <div class=review_count><a href=#>3,014 reviews</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class=si_footer>
-                                                                <div class=price>$32.50<small><del>$45</del></small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="item ovh">
-                                                    <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
-                                                        data-wow-duration=1.9s>
-                                                        <div class="thumb pb30"><img
-                                                                src={{ asset('home/images/shop-items/ep5.png') }}
-                                                                alt="Electronics Product">
-                                                            <div class=thumb_info>
-                                                                <ul class=mb0>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-heart></span></a>
-                                                                    </li>
-                                                                    <li><a href=page-dashboard-wish-list.html><span
-                                                                                class=flaticon-show></span></a></li>
-                                                                    <li><a href=page-shop-list-v6.html><span
-                                                                                class=flaticon-graph></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="shop_item_cart_btn d-grid"><a href=page-shop-cart.html
-                                                                    class="btn btn-thm">Add to Cart</a></div>
-                                                        </div>
-                                                        <div class=details>
-                                                            <div class=sub_title>rolex</div>
-                                                            <div class=title><a href=page-shop-single-v1.html>Meta
-                                                                    Quest 2 256GB VR Headset with Touch
-                                                                    Controllers</a></div>
-                                                            <div class="review d-flex db-500">
-                                                                <ul class="mb0 me-2">
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li class=list-inline-item><a href=#><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                </ul>
-                                                                <div class=review_count><a href=#>3,014 reviews</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class=si_footer>
-                                                                <div class=price>
-                                                                    $18.124<small><del>$45</del></small></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -2549,7 +793,7 @@
     </section>
 
     @isset($multiCatProductTwo)
-        <section class="featured-product pt0">
+        <section class="featured-product pt0" id="newArrivalProduct">
             <div class=container>
                 <div class=row>
                     <div class=col-md-6>
@@ -2588,595 +832,103 @@
                                 <div class="fade tab-pane active show" id=nav-hnat20 aria-labelledby=nav-hnat20-tab
                                     role=tabpanel>
                                     <div class=row>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap1.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony DJ Headphones
-                                                            4334205465, Black, Standard</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
+                                        @php
+                                            $lastCatProductOne = \App\Models\Product::where('category', $multiCatProductTwo->category_one)
+                                                ->inRandomOrder()
+                                                ->take(12)
+                                            ->get(); @endphp
+                                        @foreach ($lastCatProductOne as $product)
+                                            <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
+                                                data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
+                                                <div class="align-items-center bdr1 d-flex shop_item tiny_style">
+                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                            style="height: 75px; width:100px; margin-left:20px;"
+                                                            src={{ asset($product->image_one) }}></div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <div class="mb-2 title"><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                        </div>
+                                                        <div class="para text-thm1">${{ $product->price }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap2.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony E-Mount Full Frame FE
-                                                            24-70mm f/2.8 GM II G Master</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap3.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap4.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap5.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap6.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Samsung Galaxy S21 Ultra
-                                                            Silicone Case with S-Pen Bundle</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap7.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap8.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Office Chair Ergonomic Cheap
-                                                            Desk Chair Mesh Computer</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap9.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Ray-Ban Women's Rb3647n
-                                                            Double Bridge Round Sunglasses</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap10.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Suptek Aluminum Alloy Cell
-                                                            Phone Desk Mount Stand</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap11.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>PopSockets PopWallet+:
-                                                            Swappable and Repositionable</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap12.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Cooling Body Gel Moisturizer
-                                                            with Soothing Aloe</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="fade tab-pane" id=nav-hnababy aria-labelledby=nav-hnababy-tab role=tabpanel>
                                     <div class=row>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap1.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony DJ Headphones
-                                                            4334205465, Black, Standard</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
+                                        @php
+                                            $lastCatProductTwo = \App\Models\Product::where('category', $multiCatProductTwo->category_two)
+                                                ->inRandomOrder()
+                                                ->take(12)
+                                            ->get(); @endphp
+                                        @foreach ($lastCatProductTwo as $product)
+                                            <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
+                                                data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
+                                                <div class="align-items-center bdr1 d-flex shop_item tiny_style">
+                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                            style="height: 75px; width:100px; margin-left:20px;"
+                                                            src={{ asset($product->image_one) }}></div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <div class="mb-2 title"><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                        </div>
+                                                        <div class="para text-thm1">${{ $product->price }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap2.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony E-Mount Full Frame FE
-                                                            24-70mm f/2.8 GM II G Master</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap3.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap4.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap5.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap6.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Samsung Galaxy S21 Ultra
-                                                            Silicone Case with S-Pen Bundle</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap7.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap8.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Office Chair Ergonomic Cheap
-                                                            Desk Chair Mesh Computer</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap9.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Ray-Ban Women's Rb3647n
-                                                            Double Bridge Round Sunglasses</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap10.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Suptek Aluminum Alloy Cell
-                                                            Phone Desk Mount Stand</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap11.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>PopSockets PopWallet+:
-                                                            Swappable and Repositionable</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap12.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Cooling Body Gel Moisturizer
-                                                            with Soothing Aloe</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="fade tab-pane" id=nav-hnafurniture aria-labelledby=nav-hnafurniture-tab
                                     role=tabpanel>
                                     <div class=row>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap1.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony DJ Headphones
-                                                            4334205465, Black, Standard</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
+                                        @php
+                                            $lastCatProductThree = \App\Models\Product::where('category', $multiCatProductTwo->category_three)
+                                                ->inRandomOrder()
+                                                ->take(12)
+                                            ->get(); @endphp
+                                        @foreach ($lastCatProductThree as $product)
+                                            <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
+                                                data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
+                                                <div class="align-items-center bdr1 d-flex shop_item tiny_style">
+                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                            style="height: 75px; width:100px; margin-left:20px;"
+                                                            src={{ asset($product->image_one) }}></div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <div class="mb-2 title"><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                        </div>
+                                                        <div class="para text-thm1">${{ $product->price }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap2.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony E-Mount Full Frame FE
-                                                            24-70mm f/2.8 GM II G Master</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap3.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap4.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap5.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap6.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Samsung Galaxy S21 Ultra
-                                                            Silicone Case with S-Pen Bundle</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap7.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap8.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Office Chair Ergonomic Cheap
-                                                            Desk Chair Mesh Computer</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap9.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Ray-Ban Women's Rb3647n
-                                                            Double Bridge Round Sunglasses</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap10.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Suptek Aluminum Alloy Cell
-                                                            Phone Desk Mount Stand</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap11.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>PopSockets PopWallet+:
-                                                            Swappable and Repositionable</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap12.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Cooling Body Gel Moisturizer
-                                                            with Soothing Aloe</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="fade tab-pane" id=nav-hnaent aria-labelledby=nav-hnaent-tab role=tabpanel>
                                     <div class=row>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap1.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony DJ Headphones
-                                                            4334205465, Black, Standard</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
+                                        @php
+                                            $lastCatProductFour = \App\Models\Product::where('category', $multiCatProductTwo->category_four)
+                                                ->inRandomOrder()
+                                                ->take(12)
+                                            ->get(); @endphp
+                                        @foreach ($lastCatProductFour as $product)
+                                            <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
+                                                data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
+                                                <div class="align-items-center bdr1 d-flex shop_item tiny_style">
+                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                            style="height: 75px; width:100px; margin-left:20px;"
+                                                            src={{ asset($product->image_one) }}></div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <div class="mb-2 title"><a
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                        </div>
+                                                        <div class="para text-thm1">${{ $product->price }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap2.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Sony E-Mount Full Frame FE
-                                                            24-70mm f/2.8 GM II G Master</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap3.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=0.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap4.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>TV 55" 4-Series 4K UHD smart
-                                                            TV</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap5.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap6.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Samsung Galaxy S21 Ultra
-                                                            Silicone Case with S-Pen Bundle</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap7.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Apple iPhone Retina 6s Plus
-                                                            64GB</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.7s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap8.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Office Chair Ergonomic Cheap
-                                                            Desk Chair Mesh Computer</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=1.9s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap9.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Ray-Ban Women's Rb3647n
-                                                            Double Bridge Round Sunglasses</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.1s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap10.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Suptek Aluminum Alloy Cell
-                                                            Phone Desk Mount Stand</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.3s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap11.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>PopSockets PopWallet+:
-                                                            Swappable and Repositionable</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
-                                            data-wow-duration=2.5s>
-                                            <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                <div class=flex-shrink-0><img alt="Hot New Arrival Product"
-                                                        src={{ asset('home/images/shop-items/hnap12.png') }}></div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="mb-2 title"><a href=#>Cooling Body Gel Moisturizer
-                                                            with Soothing Aloe</a></div>
-                                                    <div class="para text-thm1">$32.50</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -3208,4 +960,118 @@
             </div>
         </div>
     </section>
+    @push('scripts')
+        <script>
+            $('.addToCartBTN').on('click', function(e) {
+                e.preventDefault();
+
+                var product_id = $(this).data('product-id');
+                var product_Qty = $('#cartProductQty').val();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "cart/store",
+                    data: {
+                        'product_id': product_id,
+                        'product_Qty': product_Qty
+                    },
+                    success: function(response) {
+                        if (response.status.indexOf('is add to your cart') !== -1) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.status,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Login required!',
+                                text: response.status,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    }
+                });
+
+                $.ajax({
+                    url: "cart/data",
+                    success: function(data) {
+                        var carts = data.carts;
+                        var list = $("#cart-list");
+                        var cartTotal = $("#subtitle");
+                        var cartCount = $("#cartCount");
+
+                        list.empty();
+                        cartCount.empty();
+                        cartTotal.empty(); // remove previous content
+
+                        var c = carts.reduce(function(sum, cart) {
+                            return sum + cart.quantity;
+                        }, 0);
+                        cartCount.append(c);
+
+                        var t = carts.reduce(function(sum, cart) {
+                            return sum + cart.total_price;
+                        }, 0);
+                        cartTotal.append(t);
+                    }
+                });
+
+            })
+        </script>
+        <script>
+            $('.btnWishlist').on('click', function(e) {
+                e.preventDefault();
+
+                var product_id = $(this).data('product-id');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('wishlist.store') }}",
+                    data: {
+                        'product_id': product_id,
+                    },
+                    success: function(response) {
+                        if (response.status.indexOf('is added on your wishlist') !== -1) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.status,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+                        } else if (response.status.indexOf('is already available on your wishlist') !== -
+                            1) {
+                            Swal.fire({
+                                title: 'Oops!',
+                                text: response.status,
+                                icon: 'info',
+                                confirmButtonText: 'OK'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Login required!',
+                                text: response.status,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    }
+                });
+
+            });
+        </script>
+    @endpush
 @endsection

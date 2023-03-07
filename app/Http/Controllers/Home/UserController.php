@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function shop(){
-        $products =Product::latest()->paginate();
-        return view('home.shop',compact('products'));
-    }
     public function singleProduct($slug=null, $id=null){
         $product = Product::findOrFail($id);
         return view('home.singleProduct',compact('product'));
+    }
+    public function singleSpecialProduct($slug=null, $id=null){
+        $product = Product::findOrFail($id);
+        return view('home.singleSpecialProduct',compact('product'));
     }
     public function cart(){
         $carts =Cart::where('user_id',Auth::id())->get();

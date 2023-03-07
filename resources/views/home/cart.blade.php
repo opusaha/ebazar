@@ -173,53 +173,6 @@
                         cartTotal.append(t);
                         cartDisplayTotal.append(t);
                         cartDisplaySubTotal.append(t);
-
-                        // Update the cart data in the HTML
-                        $.each(carts, function(index, cart) {
-                            $.ajax({
-                                url: "products/" + cart.product_id,
-                                success: function(productData) {
-                                    var product = productData.product;
-                                    var item = "<li class='list_content'>" +
-                                        "<div>" +
-                                        "<img class='float-start mt10' src='" + product
-                                        .image_one + "' style='height:75px'>" +
-                                        "<p>" + product.name.substr(0, 35) + "...</p>" +
-                                        "<div class='cart_btn home_page_sidebar mt10'>" +
-                                        "<div class='quantity-block home_page_sidebar'>" +
-                                        "<button class='quantity-arrow-minus home_page_sidebar'><img src={{ asset('home/images/icons/minus.svg') }}></button>" +
-                                        "<input class='quantity-num home_page_sidebar' type='number' value='" +
-                                        cart.quantity + "'>" +
-                                        "<button class='quantity-arrow-plus home_page_sidebar'> <span class='flaticon-close'></span> </button>" +
-                                        "</div>" +
-                                        "<span class='home_page_sidebar price'>" +
-                                        cart.total_price + " TK</span>" +
-                                        "</div>" +
-                                        "<span class='close_icon'><i class='flaticon-close'></i></span>" +
-                                        "</div>" +
-                                        "</li>";
-                                    list.append(item);
-                                    var itemTwo = `<tr><th scope="row">
-                                    <ul class="cart_list d-block d-xl-flex">
-                                    <li class="ps-1 ps-sm-4 pe-1 pe-sm-4">
-                                    <a href="#"><img src="` + product.image_one + `" alt="cart1.png" style="height:60px"></a></li>
-                                    <li class="ms-2 ms-md-3"><a class="cart_title" href="#">
-                                    <span class="fz16">` + product.name.substr(0, 35) + `</span><br>
-                                    <span class="fz14"><span class="fw500">Actual Color:</span>
-                                    Silver</span></a></li></ul></th><td>` + cart.price + ` TK</td><td>
-                                    <div class="cart_btn"><div class="quantity-block">
-                                    <button class="quantity-arrow-minus inner_page">
-                                    <span class="fa fa-minus"></span></button>
-                                    <input class="quantity-num inner_page" type="number" value="` + cart.quantity + `">
-                                    <button class="quantity-arrow-plus inner_page">
-                                    <span class="fas fa-plus"></span></button></div></div></td>
-                                    <td class=""> ` + cart.total_price + ` TK</td><td class="">
-                                    <button type="button" class="removeCart" data-product-id="` + cart.id + `" style="background-color: transparent;border:none;outline:none">
-                                    <span class="flaticon-close"></span></button></td></tr>`;
-                                    cartList.append(itemTwo);
-                                }
-                            });
-                        })
                     }
                 });
 

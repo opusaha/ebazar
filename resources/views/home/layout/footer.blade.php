@@ -24,6 +24,26 @@
                             @endisset</a></a>
                         </div>
                     </div>
+                    <div class=footer_acceped_card_widget>
+                        <h4 class="title mb20">We accept</h4>
+                        <div class=acceped_card_list>
+                            <ul class="d-flex mb-0">
+                                <li class=me-2><a href=#><img src={{ asset('home/images/resource/visa-card.png') }}
+                                            alt=visa-card></a></li>
+                                <li class=me-2><a href=#><img src={{ asset('home/images/resource/master-card.png') }}
+                                            alt=master-card></a></li>
+                                <li class=me-2><a href=#><img src={{ asset('home/images/resource/apple-pay.png') }}
+                                            alt=apple-pay></a></li>
+                                <li class=me-2><a href=#><img src={{ asset('home/images/resource/discover-card.png') }}
+                                            alt=discover-card></a></li>
+                                <li class=me-2><a href=#><img src={{ asset('home/images/resource/paypal.png') }}
+                                            alt=paypal></a>
+                                </li>
+                                <li><a href=#><img src={{ asset('home/images/resource/amex-card.png') }} alt=amex-card></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2">
@@ -31,10 +51,7 @@
                     <h4>About Zenmart</h4>
                     <ul class=list-unstyled>
                         <li><a href=#>Track Your Order</a></li>
-                        <li><a href=#>Product Guides</a></li>
-                        <li><a href=#>Wishlists</a></li>
                         <li><a href=#>Privacy Policy</a></li>
-                        <li><a href=#>Store Locator</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,9 +61,6 @@
                     <ul class=list-unstyled>
                         <li><a href=#>Contact Us</a></li>
                         <li><a href=#>Help Centre</a></li>
-                        <li><a href=#>Returns & Exchanges</a></li>
-                        <li><a href=#>Best Buy Financing</a></li>
-                        <li><a href=#>Best Buy Gift Card</a></li>
                     </ul>
                 </div>
             </div>
@@ -54,11 +68,8 @@
                 <div class=footer_qlink_widget>
                     <h4>Services</h4>
                     <ul class=list-unstyled>
-                        <li><a href=#>Geek Squad</a></li>
-                        <li><a href=#>In-Home Advisor</a></li>
-                        <li><a href=#>Trade-In Program</a></li>
-                        <li><a href=#>Electronics Recycling</a></li>
-                        <li><a href=#>Best Buy Health</a></li>
+                        <li><a href=#>Returns & Exchanges</a></li>
+                        <li><a href=#>Store Locator</a></li>
                     </ul>
                 </div>
             </div>
@@ -82,26 +93,6 @@
                         <ul class=mb0>@isset($settings)
                             <li><a href="{{$settings->app_one}}"><span class=flaticon-apple></span>iOS App</a></li>
                             <li><a href="{{$settings->app_two}}"><span class=flaticon-android></span>Android App</a></li>@endisset
-                        </ul>
-                    </div>
-                </div>
-                <div class=footer_acceped_card_widget>
-                    <h4 class="title mb20">We accept</h4>
-                    <div class=acceped_card_list>
-                        <ul class="d-flex mb-0">
-                            <li class=me-2><a href=#><img src={{ asset('home/images/resource/visa-card.png') }}
-                                        alt=visa-card></a></li>
-                            <li class=me-2><a href=#><img src={{ asset('home/images/resource/master-card.png') }}
-                                        alt=master-card></a></li>
-                            <li class=me-2><a href=#><img src={{ asset('home/images/resource/apple-pay.png') }}
-                                        alt=apple-pay></a></li>
-                            <li class=me-2><a href=#><img src={{ asset('home/images/resource/discover-card.png') }}
-                                        alt=discover-card></a></li>
-                            <li class=me-2><a href=#><img src={{ asset('home/images/resource/paypal.png') }}
-                                        alt=paypal></a>
-                            </li>
-                            <li><a href=#><img src={{ asset('home/images/resource/amex-card.png') }} alt=amex-card></a>
-                            </li>
                         </ul>
                     </div>
                 </div>

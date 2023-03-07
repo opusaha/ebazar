@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('price');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
 
             // Define foreign key constraints for seller_id and product_id columns

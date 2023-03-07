@@ -39,6 +39,8 @@ class SpecialDealController extends Controller
     }
     public function delete($id = null)
     {
+        SpecialDeals::findOrFail($id)->delete();
+        return redirect()->back();
     }
     public function search(Request $request)
     {

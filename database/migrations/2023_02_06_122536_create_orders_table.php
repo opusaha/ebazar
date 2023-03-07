@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('shipping_id');
             $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
-            $table->unsignedBigInteger('total_price');
+            $table->decimal('total_price', 10, 2);
             $table->string('payment_id');
             $table->text('notes')->nullable();
             $table->timestamps();

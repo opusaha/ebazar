@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
             $table->string('old_price');
             $table->string('price');
+            $table->float('special_price')->nullable();
             $table->string('status');
             $table->string('tag');
             $table->integer('category');
