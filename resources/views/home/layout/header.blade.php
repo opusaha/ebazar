@@ -2,10 +2,12 @@
 @if (Auth::check())
     @php
         $carts = \App\Models\Cart::where('user_id', Auth::id())->get();
-        $categories = \App\Models\Category::where('parent_id', null)->get();
     @endphp
 @endif
-@php $settings = \App\Models\WebsiteSettings::first(); @endphp
+@php
+    $categories = \App\Models\Category::where('parent_id', null)->get();
+    $settings = \App\Models\WebsiteSettings::first();
+@endphp
 <div class="header_middle pt20 pb20 dn-992">
     <div class=container>
         <div class=row>

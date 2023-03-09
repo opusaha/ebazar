@@ -207,7 +207,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
         // Product Route
 
         Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-        Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+        Route::get('/new-product',[ProductController::class,'create'])->name('new.product');
         Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
         Route::get('/product/details/{id}', [ProductController::class, 'details'])->name('product.details');
         Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');

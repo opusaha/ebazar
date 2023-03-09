@@ -136,7 +136,7 @@
                                         </div>
                                         <div class=details>
                                             <div class=title><a
-                                                    href="{{ route('single.special.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                    href="{{ route('single.special.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}</a>
                                             </div>
                                             <div class="review d-flex db-500">
                                                 @php
@@ -159,7 +159,7 @@
                                             <div class=si_footer>
                                                 <div class=price>${{ $product->special_price }}
                                                     <small><del>${{ $product->price }}</del> <span
-                                                            class="off_tag text-thm1">{{ (($product->price - $product->special_price) / $product->price) * 100 }}%
+                                                            class="off_tag text-thm1">{{ number_format((($product->price - $product->special_price) / $product->price) * 100, 2) }}%
                                                             Off</span></small>
                                                 </div>
                                                 <div class="line mt20"></div>
@@ -279,7 +279,7 @@
                                                 <div class="shop_item bdrtrb1 px-2 px-sm-3 wow fadeIn"
                                                     data-wow-duration={{ $loop->index * 0.2 + 0.7 . 's' }}>
                                                     <div class="thumb pb30">
-                                                        <img src="{{ asset($product->image_one) }}" alt="{{ $product->name }}"
+                                                        <img src="{{ asset($product->image_one) }}" alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}"
                                                             style="height:300px; width:100%;">
                                                         <div class=thumb_info>
                                                             <ul class=mb0>
@@ -302,7 +302,7 @@
                                                     <div class=details>
                                                         <div class=sub_title>{{ $product->sku }}</div>
                                                         <div class=title><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}
                                                             </a>
                                                         </div>
                                                         <div class="review d-flex db-500">
@@ -350,7 +350,7 @@
                                                 <div class="shop_item bdrtrb1 px-2 px-sm-3">
                                                     <div class="thumb pb30">
                                                         <img src="{{ asset($product->image_one) }}"
-                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                            alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}" style="height:300px; width:100%;">
                                                         <div class=thumb_info>
                                                             <ul class=mb0>
                                                                 <li><button type="button" class="btnWishlist"
@@ -372,7 +372,7 @@
                                                     <div class=details>
                                                         <div class=sub_title>{{ $product->sku }}</div>
                                                         <div class=title><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}
                                                             </a>
                                                         </div>
                                                         <div class="review d-flex db-500">
@@ -419,7 +419,7 @@
                                                 <div class="shop_item bdrtrb1 px-2 px-sm-3">
                                                     <div class="thumb pb30">
                                                         <img src="{{ asset($product->image_one) }}"
-                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                            alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}" style="height:300px; width:100%;">
                                                         <div class=thumb_info>
                                                             <ul class=mb0>
                                                                 <li><button type="button" class="btnWishlist"
@@ -441,7 +441,7 @@
                                                     <div class=details>
                                                         <div class=sub_title>{{ $product->sku }}</div>
                                                         <div class=title><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}
                                                             </a>
                                                         </div>
                                                         <div class="review d-flex db-500">
@@ -488,7 +488,7 @@
                                                 <div class="shop_item bdrtrb1 px-2 px-sm-3">
                                                     <div class="thumb pb30">
                                                         <img src="{{ asset($product->image_one) }}"
-                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                            alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}" style="height:300px; width:100%;">
                                                         <div class=thumb_info>
                                                             <ul class=mb0>
                                                                 <li><button type="button" class="btnWishlist"
@@ -510,7 +510,7 @@
                                                     <div class=details>
                                                         <div class=sub_title>{{ $product->sku }}</div>
                                                         <div class=title><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}
                                                             </a>
                                                         </div>
                                                         <div class="review d-flex db-500">
@@ -600,7 +600,7 @@
                                                     data-wow-duration="{{ $loop->index * 0.2 + 0.7 . 's' }}">
                                                     <div class="thumb pb30">
                                                         <img src="{{ asset($product->image_one) }}"
-                                                            alt="{{ $product->name }}" style="height:300px; width:100%;">
+                                                            alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}" style="height:300px; width:100%;">
                                                         <div class=thumb_info>
                                                             <ul class=mb0>
                                                                 <li><button type="button" class="btnWishlist"
@@ -622,7 +622,7 @@
                                                     <div class=details>
                                                         <div class=sub_title>{{ $product->sku }}</div>
                                                         <div class=title><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}
                                                             </a>
                                                         </div>
                                                         <div class="review d-flex db-500">
@@ -703,7 +703,7 @@
                                                             data-wow-duration={{ $loop->index * 0.2 + 0.7 . 's' }}>
                                                             <div class="thumb pb30">
                                                                 <img src="{{ asset($product->image_one) }}"
-                                                                    alt="{{ $product->name }}"
+                                                                    alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}"
                                                                     style="height:300px; width:100%;">
                                                                 <div class=thumb_info>
                                                                     <ul class=mb0>
@@ -728,7 +728,7 @@
                                                             <div class=details>
                                                                 <div class=sub_title>{{ $product->sku }}</div>
                                                                 <div class=title><a
-                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}
+                                                                        href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}
                                                                     </a>
                                                                 </div>
                                                                 <div class="review d-flex db-500">
@@ -841,12 +841,12 @@
                                             <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
                                                 data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
                                                 <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                    <div class=flex-shrink-0><img alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}"
                                                             style="height: 75px; width:100px; margin-left:20px;"
                                                             src={{ asset($product->image_one) }}></div>
                                                     <div class="flex-grow-1 ms-3">
                                                         <div class="mb-2 title"><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}</a>
                                                         </div>
                                                         <div class="para text-thm1">${{ $product->price }}</div>
                                                     </div>
@@ -866,12 +866,12 @@
                                             <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
                                                 data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
                                                 <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                    <div class=flex-shrink-0><img alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}"
                                                             style="height: 75px; width:100px; margin-left:20px;"
                                                             src={{ asset($product->image_one) }}></div>
                                                     <div class="flex-grow-1 ms-3">
                                                         <div class="mb-2 title"><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}</a>
                                                         </div>
                                                         <div class="para text-thm1">${{ $product->price }}</div>
                                                     </div>
@@ -892,12 +892,12 @@
                                             <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
                                                 data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
                                                 <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                    <div class=flex-shrink-0><img alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}"
                                                             style="height: 75px; width:100px; margin-left:20px;"
                                                             src={{ asset($product->image_one) }}></div>
                                                     <div class="flex-grow-1 ms-3">
                                                         <div class="mb-2 title"><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}</a>
                                                         </div>
                                                         <div class="para text-thm1">${{ $product->price }}</div>
                                                     </div>
@@ -917,12 +917,12 @@
                                             <div class="col-lg-3 col-lg-4 col-sm-6 px-1 px-sm-0 fadeInUp wow"
                                                 data-wow-duration={{ $loop->index * 0.1 + 0.5 . 's' }}>
                                                 <div class="align-items-center bdr1 d-flex shop_item tiny_style">
-                                                    <div class=flex-shrink-0><img alt="{{ $product->name }}"
+                                                    <div class=flex-shrink-0><img alt="{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}"
                                                             style="height: 75px; width:100px; margin-left:20px;"
                                                             src={{ asset($product->image_one) }}></div>
                                                     <div class="flex-grow-1 ms-3">
                                                         <div class="mb-2 title"><a
-                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ $product->name }}</a>
+                                                                href="{{ route('single.product', [str_replace(' ', '-', $product->name), $product->id]) }}">{{ substr($product->name, 0, 25) . (strlen($product->name) > 25 ? '...' : '') }}</a>
                                                         </div>
                                                         <div class="para text-thm1">${{ $product->price }}</div>
                                                     </div>

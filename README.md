@@ -20,7 +20,6 @@ This is a Laravel based ecommerce website that allows multiple vendors to upload
 3. Copy the `.env.example` file to `.env` and update the database connection settings.
 4. Run `php artisan key:generate` to generate an application key.
 5. Run `php artisan migrate` to run the database migrations.
-6. Run `php artisan db:seed` to seed the database with sample data (optional).
 7. Run `php artisan serve` to start the development server.
 
 ## Usage

@@ -3,43 +3,6 @@
     @push('styles')
         @php $settings = \App\Models\WebsiteSettings::first(); @endphp
         <title>{{ $settings->name }} :: Get your Product</title>
-
-        <style>
-            .rating {
-                font-size: 0;
-                display: inline-block;
-            }
-
-            .rating input[type="radio"] {
-                display: none;
-            }
-
-            .rating label {
-                display: inline-block;
-                font-size: 25px;
-                cursor: pointer;
-                color: #a7601d;
-                transition: color 0.2s ease-in-out;
-            }
-
-            .rating label:hover,
-            .rating input[type="radio"]:checked~label {
-                color: #ffc107;
-            }
-
-            .rating label.selected,
-            .rating label.selected~label {
-                color: #ffc107;
-            }
-
-            #star1:checked~label[for="star1"],
-            #star2:checked~label[for="star2"],
-            #star3:checked~label[for="star3"],
-            #star4:checked~label[for="star4"],
-            #star5:checked~label[for="star5"] {
-                color: #ffc107;
-            }
-        </style>
     @endpush
     <section class="inner_page_breadcrumb">
         <div class="container">
@@ -70,7 +33,7 @@
                                         <div class="zoomimg_wrapper">
                                             <img class="zoom-img" id="zoom_01" src="{{ asset($product->image_one) }}"
                                                 data-zoom-image="{{ asset($product->image_one) }}" width="550"
-                                                alt="Shop Single Image">
+                                                style="max-height: 550px" alt="Shop Single Image">
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +45,7 @@
                                         <div class="zoomimg_wrapper">
                                             <img class="zoom-img" id="zoom_02" src="{{ asset($product->image_two) }}"
                                                 data-zoom-image="{{ asset($product->image_two) }}" width="550"
-                                                alt="Shop Single Image">
+                                                style="max-height: 550px" alt="Shop Single Image">
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +58,7 @@
                                         <div class="zoomimg_wrapper">
                                             <img class="zoom-img" id="zoom_03" src="{{ asset($product->image_three) }}"
                                                 data-zoom-image="{{ asset($product->image_three) }}" width="550"
-                                                alt="Shop Single Image">
+                                                style="max-height: 550px" alt="Shop Single Image">
                                         </div>
                                     </div>
                                 </div>
@@ -288,21 +251,25 @@
                                                             <h5 class="title me-2 mb-0">{{ $seller->name }}</h5>
                                                             <div class="sspd_postdate me-2 mb10-sm">
                                                                 <div class="sspd_review">
+                                                                    @php
+                                                                        $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                        $total_rating = 0;
+                                                                        foreach ($reviews as $review) {
+                                                                            $total_rating += $review->rating;
+                                                                        }
+                                                                        $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                                    @endphp
                                                                     <ul class="mb0">
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
+                                                                        @for ($i = 1; $i <= $average_rating; $i++)
+                                                                            <li class="list-inline-item"><i
+                                                                                    class="fas fa-star"></i>
+                                                                            </li>
+                                                                        @endfor
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <h6 class="sub_title mb-0">965 seller reviews</h6>
+                                                            <h6 class="sub_title mb-0">{{ count($reviews) }} reviews
+                                                            </h6>
                                                         </div>
                                                     </div>
                                                     <div class="vendor_address mt10 mb20">
@@ -688,39 +655,6 @@
                             return sum + cart.total_price;
                         }, 0);
                         cartTotal.append(t);
-
-                        // Update the cart data in the HTML
-                        $.each(carts, function(index, cart) {
-                            $.ajax({
-                                url: "products/" + cart.product_id,
-                                success: function(productData) {
-                                    var product = productData.product;
-                                    var fullString = product.image_one;
-                                    var parts = fullString.split("/");
-                                    var desiredPart = "/" + parts[parts.length - 2] +
-                                        "/" + parts[parts.length - 1];
-                                    var item = "<li class='list_content'>" +
-                                        "<div>" +
-                                        "<img class='float-start mt10' src='" +
-                                        desiredPart + "' style='height:75px'>" +
-                                        "<p>" + product.name.substr(0, 35) + "...</p>" +
-                                        "<div class='cart_btn home_page_sidebar mt10'>" +
-                                        "<div class='quantity-block home_page_sidebar'>" +
-                                        "<button class='quantity-arrow-minus home_page_sidebar'><img src={{ asset('home/images/icons/minus.svg') }}></button>" +
-                                        "<input class='quantity-num home_page_sidebar' type='number' value='" +
-                                        cart.quantity + "'>" +
-                                        "<button class='quantity-arrow-plus home_page_sidebar'> <span class='flaticon-close'></span> </button>" +
-                                        "</div>" +
-                                        "<span class='home_page_sidebar price'>" +
-                                        cart.total_price + " TK</span>" +
-                                        "</div>" +
-                                        "<span class='close_icon'><i class='flaticon-close'></i></span>" +
-                                        "</div>" +
-                                        "</li>";
-                                    list.append(item);
-                                }
-                            });
-                        })
                     }
                 });
 

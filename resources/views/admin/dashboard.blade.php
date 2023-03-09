@@ -119,59 +119,62 @@
                     </div>
                 </div>
                 <div class="col-xl-4">
-                    @php
-                        $latestOrder = \App\Models\Order::latest()->first();
-                        $latestUser = \App\Models\User::latest()->first();
-                        $latestProduct = \App\Models\Product::latest()->first();
-                        $latestSeller = \App\Models\Seller::latest()->first();
-                        $latestQuestion = \App\Models\Question::latest()->first();
-                        $records = [$latestOrder, $latestUser, $latestProduct, $latestSeller, $latestQuestion];
-                        $sortedRecords = collect($records)->sortBy('created_at');
-                    @endphp
+                    <div class="recent_activity_widget">
+                        <h4 class="title mb25">Recent Activity</h4>
+                        @php
+                            $latestOrder = \App\Models\Order::latest()->first();
+                            $latestUser = \App\Models\User::latest()->first();
+                            $latestProduct = \App\Models\Product::latest()->first();
+                            $latestSeller = \App\Models\Seller::latest()->first();
+                            $latestQuestion = \App\Models\Question::latest()->first();
+                            $records = [$latestOrder, $latestUser, $latestProduct, $latestSeller, $latestQuestion];
+                            $sortedRecords = collect($records)->sortBy('created_at');
+                        @endphp
 
-                    @foreach ($sortedRecords as $record)
-                        <div class="dashboard-timeline-label">
-                            <div class="timeline-item pb10">
-                                <!--begin::Label-->
-                                <div class="child-timeline-label">{{ $record->created_at->format('H:i') }}</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless"></i>
+                        @foreach ($sortedRecords as $record)
+                            <div class="dashboard-timeline-label">
+                                <div class="timeline-item pb10">
+                                    <!--begin::Label-->
+                                    <div class="child-timeline-label">{{ $record->created_at->format('H:i') }}</div>
+                                    <!--end::Label-->
+                                    <!--begin::Badge-->
+                                    <div class="timeline-badge">
+                                        <i class="fa fa-genderless"></i>
+                                    </div>
+                                    <!--end::Badge-->
+                                    <!--begin::Text-->
+                                    <div class="ra_pcontent pl10">
+                                        @if ($record instanceof \App\Models\Order)
+                                            <span class="title">A product purchase by @php
+                                                $user = \App\Models\User::find($record->user_id);
+                                            @endphp
+                                                {{ $user->name }} <br> At price</span>
+                                            <span class="subtitle">{{ $record->total_price }}</span>
+                                        @elseif ($record instanceof \App\Models\User)
+                                            <span class="title">New user registered: {{ $record->name }}</span>
+                                        @elseif ($record instanceof \App\Models\Product)
+                                            <span class="title">New product added: {{ $record->name }}</span>
+                                        @elseif ($record instanceof \App\Models\Seller)
+                                            <span class="title">New seller registered: {{ $record->name }}</span>
+                                        @elseif ($record instanceof \App\Models\Question)
+                                            <span class="title">New Question: {{ $record->question }} <br> Asked By:
+                                                @php
+                                                    $user = \App\Models\User::find($record->user_id);
+                                                @endphp
+                                                {{ $user->name }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <!--end::Text-->
                                 </div>
-                                <!--end::Badge-->
-                                <!--begin::Text-->
-                                <div class="ra_pcontent pl10">
-                                    @if ($record instanceof \App\Models\Order)
-                                        <span class="title">A product purchase by @php
-                                            $user = \App\Models\User::find($record->user_id);
-                                        @endphp {{ $user->name }} <br> At price</span>
-                                        <span class="subtitle">{{ $record->total_price }}</span>
-                                    @elseif ($record instanceof \App\Models\User)
-                                        <span class="title">New user registered: {{ $record->name }}</span>
-                                    @elseif ($record instanceof \App\Models\Product)
-                                        <span class="title">New product added: {{ $record->name }}</span>
-                                    @elseif ($record instanceof \App\Models\Seller)
-                                        <span class="title">New seller registered: {{ $record->name }}</span>
-                                    @elseif ($record instanceof \App\Models\Question)
-                                        <span class="title">New Question: {{ $record->question }} <br> Asked By: @php
-                                            $user = \App\Models\User::find($record->seller_id);
-                                        @endphp
-                                            {{$user->name}}
-                                        </span>
-                                    @endif
-                                </div>
-                                <!--end::Text-->
                             </div>
-                        </div>
-                    @endforeach
-
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
         @include('admin.layout.footer')
     </div>
     @push('adminScripts')
-        
     @endpush
 @endsection

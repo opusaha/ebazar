@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-sm-6 col-lg-3">
                                 <div class="dashboard_page_add_listing text-center text-lg-end mb30 mb15-520 d-grid">
-                                    <a href="{{route('seller.product.create')}}" class="btn btn-new btn-lg btn-thm">Add New Products</a>
+                                    <a href="{{route('seller.new.product')}}" class="btn btn-new btn-lg btn-thm">Add New Products</a>
                                 </div>
                             </div>
                         </div>

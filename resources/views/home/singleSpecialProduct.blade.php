@@ -69,7 +69,7 @@
                                                 class="flaticon-full-screen"></span></a>
                                         <div class="zoomimg_wrapper">
                                             <img class="zoom-img" id="zoom_01" src="{{ asset($product->image_one) }}"
-                                                data-zoom-image="{{ asset($product->image_one) }}" width="550"
+                                                data-zoom-image="{{ asset($product->image_one) }}" width="550" style="max-height: 550px"
                                                 alt="Shop Single Image">
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                                 class="flaticon-full-screen"></span></a>
                                         <div class="zoomimg_wrapper">
                                             <img class="zoom-img" id="zoom_02" src="{{ asset($product->image_two) }}"
-                                                data-zoom-image="{{ asset($product->image_two) }}" width="550"
+                                                data-zoom-image="{{ asset($product->image_two) }}" width="550" style="max-height: 550px"
                                                 alt="Shop Single Image">
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                                 class="flaticon-full-screen"></span></a>
                                         <div class="zoomimg_wrapper">
                                             <img class="zoom-img" id="zoom_03" src="{{ asset($product->image_three) }}"
-                                                data-zoom-image="{{ asset($product->image_three) }}" width="550"
+                                                data-zoom-image="{{ asset($product->image_three) }}" width="550" style="max-height: 550px"
                                                 alt="Shop Single Image">
                                         </div>
                                     </div>
@@ -123,22 +123,23 @@
                         <ul class="d-flex">
                             <li class="border-right">APPLE</li>
                             <li class="mx-3">
+                                @php
+                                    $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                    $total_rating = 0;
+                                    foreach ($reviews as $review) {
+                                        $total_rating += $review->rating;
+                                    }
+                                    $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                @endphp
                                 <div class="sspd_review">
                                     <ul class="mb0">
-                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fas fa-star"></i></a>
-                                        </li>
+                                        @for ($i = 1; $i <= $average_rating; $i++)
+                                            <li class="list-inline-item"><i class="fas fa-star"></i></li>
+                                        @endfor
                                     </ul>
                                 </div>
                             </li>
-                            <li>3,014 reviews</li>
+                            <li>{{ count($reviews) }} reviews</li>
                         </ul>
                         <h4 class="title mb15">{{ $product->name }}</h4>
                         <hr>
@@ -147,9 +148,6 @@
                         <div class="shop_single_table style3 table-responsive">
                             <div>
                                 {!! $product->details !!}
-                            </div>
-                            <div class="shop_single_description">
-                                <a href="#">See More <span class="fas fa-angle-down ml10"></span></a>
                             </div>
                         </div>
                         <hr>
@@ -290,21 +288,25 @@
                                                             <h5 class="title me-2 mb-0">{{ $seller->name }}</h5>
                                                             <div class="sspd_postdate me-2 mb10-sm">
                                                                 <div class="sspd_review">
+                                                                    @php
+                                                                        $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                                                                        $total_rating = 0;
+                                                                        foreach ($reviews as $review) {
+                                                                            $total_rating += $review->rating;
+                                                                        }
+                                                                        $average_rating = count($reviews) > 0 ? round($total_rating / count($reviews)) : 0;
+                                                                    @endphp
                                                                     <ul class="mb0">
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fas fa-star"></i></a></li>
+                                                                        @for ($i = 1; $i <= $average_rating; $i++)
+                                                                            <li class="list-inline-item"><i
+                                                                                    class="fas fa-star"></i>
+                                                                            </li>
+                                                                        @endfor
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <h6 class="sub_title mb-0">965 seller reviews</h6>
+                                                            <h6 class="sub_title mb-0">{{ count($reviews) }} reviews
+                                                            </h6>
                                                         </div>
                                                     </div>
                                                     <div class="vendor_address mt10 mb20">
