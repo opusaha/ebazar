@@ -29,6 +29,15 @@ This is a Laravel based ecommerce website that allows multiple vendors to upload
 3. Login and explore the website features such as uploading products, purchasing products, leaving reviews, etc.
 4. Admin can manage products, vendors, and buyers using the admin dashboard.
 
+## Login information
+https://ebazar.adeveloper.info/admin/login
+
+https://ebazar.adeveloper.info/seller/login
+
+https://ebazar.adeveloper.info/login
+
+Email: sahaapo@gmail.com
+Passsword: 12345678
 ## Credits
 
 This project was developed by [Opu saha](https://github.com/opusaha/) and is licensed under the [MIT License](https://opensource.org/licenses/MIT).
